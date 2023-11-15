@@ -1,11 +1,13 @@
-.button{
-    background: linear-gradient(100deg, #FF0404 -5.85%, #BA0000 109.55%);
+.button {
+    background: #E50914;
     box-shadow: 0px 8px 21px 0px rgba(0, 0, 0, 0.16);
     border: none;
-    padding:0.8rem;
+    padding: 0.8rem;
     border-radius: 10rem;
+    outline: none;
     cursor: pointer;
     width: 15rem;
+    font-size: 1rem;
     color: #ffff;
-    font-weight: bold;
+    font-weight: 700;
 }
