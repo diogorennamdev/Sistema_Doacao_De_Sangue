@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import ImgDonation from '../../assets/ImgDonation.svg';
-import './LoginStyles.css'
+import './styles.css'
 
-import Input from '../../components/Input/Input';
-import Button from '../../components/Button/Button';
-import BoxDialog from '../../components/Alert/BoxDialog';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+import BoxDialog from '../../components/BoxDialog';
 
 import axios from 'axios';
 

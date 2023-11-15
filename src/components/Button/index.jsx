@@ -1,7 +1,8 @@
-import './ButtonStyles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
+
+import './styles.css';
 
 // verifica se o lading é true se sim a animação do button é ativada
 function Button({ TextButton, onclick, loading }) {

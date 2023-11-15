@@ -1,6 +1,6 @@
 import { Modal, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import './BoxDialog.css'; // Importando o arquivo CSS
+import './styles.css'; // Importando o arquivo CSS
 
 function BoxDialog({ show, handleClose, title, message }) {
     return (

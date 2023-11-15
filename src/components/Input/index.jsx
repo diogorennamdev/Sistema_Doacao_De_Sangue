@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import './InputStyles.css';
+import './styles.css';
 
 function Input({ type, placeholder, onChange }) {
     return <input className='Input' type={type} placeholder={placeholder} onChange={onChange} />;
