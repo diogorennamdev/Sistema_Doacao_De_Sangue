@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ImgDonation from '../../assets/ImgDonation.svg';
 import './LoginStyles.css'
 
@@ -8,7 +8,7 @@ import Button from '../../components/Button';
 import axios from 'axios';
 
 function Login() {
-  
+
   const API_URL = import.meta.env.VITE_LOGIN;
 
   const [employeeCode, setEmployeeCode] = useState('');
@@ -21,14 +21,14 @@ function Login() {
       alert('Preencha todos os campos para realizar o login');
       return;
     }
-    
+
     try {
       setLoading(true);
-      const response = await axios.post(`${API_URL}`,{
+      const response = await axios.post(`${API_URL}`, {
         employeeCode: employeeCode,
         password: password
       })
-     /// console.log(response.data);
+      /// console.log(response.data);
       setLoading(false);
 
     } catch (error) {
