@@ -34,8 +34,4 @@ npm install
 npm run dev
 ```
 
-Agora você pode acessar o sistema de doação de sangue no seu navegador através do endereço:
-
-```bash
- http://localhost:3000.
- ```
+- Agora você pode acessar o sistema de doação de sangue no seu navegador através do endereço: `http://localhost:3000`
