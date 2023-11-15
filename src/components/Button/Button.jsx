@@ -1,21 +1,25 @@
-import React from 'react'
 import './ButtonStyles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-function Button({ TextButton, onclick, loading }) {
+import PropTypes from 'prop-types';
 
 // verifica se o lading é true se sim a animação do button é ativada
+function Button({ TextButton, onclick, loading }) {
   return (
     <button className='button' onClick={onclick}>
       {loading ? (
         <FontAwesomeIcon icon={faSpinner} spin />
       ) : (
         TextButton
-      )
-
-      }
+      )}
     </button>
-  )
+  );
 }
 
-export default Button
+Button.propTypes = {
+  TextButton: PropTypes.string, // Se uma prop não for marcada como isRequired, ela é considerada opcional. Se uma prop opcional não for fornecida, ela será undefined
+  onclick: PropTypes.func,
+  loading: PropTypes.bool
+};
+
+export default Button;
