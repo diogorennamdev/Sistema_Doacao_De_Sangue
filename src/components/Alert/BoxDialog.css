@@ -1,0 +1,79 @@
+/* AlertDialog.css */
+.my-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00000085;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.my-modal .modal-dialog {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 40vh;
+}
+
+.my-modal .modal-content {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 2rem;
+    width: 40vw;
+    text-align: center;
+}
+
+.my-modal .modal-title {
+    font-size: 1.5rem;
+    color: #000000;
+    font-weight: 700;
+    line-height: 20.8px;
+}
+
+.my-modal .modal-body {
+    font-size: 1rem;
+    color: #000000;
+    font-weight: 500;
+    line-height: 16px;
+    padding: 2rem 0 2.2rem;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.my-modal .btn-primary  {
+    position: fixed;
+    padding:  0.5rem 1rem;
+    background-color: #E50914;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 16px;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+
+.my-modal .btn-primary:hover {
+    background-color: transparent;
+    color: #E50914;
+    border: 1px solid #E50914;
+}
+
+.btn-close{
+    display: none;
+}
+
+
+
+@media (max-width: 768px) {
+    .my-modal .modal-content {
+        width: 80vw;
+    }
+}

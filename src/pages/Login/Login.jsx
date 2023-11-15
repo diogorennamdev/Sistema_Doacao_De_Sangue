@@ -4,6 +4,7 @@ import './LoginStyles.css'
 
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
+import BoxDialog from '../../components/Alert/BoxDialog';
 
 import axios from 'axios';
 
@@ -14,11 +15,13 @@ function Login() {
   const [employeeCode, setEmployeeCode] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const loginUser = async () => {
     if (employeeCode.trim() === '' || password.trim() === '') {
-      alert('Preencha todos os campos para realizar o login');
+      handleShow();
       return;
     }
 
@@ -36,6 +39,7 @@ function Login() {
       setLoading(false);
     }
   }
+
   return (
     <main className='ContainerLogin'>
       <div className='CardImageDonation'>
@@ -64,7 +68,6 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-
           <div className='ContainerButton' >
             <Button
               loading={loading}
@@ -72,6 +75,8 @@ function Login() {
               TextButton={'ENTRAR'}
             />
           </div>
+
+          <BoxDialog show={show} handleClose={handleClose} title="Atenção!" message="Preencha todos os campos para realizar o login" />
 
         </div>
       </div>
