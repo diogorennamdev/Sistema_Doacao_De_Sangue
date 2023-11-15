@@ -2,8 +2,8 @@ import { useState } from 'react';
 import ImgDonation from '../../assets/ImgDonation.svg';
 import './LoginStyles.css'
 
-import Input from '../../components/Input';
-import Button from '../../components/Button';
+import Input from '../../components/Input/Input';
+import Button from '../../components/Button/Button';
 
 import axios from 'axios';
 
