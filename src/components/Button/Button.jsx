@@ -1,5 +1,5 @@
 import React from 'react'
-import './styles.css';
+import './ButtonStyles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 function Button({ TextButton, onclick, loading }) {

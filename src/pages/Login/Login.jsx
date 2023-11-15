@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ImgDonation from '../../assets/ImgDonation.svg';
-import './styles.css'
+import './LoginStyles.css'
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
