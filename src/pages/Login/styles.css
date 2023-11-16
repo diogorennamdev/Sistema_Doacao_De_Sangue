@@ -1,58 +1,130 @@
-.ContainerLogin {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-}
-
-.CardImageDonation {
-    width: 50%;
-}
-
-.CardImageDonation img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
 .ContainerForm {
-    width: 50%;
-    background-image: url('../../assets/ImgBackgroundLogin.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    /* ou qualquer posição desejada */
-    background-size: cover;
-    opacity: 0.9;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    height: 100vh;
+    background-color: #fefefe;
+}
+
+.ContainerLogo {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.ContainerLogo img {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 0.5rem;
+}
+
+.ContainerLogo h1 {
+    font-size: 2rem;
+    color: #E50914;
+    text-transform: uppercase;
+    font-weight: 800;
 }
 
 .CardForm {
     display: flex;
     flex-direction: column;
-    width: 80%;
-
-
+    width: 50%;
+    height: 70%;
+    flex-shrink: 0;
+    border-radius: 15px;
+    background: rgba(217, 217, 217, 0.29);
+    box-shadow: 4px 4px 10px 4px rgba(0, 0, 0, 0.20);
 }
 
-.CardForm h1 {
-    color: #fff;
+.CardForm .CardTitle {
     text-align: center;
-    font-weight: bold;
-    margin-bottom: 4rem;
+    font-size: 2rem;
+    color: #E50914;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 1rem 0 0.5rem;
+}
+
+.CardForm .CardSubtitle {
+    color: #676363;
+    font-weight: 400;
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.CardForm .CardDot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 1rem;
+    margin-bottom: 1rem;
+    color: #E50914;
+    font-size: 1.5rem;
+}
+
+.CardDot hr {
+    width: 100%;
+    border: 1.2px solid #67636350;
+    margin: 0 2rem;
+}
+
+.CardForm span {
+    text-align: center;
+    color: #E50914;
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.CardData {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: center;
+    width: 80%;
+    margin: 0 auto 2rem;
+}
+
+.CardData svg {
+    margin: 0 0.5rem;
+    color: #E50914;
+    font-size: 1.1rem;
+
 }
 
 .CardForm label {
-    margin-top: 3rem;
-    color: #fff;
-    font-weight: bold;
-    font-size: 1.2rem;
+    font-size: .8rem;
+    color: #676363;
+    font-weight: 400;
+    margin: 1rem 0 0.4rem;
+    display: flex;
+    align-items: center;
 }
+
+.CardForm input {
+    font-size: .8rem;
+    color: #676363;
+    height: 3rem;
+    flex-shrink: 0;
+    border-radius: 15px;
+    background: #FFF;
+    margin: 0 auto;
+}
+
+.CardForm input:focus {
+    outline: none;
+}
+
 
 .ContainerButton {
     display: flex;
-    width: 100%;
+    align-items: center;
     justify-content: center;
-    margin-top: 2rem;
+    width: 100%;
+    margin-top: 1rem;
 }
+

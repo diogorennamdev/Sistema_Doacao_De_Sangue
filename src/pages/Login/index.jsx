@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import ImgDonation from '../../assets/ImgDonation.svg';
+import heart from '/heart.svg';
+import { IoMdPerson, IoMdKey } from 'react-icons/io';
 import './styles.css'
 
 import Input from '../../components/Input';
@@ -16,6 +17,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -23,7 +25,7 @@ function Login() {
     if (employeeCode.trim() === '' || password.trim() === '') {
       handleShow();
       return;
-    }
+    }    
 
     try {
       setLoading(true);
@@ -31,43 +33,45 @@ function Login() {
         employeeCode: employeeCode,
         password: password
       })
-      /// console.log(response.data);
+      console.log(response.data);
       setLoading(false);
 
     } catch (error) {
-      //console.log(error);
       setLoading(false);
     }
   }
 
   return (
     <main className='ContainerLogin'>
-      <div className='CardImageDonation'>
-        <img src={ImgDonation} alt="imagem representando doação de sangue" />
-      </div>
-
       <div className='ContainerForm'>
+        <div className='ContainerLogo'>
+          <img src={heart} alt="Logo" /><h1 className='ContainerTitle'>HemoVida Unifg</h1>
+        </div>
         <div className='CardForm'>
-          <h1>Sistema de Doação de Sangue</h1>
-
-          <label htmlFor="employ">Código do funcionário:</label>
-          <Input
-            id='employ'
-            placeholder={'Digite o código'}
-            type={'name'}
-            value={employeeCode}
-            onChange={(e) => setEmployeeCode(e.target.value)}
-          />
-
-          <label htmlFor="password">Senha:</label>
-          <Input
-            className='password'
-            placeholder={'Digite a senha'}
-            type={'password'}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
+          <h2 className='CardTitle'>Bem-Vindo!</h2>
+          <span className='CardSubtitle'>Faça seu Login</span>
+          <div className='CardDot'>
+            <hr /> • <hr />
+          </div>
+          <span>Informações de Login</span>
+          <div className="CardData">
+            <label htmlFor="employ"><IoMdPerson />Código do funcionário:</label>
+            <Input
+              id='employ'
+              placeholder={'Digite o código'}
+              type={'name'}
+              value={employeeCode}
+              onChange={(e) => setEmployeeCode(e.target.value)}
+            />
+            <label htmlFor="password"><IoMdKey />Senha:</label>
+            <Input
+              className='password'
+              placeholder={'Digite a senha'}
+              type={'password'}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
           <div className='ContainerButton' >
             <Button
               loading={loading}
