@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importe o useNavigate
 import heart from '/heart.svg';
 import { IoMdPerson, IoMdKey } from 'react-icons/io';
 import './styles.css'
@@ -12,6 +13,7 @@ import axios from 'axios';
 function Login() {
 
   const Login = import.meta.env.VITE_LOGIN;
+  const navigate = useNavigate(); // Adicione esta linha
 
   const [employeeCode, setEmployeeCode] = useState('');
   const [password, setPassword] = useState('');
@@ -40,6 +42,10 @@ function Login() {
       })
       console.log(response.data);
       setLoading(false);
+
+      if (response.status === 200) {
+        navigate('/Home'); // Navegue para a página inicial
+      }
 
     } catch (error) {
       setLoading(false);
