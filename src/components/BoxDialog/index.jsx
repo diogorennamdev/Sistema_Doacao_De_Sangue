@@ -1,4 +1,5 @@
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
+import Button from '../Button';
 import PropTypes from 'prop-types';
 import './styles.css'; // Importando o arquivo CSS
 
@@ -10,9 +11,7 @@ function BoxDialog({ show, handleClose, title, message }) {
             </Modal.Header>
             <Modal.Body>{message}</Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={handleClose}>
-                    Fechar
-                </Button>
+            <Button variant="primary" onclick={handleClose} TextButton={'Fechar'} />
             </Modal.Footer>
         </Modal>
     );
