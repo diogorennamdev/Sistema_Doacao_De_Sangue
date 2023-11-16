@@ -48,7 +48,7 @@
 }
 
 .CardForm .CardSubtitle {
-    color: #676363;
+    color: #5e5b5b;
     font-weight: 400;
     text-align: center;
     font-size: 1rem;
@@ -68,7 +68,7 @@
 
 .CardDot hr {
     width: 100%;
-    border: 1.2px solid #67636350;
+    border: 1.2px solid #5e5b5b50;
     margin: 0 2rem;
 }
 
@@ -98,7 +98,7 @@
 
 .CardForm label {
     font-size: .8rem;
-    color: #676363;
+    color: #5e5b5b;
     font-weight: 400;
     margin: 1rem 0 0.4rem;
     display: flex;
@@ -107,7 +107,7 @@
 
 .CardForm input {
     font-size: .8rem;
-    color: #676363;
+    color: #5e5b5b;
     height: 3rem;
     flex-shrink: 0;
     border-radius: 15px;
@@ -117,6 +117,17 @@
 
 .CardForm input:focus {
     outline: none;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+input[type=number] { 
+    appearance: none;
+    -moz-appearance:textfield; 
 }
 
 
