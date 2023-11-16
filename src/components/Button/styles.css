@@ -1,6 +1,5 @@
 .button {
     background: #E50914;
-    box-shadow: 0px 8px 21px 0px rgba(0, 0, 0, 0.16);
     border: none;
     padding: 0.8rem;
     border-radius: 10rem;
@@ -10,4 +9,11 @@
     font-size: 1rem;
     color: #ffff;
     font-weight: 700;
+    transition: all 0.3s ease-in-out;
+}
+
+.button.hover {
+    background-color: transparent;
+    color: #E50914;
+    outline: 1px solid #E50914;
 }
