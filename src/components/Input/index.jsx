@@ -8,7 +8,7 @@ function Input({ type, placeholder, onChange }) {
             type={type}
             placeholder={placeholder}
             onChange={onChange}
-            autoComplete='on' />;
+            autoComplete='on' />
     </>
 }
 
