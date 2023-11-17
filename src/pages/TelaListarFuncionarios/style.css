@@ -1,0 +1,22 @@
+.tela {
+    background-color: gray;
+    padding: 20px;
+  }
+  
+  .funcionario {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .cadastrar {
+    background-color: green;
+    color: white;
+    margin-right: 10px;
+  }
+  
+  .cancelar {
+    background-color: red;
+    color: white;
+  }
+  
