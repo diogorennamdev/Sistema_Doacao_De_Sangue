@@ -1,22 +1,17 @@
-import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faRefresh } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 
 import './styles.css';
 
 function Button({ TextButton, onclick, loading }) {
-  const [hover, setHover] = useState(false);
-
   return (
     <button 
-      className={hover ? 'button hover' : 'button'} 
+      className='button'
       onClick={onclick}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
     >
       {loading ? (
-        <FontAwesomeIcon icon={faSpinner} spin />
+        <FontAwesomeIcon icon={faRefresh} spin />
       ) : (
         TextButton
       )}
