@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './Contexts/useContext';
+import PropTypes from 'prop-types';
+
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Admin from './pages/Admin';
-
 function PrivateRoute({ element: Element, ...rest }) {
   const { getUserData } = useAuth();
   const userData = getUserData();
@@ -31,5 +32,10 @@ function App() {
     </AuthProvider>
   );
 }
+
+PrivateRoute.propTypes = {
+  element: PropTypes.elementType.isRequired,
+  rest: PropTypes.object,
+};
 
 export default App;
