@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { useAuth } from '../../Contexts/useContext';
+import { useAuth } from '../../Contexts/useAuth';
 import './styles.css';
 
 function Home() {
@@ -10,7 +9,7 @@ function Home() {
       <h2>Home</h2>
       {userData ? (
         <div>
-          <p>Welcome, {userData.token}!</p>
+          <p>Welcome, {userData.dados.Nome}!</p>
           <button onClick={logout}>Logout</button>
         </div>
       ) : (
