@@ -6,14 +6,14 @@ function Home() {
 
   return (
     <div>
-      <h2>Home</h2>
+      <h2>Inicio</h2>
       {userData ? (
         <div>
-          <p>Welcome, {userData.dados.Nome}!</p>
-          <button onClick={logout}>Logout</button>
+          <p>Bem-Vindo, {userData.dados.Nome}!</p>
+          <button onClick={logout}>Sair</button>
         </div>
       ) : (
-        <p>Please login to view this content.</p>
+        <p>Você não está logado.</p>
       )}
     </div>
   );
