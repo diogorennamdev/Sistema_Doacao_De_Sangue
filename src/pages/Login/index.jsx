@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom'; // Importe o useNavigate
 import heart from '/heart.svg';
 import { IoMdPerson, IoMdKey } from 'react-icons/io';
@@ -9,8 +9,11 @@ import Button from '../../components/Button';
 import BoxDialog from '../../components/BoxDialog';
 
 import axios from 'axios';
+import { AuthContext } from '../../Contexts/useContext';
 
 function Login() {
+  const { login } = useContext(AuthContext);
+
 
   const Login = import.meta.env.VITE_LOGIN;
   const navigate = useNavigate(); // Adicione esta linha
@@ -24,6 +27,15 @@ function Login() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const extractUserDataFromToken = (token) => {
+    const tokenParts = token.split('.');
+    const encodedPayload = tokenParts[1];
+    const decodedPayload = atob(encodedPayload);
+    const userData = JSON.parse(decodedPayload);
+    return userData;
+  };
+
 
   const loginUser = async (event) => {
     event.preventDefault();
@@ -40,11 +52,21 @@ function Login() {
         employeeCode: employeeCode,
         password: password
       })
-      console.log(response.data);
+      //console.log(response.data)
+      const token = response.data.token;
+      // Obter os dados do usuário a partir do token
+      const userData = extractUserDataFromToken(token);
+      const datauser = {
+        dados: response.data.Funcionário,
+        informations: userData,
+        token: response.data.token
+        };
+
+      login(datauser);
       setLoading(false);
 
       if (response.status === 200) {
-        navigate('/Home'); // Navegue para a página inicial
+        navigate('/home'); // Navegue para a página inicial
       }
 
     } catch (error) {
