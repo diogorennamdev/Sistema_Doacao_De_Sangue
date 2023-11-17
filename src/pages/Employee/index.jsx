@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function ListarFuncionarios() {
-  const [funcionarios, setFuncionarios] = useState([]);
+function EmployeeList() {
+  const [employes, setEmployee] = useState([]);
 
   useEffect(() => {
     axios.get('')
       .then(response => {
-        setFuncionarios(response.data);
+        setEmployee(response.data);
       })
       .catch(error => {
         console.error('Algo deu errado!', error);
@@ -17,11 +17,11 @@ function ListarFuncionarios() {
   return (
     <div>
       <h1>Todos Funcionários</h1>
-      {funcionarios.map(funcionario => (
-        <div key={funcionario.id}>
-          <p>{funcionario.nome}</p>
-          <p>{funcionario.cargo}</p>
-          <p>{funcionario.dataAdmissao}</p>
+      {employes.map(employee => (
+        <div key={employee.id}>
+          <p>{employee.nome}</p>
+          <p>{employee.cargo}</p>
+          <p>{employee.dataAdmissao}</p>
           <button>Editar</button>
         </div>
       ))}
@@ -31,4 +31,4 @@ function ListarFuncionarios() {
   );
 }
 
-export default ListarFuncionarios;
+export default EmployeeList;
