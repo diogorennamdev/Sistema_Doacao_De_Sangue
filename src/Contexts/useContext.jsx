@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, createContext, useContext, useMemo, useCallback } from 'react';
+import { useState, createContext, useMemo, useCallback } from 'react';
 
 // Criação do contexto de autenticação
 export const AuthContext = createContext();
@@ -43,9 +43,4 @@ export const AuthProvider = ({ children }) => {
 
 AuthProvider.propTypes = {
     children: PropTypes.node.isRequired,
-};
-
-// Hook personalizado para acessar o contexto de autenticação
-export const useAuth = () => {
-    return useContext(AuthContext);
 };
