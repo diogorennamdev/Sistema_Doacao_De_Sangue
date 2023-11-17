@@ -14,16 +14,15 @@ import { AuthContext } from '../../Contexts/useContext';
 function Login() {
   const { login } = useContext(AuthContext);
 
-
   const Login = import.meta.env.VITE_LOGIN;
-  const navigate = useNavigate(); // Adicione esta linha
+  const navigate = useNavigate(); 
 
   const [employeeCode, setEmployeeCode] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
-  const [title, setTitle] = useState(''); // Adicionado
-  const [message, setMessage] = useState(''); // Adicionado
+  const [title, setTitle] = useState(''); 
+  const [message, setMessage] = useState(''); 
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -32,10 +31,9 @@ function Login() {
     const tokenParts = token.split('.');
     const encodedPayload = tokenParts[1];
     const decodedPayload = atob(encodedPayload);
-    const userData = JSON.parse(decodedPayload);
-    return userData;
+    const employeeData = JSON.parse(decodedPayload);
+    return employeeData;
   };
-
 
   const loginUser = async (event) => {
     event.preventDefault();
@@ -55,14 +53,14 @@ function Login() {
       //console.log(response.data)
       const token = response.data.token;
       // Obter os dados do usuário a partir do token
-      const userData = extractUserDataFromToken(token);
-      const datauser = {
+      const employeeData = extractUserDataFromToken(token);
+      const DataEmployee = {
         dados: response.data.Funcionário,
-        informations: userData,
+        information: employeeData,
         token: response.data.token
         };
 
-      login(datauser);
+      login(DataEmployee);
       setLoading(false);
 
       if (response.status === 200) {
