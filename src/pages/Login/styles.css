@@ -10,13 +10,14 @@ main.ContainerLogin {
     align-items: center;
     background-color: var(--white-color);
     width: 100%;
+    justify-content: center;
 }
 
 .ContainerLogo {
     display: flex;
     align-items: center;
     padding: 1rem;
-    margin: 2.5rem 0 0.5rem;
+    margin: 3rem 0 0.5rem;
 }
 
 .ContainerLogo img {
@@ -26,7 +27,7 @@ main.ContainerLogin {
 }
 
 .ContainerLogo h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: var(--primary-color);
     text-transform: uppercase;
     font-weight: 800;
@@ -40,17 +41,17 @@ main.ContainerLogin {
     border-radius: 15px;
     background-color: var(--background1-color);
     box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.20);
-    margin: 1rem 0 2rem;
-    padding: 1rem;
+    margin: 1rem;
+    padding: 2rem 1rem ;
 }
 
 .CardForm .CardTitle {
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: var(--primary-color);
     text-transform: uppercase;
     font-weight: 700;
-    margin: 1rem 0 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .CardForm .CardSubtitle {
@@ -92,7 +93,7 @@ main.ContainerLogin {
     flex-direction: column;
     align-items: baseline;
     justify-content: center;
-    width: 80%;
+    width: 90%;
     margin: 0 auto 1rem;
 }
 
@@ -123,7 +124,7 @@ main.ContainerLogin {
 }
 
 .CardForm input:focus {
-    outline: none;
+    outline: 2px solid var(--primary-color-dimmed);
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -176,10 +177,6 @@ input[type=number] {
 
     .CardDot hr{
         margin: 0 1rem;
-    }
-
-    .CardData {
-        width: 90%;
     }
 
     .ContainerButton button {

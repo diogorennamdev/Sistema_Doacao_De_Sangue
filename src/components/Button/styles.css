@@ -12,7 +12,7 @@
     transition: all 0.3s ease-in-out;
 }
 
-.button:hover {
+.button:hover, .button:focus {
     background-color: transparent;
     color: var(--primary-color);
     outline: 1px solid var(--primary-color);
