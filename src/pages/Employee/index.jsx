@@ -34,6 +34,7 @@ useEffect(() => {
       {employes.map((employee , index)=> (
         <div key={index}>
           <p>{employee.name}</p>
+          <p>{employee.employeeCode}</p>
           <button>Editar</button>
         </div>
       ))}
@@ -44,7 +45,7 @@ useEffect(() => {
         </Link>
     </button>
     <Button>
-      
+
     </Button>
     </div>
   );
