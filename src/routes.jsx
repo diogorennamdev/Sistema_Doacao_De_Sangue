@@ -5,6 +5,7 @@ import App from './App';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Admin from './pages/Admin';
+import EmployeeList from './pages/Employee';
 
 const RoutesConfig = () => (
   <Routes>
@@ -17,6 +18,10 @@ const RoutesConfig = () => (
       <Route
         path="/admin"
         element={<PrivateRoute element={Admin} />}
+      />
+      <Route
+        path="/EmployeeList"
+        element={<PrivateRoute element={EmployeeList} />}
       />
     </Route>
   </Routes>
