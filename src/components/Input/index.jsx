@@ -13,7 +13,7 @@ function Input({ type, placeholder, onChange }) {
 }
 
 Input.propTypes = {
-    type: PropTypes.string, //Se uma prop não for marcada como isRequired, ela é considerada opcional. Se uma prop opcional não for fornecida, ela será undefined
+    type: PropTypes.string, // Se uma prop não for marcada como isRequired, ela é considerada opcional. Se uma prop opcional não for fornecida, ela será undefined
     placeholder: PropTypes.string,
     onChange: PropTypes.func
 };

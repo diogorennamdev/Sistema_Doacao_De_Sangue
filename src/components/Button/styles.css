@@ -2,14 +2,14 @@
     background: #E50914;
     border: none;
     padding: 0.8rem;
-    border-radius: 10rem;
+    border-radius: 5rem;
     outline: none;
     cursor: pointer;
-    width: 15rem;
+    width: 14rem;
     font-size: 1rem;
     color: #ffff;
     font-weight: 700;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.4s ease-in-out;
 }
 
 .button.hover {
