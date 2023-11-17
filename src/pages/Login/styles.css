@@ -1,17 +1,22 @@
+main.ContainerLogin {
+    height: 100vh;
+    overflow: scroll;
+    display: contents;
+}
+
 .ContainerForm {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #fefefe;
+    background-color: var(--white-color);
+    width: 100%;
 }
 
 .ContainerLogo {
     display: flex;
     align-items: center;
     padding: 1rem;
-    margin-bottom: 1.5rem;
+    margin: 2.5rem 0 0.5rem;
 }
 
 .ContainerLogo img {
@@ -22,7 +27,7 @@
 
 .ContainerLogo h1 {
     font-size: 2rem;
-    color: #E50914;
+    color: var(--primary-color);
     text-transform: uppercase;
     font-weight: 800;
 }
@@ -31,24 +36,25 @@
     display: flex;
     flex-direction: column;
     width: 50%;
-    height: 70%;
     flex-shrink: 0;
     border-radius: 15px;
-    background: rgba(217, 217, 217, 0.29);
-    box-shadow: 4px 4px 10px 4px rgba(0, 0, 0, 0.20);
+    background-color: var(--background1-color);
+    box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.20);
+    margin: 1rem 0 2rem;
+    padding: 1rem;
 }
 
 .CardForm .CardTitle {
     text-align: center;
     font-size: 2rem;
-    color: #E50914;
+    color: var(--primary-color);
     text-transform: uppercase;
     font-weight: 700;
     margin: 1rem 0 0.5rem;
 }
 
 .CardForm .CardSubtitle {
-    color: #5e5b5b;
+    color: var(--text-color);
     font-weight: 400;
     text-align: center;
     font-size: 1rem;
@@ -62,20 +68,21 @@
     width: 100%;
     height: 1rem;
     margin-bottom: 1rem;
-    color: #E50914;
+    color: var(--primary-color);
     font-size: 1.5rem;
 }
 
 .CardDot hr {
     width: 100%;
-    border: 1.2px solid #5e5b5b50;
+    border: 1.2px solid var(--text-color-dimmed);
     margin: 0 2rem;
 }
 
 .CardForm span {
     text-align: center;
-    color: #E50914;
-    font-size: 0.8rem;
+    color: var(--primary-color);
+    font-size: 0.875rem;
+
     font-weight: 400;
     margin-bottom: 1rem;
 }
@@ -86,19 +93,19 @@
     align-items: baseline;
     justify-content: center;
     width: 80%;
-    margin: 0 auto 2rem;
+    margin: 0 auto 1rem;
 }
 
 .CardData svg {
     margin: 0 0.5rem;
-    color: #E50914;
+    color: var(--primary-color);
     font-size: 1.1rem;
 
 }
 
 .CardForm label {
     font-size: .8rem;
-    color: #5e5b5b;
+    color: var(--text-color);
     font-weight: 400;
     margin: 1rem 0 0.4rem;
     display: flex;
@@ -106,8 +113,8 @@
 }
 
 .CardForm input {
-    font-size: .8rem;
-    color: #5e5b5b;
+    font-size: 0.875rem;
+    color: var(--text-color);
     height: 3rem;
     flex-shrink: 0;
     border-radius: 15px;
@@ -119,23 +126,64 @@
     outline: none;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none; 
-    margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
-input[type=number] { 
+input[type=number] {
     appearance: none;
-    -moz-appearance:textfield; 
+    -moz-appearance: textfield;
 }
-
 
 .ContainerButton {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin-top: 1rem;
+    margin: 1.5rem 0;
 }
 
+@media screen and (max-width: 768px) {
+    .ContainerLogo img {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .ContainerLogo h1 {
+        font-size: 1.875rem;
+    }
+
+    .ContainerForm {
+        width: 100%;
+        margin: 1rem 0;
+    }
+
+    .CardForm {
+        width: 90%;
+        padding: 0.5rem;
+    }
+
+    .CardForm .CardTitle {
+        font-size: 1.5rem;
+    }
+
+    .CardForm .CardSubtitle {
+        font-size: 0.875rem;
+
+    }
+
+    .CardDot hr{
+        margin: 0 1rem;
+    }
+
+    .CardData {
+        width: 90%;
+    }
+
+    .ContainerButton button {
+        width: 50%;
+        font-size: 0.875rem;
+    }
+}
