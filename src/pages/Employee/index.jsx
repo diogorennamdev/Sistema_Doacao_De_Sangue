@@ -5,48 +5,48 @@ import Button from '../../components/Button';
 import { Link } from 'react-router-dom';
 
 function EmployeeList() {
-  
-  const { userData} = useAuth();
+
+  const { userData } = useAuth();
   const token = userData.token
   //console.log(token)
 
-  const [employes, setEmployee] = useState([]);
-  const EMPLOYEE = import.meta.env.VITE_RETURNEMPLOYEES;
+  const [employees, setEmployees] = useState([]);
+  const employee = import.meta.env.VITE_EMPLOYEES;
 
-//console.log(employes)
-useEffect(() => {
-  axios.get(`${EMPLOYEE}`, {
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
-  })
-  .then(response => {
-    setEmployee(response.data);
-  })
-  .catch(error => {
-    console.error('Algo deu errado!', error);
-  });
-}, []);
+  //console.log(employees)
+  useEffect(() => {
+    axios.get(`${employee}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(response => {
+        setEmployees(response.data);
+      })
+      .catch(error => {
+        console.error('Algo deu errado!', error);
+      });
+  }, [employee, token]);
 
   return (
     <div>
       <h1>Todos Funcionários</h1>
-      {employes.map((employee , index)=> (
-        <div key={index}>
+      {employees.map((employee) => (
+        <div key={employee.employeeCode}>
           <p>{employee.name}</p>
-          <p>{employee.employeeCode}</p>
-          <button>Editar</button>
+          <div key={employee.employeeCode}>
+            <button>Editar</button>
+          </div>
         </div>
-      ))}
-
-    <button>
-        <Link to = {'/home'}>
+        ))}
+      <button>
+        <Link to={'/home'}>
           Voltar
         </Link>
-    </button>
-    <Button>
+      </button>
+      <Button>
 
-    </Button>
+      </Button>
     </div>
   );
 }
