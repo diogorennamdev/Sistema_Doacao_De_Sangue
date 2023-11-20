@@ -6,7 +6,7 @@ function Home() {
 
   return (
     <div>
-      <h2>Inicio</h2>
+      
       {userData ? (
         <div>
           <p>Bem-Vindo, {userData.dados.Nome}!</p>
