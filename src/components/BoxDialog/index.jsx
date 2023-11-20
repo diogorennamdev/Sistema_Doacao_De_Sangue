@@ -1,5 +1,6 @@
 import { Modal } from 'react-bootstrap';
 import Button from '../Button';
+import { IoAlertCircle } from "react-icons/io5";
 import PropTypes from 'prop-types';
 
 import './styles.css'; // Importando o arquivo CSS
@@ -8,7 +9,7 @@ function BoxDialog({ show, handleClose, title, message }) {
     return (
         <Modal show={show} onHide={handleClose} className="my-modal" backdrop="static">
             <Modal.Header closeButton>
-                <Modal.Title>{title}</Modal.Title>
+                <Modal.Title ><IoAlertCircle  className='icon-alert'/>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>{message}</Modal.Body>
             <Modal.Footer>

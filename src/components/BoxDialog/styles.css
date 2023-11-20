@@ -27,10 +27,20 @@
 }
 
 .my-modal .modal-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 1.5rem;
     color: var(--text-color);
     font-weight: 700;
     line-height: 20.8px;
+}
+
+svg.icon-alert {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.4rem;
+    color: var(--primary-color);
 }
 
 .my-modal .modal-body {
