@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import Admin from './pages/Admin';
 import EmployeeList from './pages/Employee';
+import Stock from './pages/Stock';
 
 const RoutesConfig = () => (
   <Routes>
@@ -22,6 +23,10 @@ const RoutesConfig = () => (
       <Route
         path="/EmployeeList"
         element={<PrivateRoute element={EmployeeList} />}
+      />
+      <Route
+        path='/stock'
+        element={<PrivateRoute element={Stock} />}
       />
     </Route>
   </Routes>
