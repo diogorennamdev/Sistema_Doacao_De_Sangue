@@ -83,7 +83,8 @@ main.ContainerLogin {
 .CardData svg {
     margin: 0 0.5rem;
     color: var(--primary-color);
-    font-size: 1.25rem;}
+    font-size: 1.25rem;
+}
 
 .CardForm label {
     font-size: .8rem;
@@ -137,7 +138,7 @@ input[type=number] {
 
 input[type="password"]::-ms-reveal,
 input[type="password"]::-webkit-reveal {
-  display: none;
+    display: none;
 }
 
 
@@ -150,15 +151,10 @@ input[type="password"]::-webkit-reveal {
 }
 
 @media screen and (max-width: 768px) {
-    .ContainerLogo img {
-        width: 2rem;
-        height: 2rem;
+    main.ContainerLogin {
+        overflow: hidden;
     }
-
-    .ContainerLogo h1 {
-        font-size: 1.875rem;
-    }
-
+    
     .ContainerForm {
         width: 100%;
         margin: 1rem 0;
