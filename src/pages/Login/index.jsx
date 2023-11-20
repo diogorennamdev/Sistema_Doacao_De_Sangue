@@ -39,7 +39,7 @@ function Login() {
   const loginUser = async (event) => {
     event.preventDefault();
     if (employeeCode.trim() === '' || password.trim() === '') {
-      setTitle('Atenção!');
+      setTitle('Atenção');
       setMessage('Preencha todos os campos para continuar.');
       handleShow();
       return;
@@ -71,7 +71,7 @@ function Login() {
     } catch (error) {
       setLoading(false);
       if (error.response && (error.response.status === 400 || error.response.status === 500)) {
-        setTitle(`Ocorreu um erro!`);
+        setTitle(`Erro`);
         const errorMessage = error.response.data.error; // Extrai a mensagem de erro
         setMessage(errorMessage); // Define a mensagem para a mensagem de erro extraída
         handleShow();
@@ -113,7 +113,7 @@ function Login() {
                 onClick={() => setShowPassword(!showPassword)}
                 type="button"
               >
-                {showPassword ? <IoMdEyeOff title='Ocultar senha'/> : <IoMdEye title='Mostrar senha'/>}
+                {showPassword ? <IoMdEyeOff title='Ocultar senha' /> : <IoMdEye title='Mostrar senha' />}
               </button>
 
             </div>
