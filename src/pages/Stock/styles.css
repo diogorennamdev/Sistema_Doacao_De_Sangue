@@ -1,0 +1,62 @@
+.ContainerBloodBag{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+   
+}
+
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 colunas com o mesmo tamanho */
+    grid-gap: 1rem; /* Espaço entre as colunas */
+    margin-bottom: 1rem;
+    width: fit-content;
+}
+
+.icon-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--white);
+    width: 100%;
+    padding: 2rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.icon-container:hover {
+    transform: scale(1.1);
+}
+
+.icon-container img {
+    width: 7rem;
+    height: auto;
+}
+
+.icon-text {
+    display: block;
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+thead {
+    background-color: #f8f8f8;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
