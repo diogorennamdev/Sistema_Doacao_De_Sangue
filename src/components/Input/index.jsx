@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types';
 import './styles.css';
 
-function Input({ type, placeholder, onChange }) {
+function Input({ type, placeholder, onChange ,value}) {
     return <>
         <input
             className='Input'
             type={type}
             placeholder={placeholder}
             onChange={onChange}
+            value={value}
             autoComplete='on' />
     </>
 }
