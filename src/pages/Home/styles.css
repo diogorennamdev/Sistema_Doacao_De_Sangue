@@ -1,4 +1,4 @@
-main.ContainerLogin {
+main{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,187 +6,44 @@ main.ContainerLogin {
     min-height: 100vh;
     overflow: auto;
 }
-
-.ContainerForm {
+.container{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    background-color: var(--white-color);
-    width: 100%;
-}
-
-.CardForm {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    flex-shrink: 0;
+    
     border-radius: 15px;
     background-color: var(--background1-color);
     box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.20);
-    margin: 1rem;
-    padding: 2rem 1rem;
-}
+    width: 50%;
 
-.CardForm .CardTitle {
-    text-align: center;
-    font-size: 2.5rem;
-    color: var(--primary-color);
-    text-transform: uppercase;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
 }
-
-.CardForm .CardSubtitle {
-    color: var(--text-color);
-    font-weight: 400;
-    text-align: center;
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.CardForm .CardDot {
+.title{
+    font-size: 2,5rem;
     display: flex;
-    align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 1rem;
+    align-items: center;
+    margin-top: 2rem;
     margin-bottom: 1rem;
     color: var(--primary-color);
-    font-size: 1.5rem;
 }
-
-.CardDot hr {
-    width: 100%;
-    border: 1.2px solid var(--text-color-dimmed);
-    margin: 0 2rem;
+.welcome{
+    margin-bottom: 4rem;
+    color: var(--text-color);
 }
-
-.CardForm span {
-    text-align: center;
-    color: var(--primary-color);
-    font-size: 0.875rem;
-
-    font-weight: 400;
-    margin-bottom: 1rem;
+.button{
+    margin: 1rem;
+    padding: 1.4rem;
+    
 }
-
-.CardData {
+.containerButton{
     display: flex;
     flex-direction: column;
-    align-items: baseline;
-    justify-content: center;
-    width: 90%;
-    margin: 0 auto 1rem;
-}
-
-.CardData svg {
-    margin: 0 0.5rem;
-    color: var(--primary-color);
-    font-size: 1.3rem;
-}
-
-.CardForm label {
-    font-size: .8rem;
-    color: var(--text-color);
-    font-weight: 400;
-    margin: 1rem 0 0.4rem;
-    display: flex;
     align-items: center;
+    margin-bottom: 2rem;
+    width: 80%;
 }
 
-.CardForm input {
-    font-size: 0.875rem;
-    color: var(--text-color);
-    height: 3rem;
-    border-radius: 15px;
-    background: #FFF;
-    margin: 0 auto;
-    width: 100%;
-}
+.buttonLogout{
+    margin-bottom: 2rem;
 
-.CardForm input:focus {
-    outline: 2px solid var(--primary-color-dimmed);
-}
-
-.password-input {
-    width: 100%;
-    position: relative;
-}
-
-.password-toggle-icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    background: none;
-    border: none;
-    outline: none;
-}
-
-.password-toggle-icon svg {
-    width: 1.6rem;
-    height: 1.6rem;
-}
-
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type=number] {
-    appearance: none;
-    -moz-appearance: textfield;
-}
-
-input[type="password"]::-ms-reveal,
-input[type="password"]::-webkit-reveal {
-    display: none;
-}
-
-
-.ContainerButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin: 1.5rem 0;
-}
-
-@media screen and (max-width: 768px) {
-    main.ContainerLogin {
-       display: block;
-       overflow: hidden;
-       margin-top: 0.5rem;
-    }
-
-    .ContainerForm {
-        width: 100%;
-        margin: 1rem 0;
-    }
-
-    .CardForm {
-        width: 90%;
-        padding: 0.5rem;
-    }
-
-    .CardForm .CardTitle {
-        font-size: 1.5rem;
-    }
-
-    .CardForm .CardSubtitle {
-        font-size: 0.875rem;
-
-    }
-
-    .CardDot hr {
-        margin: 0 1rem;
-    }
-
-    .ContainerButton button {
-        width: 50%;
-        font-size: 0.875rem;
-    }
 }
