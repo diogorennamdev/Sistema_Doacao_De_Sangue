@@ -12,7 +12,7 @@ function EmployeeList() {
 
   const [employees, setEmployees] = useState([]);
   const employee = import.meta.env.VITE_EMPLOYEES;
-
+  
   //console.log(employees)
   useEffect(() => {
     axios.get(`${employee}`, {
@@ -26,7 +26,10 @@ function EmployeeList() {
       .catch(error => {
         console.error('Algo deu errado!', error);
       });
+
   }, [employee, token]);
+  
+  const [showPopup, setShowPopup] = useState(false);
 
   return (
     <div>
@@ -35,10 +38,18 @@ function EmployeeList() {
         <div key={employee.employeeCode}>
           <p>{employee.name}</p>
           <div key={employee.employeeCode}>
-            <button>Editar</button>
+            <button onClick={() => setShowPopup(true)}>Editar</button>
           </div>
         </div>
-        ))}
+      ))}
+
+      {showPopup && (
+        <div className="popup">
+          <h2>Este é o Popup</h2>
+          <button onClick={() => setShowPopup(false)}>Fechar Popup</button>
+        </div>
+      )}
+
       <button>
         <Link to={'/home'}>
           Voltar
@@ -51,4 +62,4 @@ function EmployeeList() {
   );
 }
 
-export default EmployeeList;
+export default EmployeeList
