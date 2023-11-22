@@ -56,7 +56,7 @@ function Login() {
       // Obter os dados do usuário a partir do token
       const employeeData = extractUserDataFromToken(token);
       const DataEmployee = {
-        dados: response.data.Funcionário,
+        data: response.data.Funcionário,
         information: employeeData,
         token: response.data.token
       };
@@ -65,7 +65,7 @@ function Login() {
       setLoading(false);
 
       if (response.status === 200) {
-        navigate('/home'); // Navegue para a página inicial
+        navigate('/inicio'); // Navegue para a página inicial
       }
 
     } catch (error) {
