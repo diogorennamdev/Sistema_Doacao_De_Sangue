@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import Admin from './pages/Admin';
 import EmployeeList from './pages/Employee';
 import Stock from './pages/Stock';
-
+import Cadastro from './pages/Cadastro';
 const RoutesConfig = () => (
   <Routes>
     <Route element={<App />}>
@@ -21,12 +21,16 @@ const RoutesConfig = () => (
         element={<PrivateRoute element={Admin} />}
       />
       <Route
-        path="/EmployeeList"
+        path="/employee"
         element={<PrivateRoute element={EmployeeList} />}
       />
       <Route
         path='/stock'
         element={<PrivateRoute element={Stock} />}
+      />
+      <Route
+        path='/cadastro'
+        element={<PrivateRoute element={Cadastro} />}
       />
     </Route>
   </Routes>
