@@ -8,6 +8,9 @@ import Admin from './pages/Admin';
 import EmployeeList from './pages/Employee';
 import Stock from './pages/Stock';
 import Cadastro from './pages/Cadastro';
+import Donation from './pages/Donation';
+
+
 const RoutesConfig = () => (
   <Routes>
     <Route element={<App />}>
@@ -28,11 +31,16 @@ const RoutesConfig = () => (
         path='/estoque'
         element={<PrivateRoute element={Stock} />}
       />
-    </Route>
-    <Route
+      <Route
         path='/cadastro'
         element={<PrivateRoute element={Cadastro} />}
       />
+      <Route
+        path='/doador'
+        element={<PrivateRoute element={Donation} />}
+      />
+    </Route>
+    
   </Routes>
 );
 
