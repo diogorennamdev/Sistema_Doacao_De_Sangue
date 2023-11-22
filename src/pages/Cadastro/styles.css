@@ -1,0 +1,93 @@
+.sectionCadastre {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.containerForm {
+    width: 50%;
+}
+
+.containerForm input {
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-top: 0.4rem;
+}
+
+.containerForm h1 {
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+
+}
+
+.labelStyle {
+    font-weight: 700;
+    color: #333;
+    margin-top: 3rem;
+    font-size: 1.1rem;
+
+
+}
+.containerInput{
+    margin-top: 2rem;
+    margin-bottom: 0.4rem;
+}
+.containerForm button {
+    background-color: #0F9D58;
+    margin-bottom: 4rem;
+}
+
+.containerForm button:hover,
+.containerForm button:focus {
+    background-color: transparent;
+    color: #0F9D58;
+    outline: 1px solid #0F9D58;
+}
+
+.containerForm input[type="radio"] {
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 50%;
+    border: 2px solid #333;
+    outline: none;
+    cursor: pointer;
+    box-shadow: none;
+    margin: 0;
+
+}
+
+.ContainerSectionRadio {
+    display: flex;
+    margin-bottom: 2rem;
+    margin-top: 1.6rem;
+}
+.ContainerSectionRadio label{
+    color: #000;
+    font-weight: 500
+}
+.cardInputradio {
+    display: flex;
+    align-items: center;
+    margin-right: 2rem;
+}
+.TitleTypeUser{
+    margin-top: 0.8rem;
+}
+.textErro{
+    color: red;
+    font-weight: 500;
+    margin-top: 0.3rem;
+    margin-bottom: 0.4rem;
+}
+@media screen and (max-width: 768px) {
+    .containerForm {
+        width: 90%;
+    }
+    .containerForm h1 {
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+        font-size: 1.4rem;
+
+    }
+}
