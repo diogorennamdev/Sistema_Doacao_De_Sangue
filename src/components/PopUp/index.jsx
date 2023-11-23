@@ -1,11 +1,15 @@
 import PropTypes from 'prop-types';
-import Button from '../Button';
 import './styles.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuth } from '../../Contexts/useAuth';
+
 
 function Popup({ show, onClose, employee }) {
     const [senha, setSenha] = useState('')
+    const { userData } = useAuth();
+    const token = userData.token
+    const employeeUrl = import.meta.env.VITE_EMPLOYEES;
 
     useEffect(() => {
         if (employee && employee.password) {
@@ -18,13 +22,16 @@ function Popup({ show, onClose, employee }) {
     }
 
     async function editar() {
-        const url = `https://apidoadoressangue.vercel.app/employees/${employee.employeeCode}`;
         const updatedEmployee = {
             password: senha
         };
 
         try {
-            const response = await axios.put(url, updatedEmployee);
+            const response = await axios.patch(`${employeeUrl}${employee.employeeCode}`, updatedEmployee, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
             console.log('Senha atualizada com sucesso!', response.data);
         } catch (error) {
             console.error('Erro ao atualizar a senha', error);
@@ -40,10 +47,11 @@ function Popup({ show, onClose, employee }) {
                 <input type="password" onChange={(e) => setSenha(e.target.value)} value={senha} />
             </label>
             <button onClick={onClose}>Fechar Popup</button>
-            <Button 
-            TextButton={'Salvar edição'}
-            onClick={editar}   
-            />           
+            
+           <button onClick={editar}>Salvar edição</button>
+            
+
+
         </div>
     );
 }

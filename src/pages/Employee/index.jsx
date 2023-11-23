@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../Contexts/useAuth';
-import Button from '../../components/Button';
 import Popup from '../../components/PopUp';
 function EmployeeList() {
 
@@ -50,11 +49,6 @@ function EmployeeList() {
         employee={editingEmployee}
         onClose={() => setShowPopup(false)}
       />
-
-
-      <Button>
-
-      </Button>
     </div>
   );
 }
