@@ -2,18 +2,16 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../Contexts/useAuth';
 import Button from '../../components/Button';
-import { Link } from 'react-router-dom';
-
+import Popup from '../../components/PopUp';
 function EmployeeList() {
 
   const { userData } = useAuth();
   const token = userData.token
-  //console.log(token)
-
   const [employees, setEmployees] = useState([]);
   const employee = import.meta.env.VITE_EMPLOYEES;
-  
-  //console.log(employees)
+  const [showPopup, setShowPopup] = useState(false);
+  const [editingEmployee, setEditingEmployee] = useState(null);
+
   useEffect(() => {
     axios.get(`${employee}`, {
       headers: {
@@ -28,8 +26,9 @@ function EmployeeList() {
       });
 
   }, [employee, token]);
-  
-  const [showPopup, setShowPopup] = useState(false);
+
+
+  //console.log(editingEmployee.employeeCode)
 
   return (
     <div>
@@ -38,23 +37,21 @@ function EmployeeList() {
         <div key={employee.employeeCode}>
           <p>{employee.name}</p>
           <div key={employee.employeeCode}>
-            <button onClick={() => setShowPopup(true)}>Editar</button>
+            <button onClick={() => {
+              setShowPopup(true);
+              setEditingEmployee(employee);
+            }}>Editar</button>
           </div>
         </div>
       ))}
 
-      {showPopup && (
-        <div className="popup">
-          <h2>Este é o Popup</h2>
-          <button onClick={() => setShowPopup(false)}>Fechar Popup</button>
-        </div>
-      )}
+      <Popup
+        show={showPopup}
+        employee={editingEmployee}
+        onClose={() => setShowPopup(false)}
+      />
 
-      <button>
-        <Link to={'/home'}>
-          Voltar
-        </Link>
-      </button>
+
       <Button>
 
       </Button>
@@ -62,4 +59,4 @@ function EmployeeList() {
   );
 }
 
-export default EmployeeList
+export default EmployeeList;
