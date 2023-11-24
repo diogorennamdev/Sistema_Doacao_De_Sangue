@@ -1,63 +1,45 @@
 import { useAuth } from '../../Contexts/useAuth';
-import Button from '../../components/Button';
-import { useMemo } from 'react';
-import { Link } from 'react-router-dom'; // Importe o Link
+import { Link } from 'react-router-dom';
 
 import './styles.css';
 
 function Home() {
-  const { userData } = useAuth(); // Obtendo os dados do contexto
-  
-  const loading = useMemo(() => false, []);
+  const { userData } = useAuth();
+
+  const renderWelcomeMessage = () => {
+    if (userData) {
+      return (
+        <div className='WelcomeMessage'>
+          <h2>Bem-Vindo, {userData.data.Nome}!</h2>
+          <p>Aqui estão algumas tarefas que você pode realizar hoje:</p>
+        </div>
+      );
+    }
+    return <h2>Bem-vindo ao nosso Hemocentro!</h2>;
+  };
+
+  const renderCard = (link, text, description) => (
+    <div className="Card">
+      <Link to={link}>
+        <h3>{text}</h3>
+        <p>{description}</p>
+      </Link>
+    </div>
+  );
+  console.log(userData)
+
 
   return (
     <main>
-
-      <div className='container'>
-
-        <h2 className='title'>INFORMAÇÕES DO HOMOCENTRO</h2>
-
-        {userData ? (
-          <div className='welcome'>
-            <p>Bem-Vindo, {userData.dados.Nome}!</p>
-          </div>
-        ) : (
-          <p>Você não está logado.</p>
-        )}
-
-        <div className='containerButton' > 
-
-          <Link to="/">
-            <Button
-              loading={loading}
-              TextButton={'Gerenciar Doadores'}
-            />
-          </Link>
-
-          <Link to="/">
-            <Button
-              loading={loading}
-              TextButton={'Adicionar Exames'}
-            />
-          </Link>
-
-          <Link to="/Stock">
-            <Button
-              loading={loading}
-              TextButton={'Estoque'}
-            />
-          </Link>
-
-          <Link to="/">
-            <Button
-              loading={loading}
-              TextButton={'Cadastro de funcionários'}
-            />
-          </Link>
+      <div className='ContainerHome'>
+        {renderWelcomeMessage()}
+        <div className='CardsHome'>
+          {renderCard("/", "Gerenciar Doadores", "Visualize e gerencie todos os doadores")}
+          {renderCard("/", "Adicionar Exames", "Adicione resultados de exames para doadores")}
+          {renderCard("/estoque", "Estoque", "Verifique o estoque atual de sangue")}
+          {userData?.information?.isAdmin && renderCard("/cadastro", "Gerenciar funcionários", "Visualize e gerencie todos os funcionários")}
         </div>
-
       </div>
-
     </main>
   );
 }
