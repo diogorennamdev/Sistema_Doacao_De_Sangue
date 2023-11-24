@@ -1,20 +1,25 @@
-.ContainerBloodBag{
+.ContainerBloodBag {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-   
+
 }
 
-.icon-grid {
+.BloodBagIcon {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 colunas com o mesmo tamanho */
-    grid-gap: 1rem; /* Espaço entre as colunas */
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 colunas com o mesmo tamanho */
+    grid-gap: 1rem;
+    /* Espaço entre as colunas */
     margin-bottom: 1rem;
+    width: -moz-fit-content;
+    /* Para suporte ao Firefox */
     width: fit-content;
 }
 
-.icon-container{
+
+.ContainerIcon {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,16 +30,28 @@
     transition: all 0.2s ease-in-out;
 }
 
-.icon-container:hover {
+.ContainerIcon:hover {
     transform: scale(1.1);
 }
 
-.icon-container img {
+.ContainerIcon img {
     width: 7rem;
     height: auto;
 }
 
-.icon-text {
+.no-events {
+    pointer-events: none;
+    -webkit-user-select: none;
+    /* Para suporte ao Safari e iOS */
+    -moz-user-select: none;
+    /* Para suporte ao Firefox */
+    -ms-user-select: none;
+    /* Para suporte ao Internet Explorer/Edge */
+    user-select: none;
+    /* Desativa a seleção de texto */
+}
+
+.IconText {
     display: block;
     color: var(--text-color);
     font-weight: bold;
@@ -51,7 +68,8 @@ thead {
     background-color: #f8f8f8;
 }
 
-th, td {
+th,
+td {
     padding: 10px;
     border: 1px solid #ddd;
     text-align: center;

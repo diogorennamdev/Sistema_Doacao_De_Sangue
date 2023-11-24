@@ -42,7 +42,7 @@ const Stock = () => {
     return (
         <div className='ContainerBloodBag'>
             <h1>Estoque de Bolsas de Sangue</h1>
-            <div className="icon-grid">
+            <div className="BloodBagIcon">
                 {countsWithPercentage.map(([, , cleanedBloodType, percentage]) => {
                     let iconSrc, altText;
                     if (percentage < 10) {
@@ -60,10 +60,10 @@ const Stock = () => {
                     }
 
                     return (
-                        <div key={cleanedBloodType} className="icon-container">
-                            <img src={iconSrc} alt={altText} />
+                        <div key={cleanedBloodType} className="ContainerIcon no-events">
+                            <img src={iconSrc} alt={altText} draggable="false" />
                             <p>{altText}</p>
-                            <p className="icon-text">{cleanedBloodType}</p>
+                            <p className="IconText">{cleanedBloodType}</p>
                         </div>
                     );
                 })}
@@ -82,7 +82,7 @@ const Stock = () => {
                         <tr key={cleanedBloodType}>
                             <td>{cleanedBloodType}</td>
                             <td>{count}</td>
-                            <td>{Number.isNaN(percentage) ? 'NaN' : percentage}%</td> 
+                            <td>{Number.isNaN(percentage) ? 'NaN' : percentage}%</td>
                         </tr>
                     ))}
                 </tbody>
