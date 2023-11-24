@@ -1,49 +1,59 @@
-main{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    overflow: auto;
-}
-.container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    border-radius: 15px;
-    background-color: var(--background1-color);
-    box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.20);
-    width: 50%;
-
-}
-.title{
-    font-size: 2,5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    color: var(--primary-color);
-}
-.welcome{
-    margin-bottom: 4rem;
-    color: var(--text-color);
-}
-.button{
-    margin: 1rem;
-    padding: 1.4rem;
-    
-}
-.containerButton{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 2rem;
-    width: 80%;
+.ContainerHome {
+  width: 100%;
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
 }
 
-.buttonLogout{
-    margin-bottom: 2rem;
+.WelcomeMessage {
+  text-align: center;
+  color: var(--text-color);
+  margin: 5rem 0 2.5rem;
+}
 
+.welcome h2 {
+  font-size: 1.7rem;
+}
+
+.CardsHome {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.Card {
+  text-align: center;
+  width: calc(50% - 0.625rem);
+  height: auto;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.Card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.Card h3 {
+  margin-bottom: 0.625rem;
+  color: var(--primary-color);
+}
+
+.Card p {
+  color: var(--text-color);
+}
+
+@media (max-width: 1200px) {
+  .Card {
+    width: calc(50% - 0.625rem);
+  }
+}
+
+@media (max-width: 30rem) {
+  .Card {
+    width: 100%;
+  }
 }
