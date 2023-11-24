@@ -1,19 +1,16 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../Contexts/useAuth';
-import Button from '../../components/Button';
-import { Link } from 'react-router-dom';
-
+import Popup from '../../components/PopUp';
 function EmployeeList() {
 
   const { userData } = useAuth();
   const token = userData.token
-  //console.log(token)
-
   const [employees, setEmployees] = useState([]);
   const employee = import.meta.env.VITE_EMPLOYEES;
+  const [showPopup, setShowPopup] = useState(false);
+  const [editingEmployee, setEditingEmployee] = useState(null);
 
-  //console.log(employees)
   useEffect(() => {
     axios.get(`${employee}`, {
       headers: {
@@ -26,7 +23,11 @@ function EmployeeList() {
       .catch(error => {
         console.error('Algo deu errado!', error);
       });
+
   }, [employee, token]);
+
+
+  //console.log(editingEmployee.employeeCode)
 
   return (
     <div>
@@ -35,18 +36,19 @@ function EmployeeList() {
         <div key={employee.employeeCode}>
           <p>{employee.name}</p>
           <div key={employee.employeeCode}>
-            <button>Editar</button>
+            <button onClick={() => {
+              setShowPopup(true);
+              setEditingEmployee(employee);
+            }}>Editar</button>
           </div>
         </div>
-        ))}
-      <button>
-        <Link to={'/home'}>
-          Voltar
-        </Link>
-      </button>
-      <Button>
+      ))}
 
-      </Button>
+      <Popup
+        show={showPopup}
+        employee={editingEmployee}
+        onClose={() => setShowPopup(false)}
+      />
     </div>
   );
 }
