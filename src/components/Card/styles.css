@@ -1,0 +1,18 @@
+.CardDonation {
+    border: 1px solid black;
+    padding: 10px;
+    width: 200px;
+    margin: 10px auto;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  }
+  
+  .CardDonation h2 {
+    font-size: 20px;
+    color: #333;
+    
+
+  }
+  
+    
+  
