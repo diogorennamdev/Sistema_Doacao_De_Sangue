@@ -5,15 +5,33 @@
     margin-bottom: 1rem;
 }
 
-.ContainerLogo img {
+.ContainerLogo .ImgLogo {
     width: 2.5rem;
     height: 2.5rem;
     margin-right: 0.5rem;
 }
 
-.ContainerLogo h1 {
+.ContainerTitle {
     font-size: 2.5rem;
     color: var(--primary-color);
+    text-transform: uppercase;
+    font-weight: 800;
+}
+
+.ContainerLogoReverse {
+    display: flex;
+    align-items: center;
+}
+
+.ContainerLogoReverse .ImgLogoReverse {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.5rem;
+}
+
+.ContainerTitleReverse {
+    font-size: 2rem;
+    color: var(--white-color);
     text-transform: uppercase;
     font-weight: 800;
 }

@@ -4,12 +4,9 @@ import PropTypes from 'prop-types';
 
 import './styles.css';
 
-function Button({ TextButton, onclick, loading }) {
+function Button({ TextButton, onClick, className, loading }) {
   return (
-    <button 
-      className='button'
-      onClick={onclick}
-    >
+    <button className={`button ${className}`} onClick={onClick}>
       {loading ? (
         <FontAwesomeIcon icon={faRefresh} spin />
       ) : (
@@ -21,7 +18,8 @@ function Button({ TextButton, onclick, loading }) {
 
 Button.propTypes = {
   TextButton: PropTypes.string,
-  onclick: PropTypes.func,
+  onClick: PropTypes.func,
+  className: PropTypes.string,
   loading: PropTypes.bool
 };
 
