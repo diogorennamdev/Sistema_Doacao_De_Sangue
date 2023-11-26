@@ -1,7 +1,7 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { LogoReverse } from '../Logo';
 import { useAuth } from '../../Contexts/useAuth';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '../Button';
 import { FaUserCircle, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import axios from 'axios';
@@ -12,10 +12,24 @@ function Navbar() {
   const logout = import.meta.env.VITE_LOGOUT;
 
   const location = useLocation();
-  const { userData, logout: userLogout } = useAuth(); // Adicionei a função de logout aqui
+  const { userData, logout: userLogout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
- 
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isOpen && !event.target.closest('.dropdown-menu')) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isOpen]);
+
   if (location.pathname === './src/pages/login' || location.pathname === '/') {
     return null;
   }
@@ -24,33 +38,53 @@ function Navbar() {
     try {
       const response = await axios.post(`${logout}`, {}, {
         headers: {
-          Authorization: `Bearer ${userData.token}` 
+          Authorization: `Bearer ${userData.token}`
         }
       })
 
       if (response.status === 200) {
-        userLogout(); 
-        navigate('/'); // Redireciona para a página de login
+        userLogout();
+        navigate('/');
       }
     } catch (error) {
       console.error(error);
     }
   };
 
+  const toggleMenu = (event) => {
+    event.stopPropagation();
+    setIsOpen(!isOpen);
+  };
 
   return (
     <div className="ContainerNavBar">
-      <div className="ContainerLogo">
-        <LogoReverse />
-      </div>
+      <LogoReverse />
       <div className="ContainerUser">
         <FaUserCircle />
-        <p>Olá, <strong>{userData.data.Nome}</strong></p>
-        <button onClick={() => setIsOpen(!isOpen)} className='buttonArrow'>
+        <p
+          onClick={toggleMenu}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              toggleMenu(event);
+            }
+          }}
+          tabIndex={0}
+        >
+          Olá, <strong>{userData.data.Nome}</strong>
+        </p>
+        <button onClick={toggleMenu} className='buttonArrow'>
           {isOpen ? <FaChevronUp /> : <FaChevronDown />}
         </button>
         {isOpen && (
-          <div className="dropdown-menu">
+          <div
+            className="dropdown-menu"
+            onClick={(event) => event.stopPropagation()}
+            onKeyDown={(event) => {
+              if (event.key === 'Escape') {
+                setIsOpen(false);
+              }
+            }}
+          >
             <h4>Acesso rápido</h4>
             <div className="dropdown-links">
               <Link to="/inicio">Inicio</Link>
