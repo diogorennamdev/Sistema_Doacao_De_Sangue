@@ -25,6 +25,10 @@ body {
   font-weight: 300;
 }
 
+.App{
+  height: 100vh;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
   /* width de toda a barra de rolagem */

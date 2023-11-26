@@ -1,23 +1,37 @@
-.ContainerBloodBag {
+.ContainerStock {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 1rem;
+}
 
+.ContainerStock .Title {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--text-color);
+    margin-top: 2rem;
+}
+
+.ContainerStock .Subtitle {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: 2.5rem;
+}
+
+.ContainerBloodBag {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
 }
 
 .BloodBagIcon {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    /* 4 colunas com o mesmo tamanho */
-    grid-gap: 1rem;
-    /* Espaço entre as colunas */
-    margin-bottom: 1rem;
-    width: -moz-fit-content;
-    /* Para suporte ao Firefox */
-    width: fit-content;
+    grid-gap: 0.5rem;
+    margin-right: 1.5rem;
 }
-
 
 .ContainerIcon {
     display: flex;
@@ -25,9 +39,6 @@
     align-items: center;
     justify-content: center;
     background-color: var(--white);
-    width: 100%;
-    padding: 2rem;
-    transition: all 0.2s ease-in-out;
 }
 
 .ContainerIcon:hover {
@@ -35,20 +46,27 @@
 }
 
 .ContainerIcon img {
-    width: 7rem;
-    height: auto;
+    width: 9.25rem;
+    height: 9.25rem;
+}
+
+.ContainerIcon span {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.ContainerIcon p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 0.8rem;
 }
 
 .no-events {
     pointer-events: none;
     -webkit-user-select: none;
-    /* Para suporte ao Safari e iOS */
     -moz-user-select: none;
-    /* Para suporte ao Firefox */
     -ms-user-select: none;
-    /* Para suporte ao Internet Explorer/Edge */
     user-select: none;
-    /* Desativa a seleção de texto */
 }
 
 .IconText {
@@ -57,24 +75,60 @@
     font-weight: bold;
 }
 
-
 table {
-    width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
+    border-radius: 10px;
+    overflow: hidden;
+    outline: 1px solid var(--border-color);
 }
 
 thead {
-    background-color: #f8f8f8;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-radius: 10px;
 }
 
 th,
 td {
     padding: 10px;
-    border: 1px solid #ddd;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
     text-align: center;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+th {
+    white-space: normal;
+    word-break: keep-all;
+}
+
+td {
+    width: 25%;
+    font-weight: 400;
+    color: var(--text-color);
+    border-right: 1px solid var(--border-color);
+}
+
+@media (max-width: 600px) {
+    .ContainerStock {
+        margin: 1rem;
+    }
+
+    .ContainerBloodBag {
+        flex-direction: column;
+    }
+
+    .BloodBagIcon {
+        grid-template-columns: repeat(2, 1fr);
+        margin-right: 0;
+    }
+
+    table {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+
+    th {
+        padding: 5px 0;
+    }
 }
