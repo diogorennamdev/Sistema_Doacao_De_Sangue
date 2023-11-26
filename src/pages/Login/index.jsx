@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom'; // Importe o useNavigate
-import Logo from '../../components/Logo';
+import {Logo} from '../../components/Logo';
 import { IoMdPerson, IoMdKey, IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import './styles.css'
 
