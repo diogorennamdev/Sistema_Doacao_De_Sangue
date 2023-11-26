@@ -1,0 +1,55 @@
+.Loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.LoadingIcon {
+    font-size: 4rem;
+    color: var(--primary-color);
+}
+
+.LoadingText {
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--primary-color);
+    margin-top: 1rem;
+}
+
+@keyframes dot {
+
+    0%,
+    20% {
+        opacity: 0;
+    }
+
+    50%,
+    100% {
+        opacity: 1;
+    }
+}
+
+.dot1 {
+    animation: dot 2.5s infinite;
+    /* Aumente a duração da animação para 2s */
+    animation-delay: 0.0s;
+}
+
+.dot2 {
+    animation: dot 2.5s infinite;
+    /* Aumente a duração da animação para 2s */
+    animation-delay: 0.2s;
+}
+
+.dot3 {
+    animation: dot 2.5s infinite;
+    /* Aumente a duração da animação para 2s */
+    animation-delay: 0.4s;
+}
