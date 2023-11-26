@@ -18,6 +18,11 @@ function Cadastro() {
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
     const [mensagem, setmensagem] = useState('');
+    const [type, setType] = useState('')
+    const [titleMensageBox, setTitleMensageBox] = useState('');
+    console.log(titleMensageBox)
+    const [personCode, setPersonCode] = useState('');
+    const [password, setPassword] = useState('');
     const handleAdminPermissionChange = (event) => {
         setIsAdmin(event.target.value === 'true');
     };
@@ -39,17 +44,25 @@ function Cadastro() {
         setNome('');
         setSenha('');
         setSenhaValida(true);
+        setPassword('');
+        setPersonCode('');
+        setTitleMensageBox('');
+        setType('');
+        setmensagem('');
     }
     const handleSubmit = async () => {
+
         if (nome === '' || senha === '') {
             setmensagem('Preencha todos os campos!');
             setShow(true);
+            setTitleMensageBox('Atenção')
             return;
         }
 
         if (senha.length < 8) {
             setmensagem('Sua senha deve ter no mínimo 8 caracteres.');
             setShow(true);
+            setTitleMensageBox('Atenção')
             return;
         }
 
@@ -69,19 +82,33 @@ function Cadastro() {
         try {
             setLoading(true);
             const response = await axios.post(ApiUrl, user, config);
-         
+
             if (response.status === 201) {
                 setmensagem('Funcionário registrado com sucesso!');
                 setShow(true);
                 setLoading(false);
-                limparCampos()
+                limparCampos();
+                setType('success');
+                setTitleMensageBox('Sucesso!')
+                setPassword(response.data.Funcionário.Senha);
+                setPersonCode(response.data.Funcionário.Código)
             }
-            
+            console.log(response.data);
+
 
         } catch (error) {
+            if (error.response && error.response.status === 401) {
+                setLoading(false);
+
+                console.log('Erro de autenticação: não autorizado.');
+                //Fazer um componente para direcionar para a tela de login novamente
+                return
+
+            }
             setmensagem(error.response.data.error);
             setShow(true);
             setLoading(false);
+            setTitleMensageBox('Atenção!')
         }
     };
 
@@ -149,17 +176,20 @@ function Cadastro() {
 
                 </div>
                 <Button
-                    TextButton={'Criar Funcionário'}
-                    onclick={handleSubmit}
+                    TextButton={'Cria Funcionário'}
+                    onClick={() => handleSubmit()}
                     loading={loading}
 
                 />
             </div>
             <BoxDialog
-                title='Atenção!'
+                title={titleMensageBox}
                 message={mensagem}
                 show={show}
+                type={type}
                 handleClose={handleCloseBox}
+                personCode={personCode}
+                password={password}
             />
         </div>
     );
