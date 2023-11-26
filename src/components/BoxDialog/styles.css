@@ -36,13 +36,16 @@
     line-height: 20.8px;
 }
 
-svg.icon-alert {
+.icon-alert svg {
     width: 2rem;
     height: 2rem;
     margin-right: 0.4rem;
     color: var(--primary-color);
 }
-
+.modal-title h4{
+    display: flex;
+    align-items: center;
+}
 .my-modal .modal-body {
     font-size: 1rem;
     color: var(--text-color);
@@ -57,10 +60,60 @@ svg.icon-alert {
     align-items: center;
 }
 
-.btn-close{
+.btn-close {
     display: none;
 }
 
+
+.my-modal.success .icon-success svg {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.4rem;
+    color: var(--text-color-sucess-color);
+}
+
+.my-modal.success button {
+    background-color: var(--text-color-sucess-color);
+}
+.my-modal.success button:hover{
+    outline: 1px solid var(--text-color-sucess-color);
+    color: #fff;
+}
+.copy-success-message {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #42b72a;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    z-index: 999;
+    animation: fadeOut 2s ease-in-out forwards;
+}
+
+.informationEmployee p {
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+.informationEmployee span{
+    color: #000;
+    margin-right: 0.3rem;
+}
+.informationEmployee p svg {
+    cursor: pointer;
+    margin-left: 0.5rem;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
 
 @media (max-width: 768px) {
     .my-modal .modal-content {
