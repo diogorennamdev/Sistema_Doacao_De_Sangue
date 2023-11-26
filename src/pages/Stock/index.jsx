@@ -40,55 +40,58 @@ const Stock = () => {
     });
 
     return (
-        <div className='ContainerBloodBag'>
-            <h1>Estoque de Bolsas de Sangue</h1>
-            <div className="BloodBagIcon">
-                {countsWithPercentage.map(([, , cleanedBloodType, percentage]) => {
-                    let iconSrc, altText;
-                    if (percentage < 10) {
-                        iconSrc = critico;
-                        altText = "Critico";
-                    } else if (percentage < 20) {
-                        iconSrc = alerta;
-                        altText = "Alerta";
-                    } else if (percentage < 60) {
-                        iconSrc = adequado;
-                        altText = "Adequado";
-                    } else {
-                        iconSrc = estavel;
-                        altText = "Estavel";
-                    }
-
-                    return (
-                        <div key={cleanedBloodType} className="ContainerIcon no-events">
-                            <img src={iconSrc} alt={altText} draggable="false" />
-                            <p>{altText}</p>
-                            <p className="IconText">{cleanedBloodType}</p>
-                        </div>
-                    );
-                })}
-            </div>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Grupo ABO | Rh (Pos) ou (Neg)</th>
-                        <th>Quantidade de bolsas no estoque</th>
-                        <th>Porcentagem %</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {countsWithPercentage.map(([, count, cleanedBloodType, percentage]) => (
-                        <tr key={cleanedBloodType}>
-                            <td>{cleanedBloodType}</td>
-                            <td>{count}</td>
-                            <td>{Number.isNaN(percentage) ? 'NaN' : percentage}%</td>
+        <div className='ContainerStock'>
+            <h1 className='Title'>Estoque de Bolsas de Sangue</h1>
+            <span className='Subtitle'>Visualize o estoque disponível!</span>
+            <div className='ContainerBloodBag'>
+                <div className="BloodBagIcon">
+                    {countsWithPercentage.map(([, , cleanedBloodType, percentage]) => {
+                        let iconSrc, altText;
+                        if (percentage < 10) {
+                            iconSrc = critico;
+                            altText = "Critico";
+                        } else if (percentage < 20) {
+                            iconSrc = alerta;
+                            altText = "Alerta";
+                        } else if (percentage < 60) {
+                            iconSrc = adequado;
+                            altText = "Adequado";
+                        } else {
+                            iconSrc = estavel;
+                            altText = "Estavel";
+                        }
+    
+                        return (
+                            <div key={cleanedBloodType} className="ContainerIcon no-events">
+                                <img src={iconSrc} alt={altText} draggable="false" />
+                                <span>{altText}</span>
+                                <p className="IconText">{cleanedBloodType}</p>
+                            </div>
+                        );
+                    })}
+                </div>
+    
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Grupo ABO | Rh</th>
+                            <th>Quantidade de bolsas no estoque</th>
+                            <th>Porcentagem %</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {countsWithPercentage.map(([, count, cleanedBloodType, percentage]) => (
+                            <tr key={cleanedBloodType}>
+                                <td>{cleanedBloodType}</td>
+                                <td>{count}</td>
+                                <td>{Number.isNaN(percentage) ? 'NaN' : percentage}%</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
-    );
+    );    
 }
 
 export default Stock;
