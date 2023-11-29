@@ -20,7 +20,7 @@ function Cadastro() {
     const [mensagem, setmensagem] = useState('');
     const [type, setType] = useState('')
     const [titleMensageBox, setTitleMensageBox] = useState('');
-    console.log(titleMensageBox)
+    console.log('mensagem', mensagem)
     const [personCode, setPersonCode] = useState('');
     const [password, setPassword] = useState('');
     const handleAdminPermissionChange = (event) => {
@@ -39,7 +39,7 @@ function Cadastro() {
         }
     };
 
-    function limparCampos() {
+    function clearFields() {
         setIsAdmin(false);
         setNome('');
         setSenha('');
@@ -87,13 +87,12 @@ function Cadastro() {
                 setmensagem('Funcionário registrado com sucesso!');
                 setShow(true);
                 setLoading(false);
-                limparCampos();
                 setType('success');
                 setTitleMensageBox('Sucesso!')
                 setPassword(response.data.Funcionário.Senha);
                 setPersonCode(response.data.Funcionário.Código)
             }
-            console.log(response.data);
+
 
 
         } catch (error) {
@@ -114,7 +113,7 @@ function Cadastro() {
 
     const handleCloseBox = async () => {
         setShow(false);
-        setmensagem('')
+        clearFields();
     };
     return (
         <div className='sectionCadastre'>
