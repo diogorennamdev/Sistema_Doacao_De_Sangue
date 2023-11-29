@@ -10,46 +10,50 @@
 
 .containerForm input {
     border-radius: 10px;
-    background: #FFF;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    background: var(--white-color);
     margin-top: 0.4rem;
+    outline: 2px solid var(--border-color);
+}
+
+.containerForm input:focus {
+    outline: 2px solid var(--primary-color-dimmed);
 }
 
 .containerForm h1 {
     margin-top: 5rem;
     margin-bottom: 2rem;
-
+    color: var(--text-color);
 }
 
 .labelStyle {
-    font-weight: 700;
-    color: #333;
+    font-weight: 500;
+    color: var(--text-color);
     margin-top: 3rem;
     font-size: 1.1rem;
-
-
 }
+
 .containerInput{
-    margin-top: 2rem;
+    margin-top: 1.2rem;
     margin-bottom: 0.4rem;
 }
+
 .containerForm button {
-    background-color: #0F9D58;
+    background-color: var(--green-color);
     margin-bottom: 4rem;
 }
 
 .containerForm button:hover,
 .containerForm button:focus {
     background-color: transparent;
-    color: #0F9D58;
-    outline: 1px solid #0F9D58;
+    color: var(--green-color);
+    outline: 1px solid var(--green-color);
 }
 
 .containerForm input[type="radio"] {
     width: 1.3rem;
     height: 1.3rem;
     border-radius: 50%;
-    border: 2px solid #333;
+    border: 2px solid var(--border-color);
     outline: none;
     cursor: pointer;
     box-shadow: none;
@@ -59,27 +63,36 @@
 
 .ContainerSectionRadio {
     display: flex;
-    margin-bottom: 2rem;
-    margin-top: 1.6rem;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
 }
+
 .ContainerSectionRadio label{
-    color: #000;
-    font-weight: 500
+    color: var(--text-color);
+    font-weight: 500;
+    margin-left: 0.3rem;
 }
+
 .cardInputradio {
     display: flex;
     align-items: center;
-    margin-right: 2rem;
+    margin-right: 1rem;
 }
+
 .TitleTypeUser{
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-weight: 500;
     margin-top: 0.8rem;
 }
+
 .textErro{
-    color: red;
+    color: var(--primary-color);
     font-weight: 500;
     margin-top: 0.3rem;
     margin-bottom: 0.4rem;
 }
+
 @media screen and (max-width: 768px) {
     .containerForm {
         width: 90%;
@@ -88,6 +101,5 @@
         margin-top: 3rem;
         margin-bottom: 2rem;
         font-size: 1.4rem;
-
     }
 }
