@@ -3,12 +3,10 @@ import Navbar from '../src/components/NavBar';
 
 function App() {
     return (
-        <>
             <div className='App'>
                 <Navbar />
-                <Outlet />
+                <Outlet />  
             </div>
-        </>
     );
 }
 

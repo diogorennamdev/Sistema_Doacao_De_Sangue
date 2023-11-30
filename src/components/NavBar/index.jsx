@@ -1,20 +1,16 @@
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { LogoReverse } from '../Logo';
 import { useAuth } from '../../Contexts/useAuth';
 import { useState, useEffect } from 'react';
-import Button from '../Button';
+import Logout from '../../utils/Logout';
 import { FaUserCircle, FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import axios from 'axios';
 
 import './styles.css';
 
 function Navbar() {
-  const logout = import.meta.env.VITE_LOGOUT;
-
   const location = useLocation();
-  const { userData, logout: userLogout } = useAuth();
+  const { userData } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -33,23 +29,6 @@ function Navbar() {
   if (location.pathname === './src/pages/login' || location.pathname === '/') {
     return null;
   }
-
-  const logoutUser = async () => {
-    try {
-      const response = await axios.post(`${logout}`, {}, {
-        headers: {
-          Authorization: `Bearer ${userData.token}`
-        }
-      })
-
-      if (response.status === 200) {
-        userLogout();
-        navigate('/');
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const toggleMenu = (event) => {
     event.stopPropagation();
@@ -93,7 +72,7 @@ function Navbar() {
               <Link to="/estoque">Estoque</Link>
               {userData?.information?.isAdmin && <Link to="/cadastro">Gerenciar funcionários</Link>}
             </div>
-            <Button TextButton={'Sair'} onClick={logoutUser} className="navbar-button" />
+            <Logout />
           </div>
         )}
       </div>

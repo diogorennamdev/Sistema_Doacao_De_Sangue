@@ -12,13 +12,13 @@
 }
 
 .LoadingIcon {
-    font-size: 4rem;
+    font-size: 3rem;
     color: var(--primary-color);
 }
 
 .LoadingText {
     font-size: 2rem;
-    font-weight: 400;
+    font-weight: 600;
     color: var(--primary-color);
     margin-top: 1rem;
 }
