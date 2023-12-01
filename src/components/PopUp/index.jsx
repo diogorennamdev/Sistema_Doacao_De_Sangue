@@ -1,29 +1,65 @@
 import { Modal } from 'react-bootstrap';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '../Button';
 import Input from '../Input';
 import PropTypes from 'prop-types';
 import { IoMdClose } from "react-icons/io";
-import './styles.css'; // Importando o arquivo CSS
+import './styles.css';
 
-function PopUp({ show, handleClose, userData }) {
-    console.log(userData);
+function PopUp({ show, handleClose, userData, type, onClick }) {
+    const [password, setPassword] = useState('')
+
+    function clearFields() {
+        setPassword('')
+    }
+  
+    useEffect(() => {
+        if (!show) {
+            clearFields();// Define onSuccess como false quando o modal é fechado
+        }
+    }, [show]);
     return (
-        <Modal className='ModalEditUser' show={show} onHide={handleClose} backdrop="static">
+        <Modal className='ModalEditUser' show={show} onHide={() => {
+            handleClose();
+            clearFields();
+        }} backdrop="static">
 
             <Modal.Body className='BodyPopUp'>
                 <div className='ContainerBody'>
-                    <IoMdClose className='IconClosePopUp' onClick={handleClose} />
+                    <IoMdClose className='IconClosePopUp' onClick={() => {
+                        handleClose();
+                        clearFields();
+                    }} />
+                    <h2>Funcionário: {userData.name}</h2>
+                    {type === 'employee' ? (
+                        <div className="ContainerFormEditerEmployee">
+                            <h3>Código:{userData.employeeCode}</h3>
+                            <div className='label'>
+                                <label htmlFor="password">Nova senha:</label>
+                                <Input
+                                    id='password'
+                                    placeholder={'Digite uma nova senha'}
+                                    type={'text'}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                            </div>
+                            <Button
+                              onClick={() => {
+                                onClick(password);
+                            }}
+                                TextButton={'Atualizar'}
+                            />
+                        </div>
+                    ) : (
+                        // código para edição dos doadores
+                        <div className='ContainerFormEditerDonation'>
 
-                    <div className="ContainerFormEditer">
-                        <h2>Edite as informações de: {userData.name}</h2>
-                        <p>{userData.name}</p>
-                       
-                    </div>
+                        </div>
+                    )}
+
 
                 </div>
-
-
             </Modal.Body>
         </Modal>
     );
@@ -32,11 +68,10 @@ function PopUp({ show, handleClose, userData }) {
 PopUp.propTypes = {
     show: PropTypes.bool.isRequired,
     handleClose: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired,
-    type: PropTypes.string,
-    personCode: PropTypes.string, // Adicionando prop para o código da pessoa
-    password: PropTypes.string,
+    userData: PropTypes.string.isRequired,// Supondo que userData seja um objeto
+    type: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired, // Se onClick é usado para atualizar a senha
 };
+
 
 export default PopUp;

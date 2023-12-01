@@ -23,11 +23,18 @@
 
 .ContainerBody {
   background-color: #fff;
-  height: 300px;
+  height: auto;
   width: 60%;
   margin-top: 13rem;
   border-radius: 10px;
   position: relative;
+  padding-inline: 4rem;
+
+}
+
+.ContainerBody h2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
 .IconClosePopUp {
@@ -36,4 +43,52 @@
   right: 1rem;
   cursor: pointer;
 
+}
+
+.label {
+  margin-top: 1.3rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.ContainerFormEditerEmployee input {
+  font-size: 0.875rem;
+  background-color: var(--background1-color);
+  height: 3rem;
+  border-radius: 15px;
+  margin: 0 auto;
+  width: 100%;
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.ContainerFormEditerEmployee input:focus {
+  outline: 2px solid var(--primary-color-dimmed);
+}
+
+.ContainerFormEditerEmployee button {
+  margin-bottom: 3rem;
+  background-color: #0F9D58;
+}
+
+.ContainerFormEditerEmployee button:hover,
+.ContainerFormEditerEmployee button:focus {
+  background-color: transparent;
+  color: #0F9D58;
+  outline: 1px solid #0F9D58;
+}
+
+@media (max-width: 767px) {
+
+  .ContainerBody {
+    width: 95%;
+    padding-inline: 0.6rem;
+  }
+
+  .ContainerBody h2 {
+    font-size: 1.2rem;
+  }
+  .label{
+    font-size: 1rem;
+  }
 }
