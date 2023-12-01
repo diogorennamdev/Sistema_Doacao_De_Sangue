@@ -1,65 +1,42 @@
+import { Modal } from 'react-bootstrap';
+import { useState } from 'react';
+import Button from '../Button';
+import Input from '../Input';
 import PropTypes from 'prop-types';
-import './styles.css';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useAuth } from '../../Contexts/useAuth';
+import { IoMdClose } from "react-icons/io";
+import './styles.css'; // Importando o arquivo CSS
 
-
-function Popup({ show, onClose, employee }) {
-    const [senha, setSenha] = useState('')
-    const { userData } = useAuth();
-    const token = userData.token
-    const employeeUrl = import.meta.env.VITE_EMPLOYEES;
-
-    useEffect(() => {
-        if (employee && employee.password) {
-            setSenha(employee.password);
-        }
-    }, [employee]);
-
-    if (!show) {
-        return null;
-    }
-
-    async function editar() {
-        const updatedEmployee = {
-            password: senha
-        };
-
-        try {
-            const response = await axios.patch(`${employeeUrl}${employee.employeeCode}`, updatedEmployee, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            console.log('Senha atualizada com sucesso!', response.data);
-        } catch (error) {
-            console.error('Erro ao atualizar a senha', error);
-        }
-    }
-
+function PopUp({ show, handleClose, userData }) {
+    console.log(userData);
     return (
-        <div className="popup">
-            <h2>Editando</h2>
-            <p>Codigo do funcionario:{employee.employeeCode}</p>
-            <label>
-                Senha:
-                <input type="password" onChange={(e) => setSenha(e.target.value)} value={senha} />
-            </label>
-            <button onClick={onClose}>Fechar Popup</button>
-            
-           <button onClick={editar}>Salvar edição</button>
-            
+        <Modal className='ModalEditUser' show={show} onHide={handleClose} backdrop="static">
+
+            <Modal.Body className='BodyPopUp'>
+                <div className='ContainerBody'>
+                    <IoMdClose className='IconClosePopUp' onClick={handleClose} />
+
+                    <div className="ContainerFormEditer">
+                        <h2>Edite as informações de: {userData.name}</h2>
+                        <p>{userData.name}</p>
+                       
+                    </div>
+
+                </div>
 
 
-        </div>
+            </Modal.Body>
+        </Modal>
     );
 }
 
-Popup.propTypes = {
+PopUp.propTypes = {
     show: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
-    employee: PropTypes.object
+    handleClose: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired,
+    type: PropTypes.string,
+    personCode: PropTypes.string, // Adicionando prop para o código da pessoa
+    password: PropTypes.string,
 };
 
-export default Popup;
+export default PopUp;
