@@ -1,4 +1,4 @@
-.sectionCadastre {
+.sectionRegister {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -49,6 +49,10 @@
     outline: 1px solid var(--green-color);
 }
 
+.containerSectionRadio{
+    display: flex;
+}
+
 .containerForm input[type="radio"] {
     width: 1.3rem;
     height: 1.3rem;
@@ -58,22 +62,21 @@
     cursor: pointer;
     box-shadow: none;
     margin: 0;
-
 }
 
-.ContainerSectionRadio {
+.cardInputRadio {
     display: flex;
     margin-top: 1rem;
     margin-bottom: 1.5rem;
 }
 
-.ContainerSectionRadio label{
+.cardInputRadio label{
     color: var(--text-color);
     font-weight: 500;
     margin-left: 0.3rem;
 }
 
-.cardInputradio {
+.cardInputRadio {
     display: flex;
     align-items: center;
     margin-right: 1rem;
