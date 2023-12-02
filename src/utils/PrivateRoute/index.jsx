@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useAuth } from "../../Contexts/useAuth";
-import BoxDialog from "../../components/BoxDialog";
+import AlertDialog from "../../components/AlertDialog";
 import { useState, useEffect } from "react";
 
 function PrivateRoute({ element: Element, ...rest }) {
@@ -33,7 +33,7 @@ function PrivateRoute({ element: Element, ...rest }) {
   return (
     <>
       {navigate && <Navigate to="/" replace />}
-      <BoxDialog show={show} handleClose={handleClose} title={title} message={message} />
+      <AlertDialog show={show} handleClose={handleClose} title={title} message={message} />
       {!navigate && <Element {...rest} />}
     </>
   );
