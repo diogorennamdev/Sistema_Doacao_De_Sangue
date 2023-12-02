@@ -5,7 +5,7 @@
     border-radius: 5rem;
     outline: none;
     cursor: pointer;
-    width: 30%;
+    width: 25%;
     font-size: 1rem;
     color: var(--white-color);
     font-weight: 700;
@@ -16,4 +16,10 @@
     background-color: transparent;
     color: var(--primary-color);
     outline: 1px solid var(--primary-color);
+}
+
+@media screen and (max-width: 768px) {
+    .button {
+        width: 45%;
+    }
 }
