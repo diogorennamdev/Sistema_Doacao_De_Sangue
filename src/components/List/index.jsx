@@ -4,7 +4,7 @@ import "./styles.css";
 import { LuPencilLine } from "react-icons/lu";
 import Pagination from '../Pagination';
 
-function Card({ users, onClick }) {
+function List({ users, onClick }) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const usersPerPage = 5;
@@ -18,7 +18,7 @@ function Card({ users, onClick }) {
 
   return (
     <>
-      <div className='CardList'>
+      <div className='LisContainer'>
         {visibleUsers.map((user, index) => (
           <div className='CardListUser' key={index}>
             <div className='CardListName'>
@@ -39,9 +39,9 @@ function Card({ users, onClick }) {
   );
 }
 
-Card.propTypes = {
+List.propTypes = {
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
-export default Card;
+export default List;

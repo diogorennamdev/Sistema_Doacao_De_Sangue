@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Input from '../../components/Input';
 import { FaSearch } from "react-icons/fa";
 import { useAuth } from '../../Contexts/useAuth';
 import axios from 'axios';
-import Card from '../../components/Card';
+import List from '../../components/List';
 
 
 import "./styles.css"
@@ -50,7 +50,7 @@ function Donation() {
       </div>
 
       {employees?.map((employee) => (
-        <Card
+        <List
           key={employee._id}
           name={employee.name}
         />

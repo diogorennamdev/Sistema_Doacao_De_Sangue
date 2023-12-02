@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../Contexts/useAuth';
 import Popup from '../../components/PopUp';
-import Card from '../../components/Card';
+import List from '../../components/List';
 import Input from '../../components/Input';
 import AlertDialog from '../../components/AlertDialog';
 import Loading from '../../components/Loading';
@@ -132,7 +132,7 @@ function EmployeeList() {
       {loading ? ( // Mostrar componente de Loading enquanto estiver carregando
         <Loading />
       ) : (
-        <Card
+        <List
           users={employees}
           onClick={(user) => onClickModal(user)}
         />
