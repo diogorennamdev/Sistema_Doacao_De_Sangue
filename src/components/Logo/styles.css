@@ -54,3 +54,9 @@
         font-size: 1.875rem;
     }
 }
+
+@media (max-width: 320px) {
+    .ContainerTitleReverse {
+        font-size: 1.5rem;
+    }
+}

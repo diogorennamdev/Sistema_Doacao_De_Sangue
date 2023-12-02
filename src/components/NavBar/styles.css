@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: var(--primary-color);
-    padding: 1.5rem 8rem;
+    padding: 1.5rem 3rem;
     width: 100%;
 }
 
@@ -60,6 +60,7 @@
     top: 120%;
     right: 0;
     z-index: 1;
+    box-sizing: border-box;
 }
 
 .dropdown-menu h4 {
@@ -88,4 +89,22 @@
     margin-top: 1rem;
     width: 5rem;
     padding: 0.5rem;
+}
+
+@media (max-width: 765px) {
+    .ContainerNavBar {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .ContainerUser {
+        margin: 1rem 0;
+    }
+
+    .dropdown-menu {
+        position: fixed;
+        top: 15%;
+        left: 0;
+        width: 100%;
+    }
 }
