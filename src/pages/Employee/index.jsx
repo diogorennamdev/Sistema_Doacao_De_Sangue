@@ -4,7 +4,7 @@ import { useAuth } from '../../Contexts/useAuth';
 import Popup from '../../components/PopUp';
 import Card from '../../components/Card';
 import Input from '../../components/Input';
-import BoxDialog from '../../components/BoxDialog';
+import AlertDialog from '../../components/AlertDialog';
 import Loading from '../../components/Loading';
 import { FaSearch } from "react-icons/fa";
 import './styles.css'
@@ -15,7 +15,7 @@ function EmployeeList() {
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
-  const [showBoxDialog, setShowBoxDialog] = useState(false)
+  const [showAlertDialog, setShowAlertDialog] = useState(false)
   const [userSelected, setUserSelected] = useState('');
   const employee = import.meta.env.VITE_EMPLOYEES;
   const [type, setType] = useState('')
@@ -52,8 +52,8 @@ function EmployeeList() {
     setShow(true);
   };
 
-  const handleCloseBoxDialog = () => {
-    setShowBoxDialog(false);
+  const handleCloseAlertDialog = () => {
+    setShowAlertDialog(false);
     setMessage('');
     setTitle('');
     setPassword('')
@@ -62,17 +62,17 @@ function EmployeeList() {
 
   };
 
-  //verfico se existe o dado atualizado quando clico em atualizar se sim passo as novas informações e atualizo a o funcionario
+  //verifica se existe o dado atualizado quando clico em atualizar se sim passo as novas informações e atualizo a o funcionário
   const onClickUpdate = (password) => {
     if (!password) {
-      setShowBoxDialog(true);
+      setShowAlertDialog(true);
       setMessage('É necessário inserir uma nova senha para atualizar!');
       setTitle('Atenção');
       return;
     }
 
     if (password.length < 8) {
-      setShowBoxDialog(true);
+      setShowAlertDialog(true);
       setMessage('Sua senha precisa ter no mínimo 8 caracteres!');
       setTitle('Atenção');
       return;
@@ -100,7 +100,7 @@ function EmployeeList() {
       if (response.status === 200) {
         setShow(false);
         setType('success');
-        setShowBoxDialog(true);
+        setShowAlertDialog(true);
         setMessage('Senha atualizada com sucesso!')
         setTitle('Sucesso!')
         setPersonCode(userSelected.employeeCode)
@@ -140,9 +140,9 @@ function EmployeeList() {
         onClick={onClickUpdate}
       />
 
-      <BoxDialog
-        handleClose={handleCloseBoxDialog}
-        show={showBoxDialog}
+      <AlertDialog
+        handleClose={handleCloseAlertDialog}
+        show={showAlertDialog}
         message={message}
         title={title}
         type={type}

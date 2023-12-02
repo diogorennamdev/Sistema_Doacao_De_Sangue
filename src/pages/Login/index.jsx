@@ -6,7 +6,7 @@ import './styles.css'
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import BoxDialog from '../../components/BoxDialog';
+import AlertDialog from '../../components/AlertDialog';
 
 import axios from 'axios';
 import { AuthContext } from '../../Contexts/useContext';
@@ -124,7 +124,7 @@ function Login() {
               TextButton={'ENTRAR'}
             />
           </div>
-          <BoxDialog show={show} handleClose={handleClose} title={title} message={message} />
+          <AlertDialog show={show} handleClose={handleClose} title={title} message={message} />
         </form>
       </div>
     </main>
