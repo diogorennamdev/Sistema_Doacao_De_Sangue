@@ -1,19 +1,39 @@
-.CardListUser {
-  width: 60%;
+.CardList {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 0.3rem;
-  margin-bottom: 1rem;
-  background-color: #F7F6FA;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out;
+  width: 60%;
+  min-height: 50vh; 
+  margin: 0 auto;
 }
 
+.pagination {
+  width: 100%;
+  margin: 1rem 0;
+  position: fixed;
+  bottom: 1rem;
+}
+
+
+.CardListUser {
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--border-color);
+  border-radius: 30px;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+
 .CardListUser:hover {
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
 .CardListName {
@@ -23,52 +43,29 @@
 
 .CardListUser h2 {
   text-transform: uppercase;
-  font-size: 1.4rem;
-  width: 4rem;
-  height: 4rem;
+  font-size: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   margin-right: 2rem;
-  background-color: #E50914;
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--white-color);
 }
 
 .CardListUser h3 {
-  text-transform: uppercase;
   font-size: 1rem;
+  color: var(--text-color);
+  font-weight: 400;
 }
 
 .icon {
-  padding-right: 3rem;
+  padding-right: 1.5rem;
   cursor: pointer;
-  font-size: 2rem;
-}
-
-/* Adicione estes estilos ao seu arquivo styles.css */
-.load-more-button {
-  padding: 8px 16px;
-  margin: 8px;
-  font-size: 14px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: #007bff;
-  color: #fff;
-}
-
-.load-more-button:hover {
-  background-color: #0056b3;
-}
-
-/* Estilos para o botão "Ver Menos" */
-.load-more-button:last-child {
-  background-color: #dc3545;
-}
-
-.load-more-button:last-child:hover {
-  background-color: #bd2130;
+  font-size: 1.3rem;
+  color: var(--text-color);
 }
 
 @media (max-width: 768px) {

@@ -1,57 +1,47 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import "./styles.css";
 import { LuPencilLine } from "react-icons/lu";
+import Pagination from '../Pagination';
 
-function Card({ users ,onClick}) {
-  const [startIndex, setStartIndex] = useState(0); // Controla o índice inicial dos usuários visíveis
+function Card({ users, onClick }) {
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const handleLoadMore = () => {
-    setStartIndex(prevStartIndex => prevStartIndex + 5); // Avança para o próximo conjunto de usuários ao clicar em "Ver Mais"
+  const usersPerPage = 5;
+  const totalPages = Math.ceil(users.length / usersPerPage);
+
+  const visibleUsers = users.slice((currentPage - 1) * usersPerPage, currentPage * usersPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
-  const handleLoadLess = () => {
-    setStartIndex(0); // Mostra apenas os 6 primeiros usuários ao clicar em "Ver Menos"
-  };
-
-  const visibleUsers = users.slice(startIndex, startIndex + 5);
 
   return (
     <>
-      {visibleUsers.map((user, index) => (
-        <div className='CardListUser' key={index}>
-          <div className='CardListName'>
-            <h2>{user.name.substring(0, 2)}</h2>
-            <h3>{user.name}</h3>
+      <div className='CardList'>
+        {visibleUsers.map((user, index) => (
+          <div className='CardListUser' key={index}>
+            <div className='CardListName'>
+              <h2>{user.name.substring(0, 2)}</h2>
+              <h3>{user.name}</h3>
+            </div>
+            <span onClick={() => onClick(user)} className='icon'>
+              <LuPencilLine />
+            </span>
           </div>
-          <span onClick={() => onClick(user)} className='icon'>
-            <LuPencilLine />
-          </span>
-        </div>
-      ))}
-
-      <div>
-        {users.length > startIndex + 6 && (
-          <button onClick={handleLoadMore} className="load-more-button">
-            Ver Mais
-          </button>
-        )}
-
-        {startIndex > 0 && (
-          <button onClick={handleLoadLess} className="load-more-button">
-            Ver Menos
-          </button>
-        )}
+        ))}
       </div>
+      <div className="pagination">
+        <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
+      </div>
+
     </>
   );
 }
 
 Card.propTypes = {
-  users: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string
-    })
-  )
+  users: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default Card;
