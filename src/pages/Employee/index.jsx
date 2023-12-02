@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../Contexts/useAuth';
 import Popup from '../../components/PopUp';
-import Card from '../../components/Card';
+import List from '../../components/List';
 import Input from '../../components/Input';
 import AlertDialog from '../../components/AlertDialog';
 import Loading from '../../components/Loading';
@@ -23,24 +23,28 @@ function EmployeeList() {
   const [title, setTitle] = useState('');
   const [personCode, setPersonCode] = useState('');
   const [password, setPassword] = useState('');
-  useEffect(() => {
-    setLoading(true); // Ativar o estado de carregamento antes da requisição
+  const [searchTerm, setSearchTerm] = useState('');
 
-    axios.get(`${employee}`, {
+
+  useEffect(() => {
+    setLoading(true);
+
+    axios.get(`${employee}?name=${searchTerm}`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
     })
       .then(response => {
         setEmployees(response.data);
-        setLoading(false); // Desativar o estado de carregamento após a requisição ser completada
+        setLoading(false);
       })
       .catch(error => {
         console.error('Algo deu errado!', error);
-        setLoading(false); // Certifique-se de desativar o estado de carregamento em caso de erro também
+        setLoading(false);
       });
 
-  }, [employee, token]);
+  }, [employee, token, searchTerm]);
+
 
   const handleCloseModal = () => {
     setShow(false);
@@ -105,7 +109,7 @@ function EmployeeList() {
         setTitle('Sucesso!')
         setPersonCode(userSelected.employeeCode)
         setPassword(password);
-       
+
       }
       console.log(response.data); // Se desejar, faça algo com a resposta da requisição
     } catch (error) {
@@ -120,13 +124,15 @@ function EmployeeList() {
         <FaSearch />
         <Input
           placeholder={'Pesquise pelo nome do funcionário'}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
 
       {loading ? ( // Mostrar componente de Loading enquanto estiver carregando
         <Loading />
       ) : (
-        <Card
+        <List
           users={employees}
           onClick={(user) => onClickModal(user)}
         />
