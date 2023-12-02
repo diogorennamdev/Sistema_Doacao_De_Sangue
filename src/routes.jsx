@@ -23,7 +23,7 @@ const RoutesConfig = () => {
           <Route path="/" element={<Login />} />
           <Route path="/inicio" element={<PrivateRoute element={Home} />} />
           <Route path="/admin" element={<PrivateRoute element={Admin} />} />
-          <Route path="/funcionario/listar" element={<PrivateRoute element={EmployeeList} />} />
+          <Route path="/funcionario" element={<PrivateRoute element={EmployeeList} />} />
           <Route path='/estoque' element={<PrivateRoute element={Stock} />} />
           <Route path='/cadastro' element={<PrivateRoute element={Register} />} />
           <Route path='/doador' element={<PrivateRoute element={Donation} />} />

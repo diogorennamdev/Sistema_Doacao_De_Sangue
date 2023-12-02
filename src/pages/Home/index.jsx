@@ -37,7 +37,7 @@ function Home() {
           {renderCard("/", "Gerenciar Doadores", "Visualize e gerencie todos os doadores")}
           {renderCard("/", "Adicionar Exames", "Adicione resultados de exames para doadores")}
           {renderCard("/estoque", "Estoque", "Verifique o estoque atual de sangue")}
-          {userData?.information?.isAdmin && renderCard("/cadastro", "Gerenciar funcionários", "Visualize e gerencie todos os funcionários")}
+          {userData?.information?.isAdmin && renderCard("/funcionario", "Gerenciar funcionários", "Visualize e gerencie todos os funcionários")}
         </div>
       </div>
     </main>
