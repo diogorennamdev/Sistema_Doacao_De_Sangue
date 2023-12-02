@@ -39,7 +39,8 @@
 @media (max-width: 768px) {
     .ContainerLogo {
         flex-direction: column;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
+        padding: 0.8rem;
     }
 
     .ContainerLogo img {
