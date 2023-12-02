@@ -1,65 +1,77 @@
-import PropTypes from 'prop-types';
-import './styles.css';
+import { Modal } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useAuth } from '../../Contexts/useAuth';
+import Button from '../Button';
+import Input from '../Input';
+import PropTypes from 'prop-types';
+import { IoMdClose } from "react-icons/io";
+import './styles.css';
 
+function PopUp({ show, handleClose, userData, type, onClick }) {
+    const [password, setPassword] = useState('')
 
-function Popup({ show, onClose, employee }) {
-    const [senha, setSenha] = useState('')
-    const { userData } = useAuth();
-    const token = userData.token
-    const employeeUrl = import.meta.env.VITE_EMPLOYEES;
-
+    function clearFields() {
+        setPassword('')
+    }
+  
     useEffect(() => {
-        if (employee && employee.password) {
-            setSenha(employee.password);
+        if (!show) {
+            clearFields();// Define onSuccess como false quando o modal é fechado
         }
-    }, [employee]);
-
-    if (!show) {
-        return null;
-    }
-
-    async function editar() {
-        const updatedEmployee = {
-            password: senha
-        };
-
-        try {
-            const response = await axios.patch(`${employeeUrl}${employee.employeeCode}`, updatedEmployee, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            console.log('Senha atualizada com sucesso!', response.data);
-        } catch (error) {
-            console.error('Erro ao atualizar a senha', error);
-        }
-    }
-
+    }, [show]);
     return (
-        <div className="popup">
-            <h2>Editando</h2>
-            <p>Codigo do funcionario:{employee.employeeCode}</p>
-            <label>
-                Senha:
-                <input type="password" onChange={(e) => setSenha(e.target.value)} value={senha} />
-            </label>
-            <button onClick={onClose}>Fechar Popup</button>
-            
-           <button onClick={editar}>Salvar edição</button>
-            
+        <Modal className='ModalEditUser' show={show} onHide={() => {
+            handleClose();
+            clearFields();
+        }} backdrop="static">
+
+            <Modal.Body className='BodyPopUp'>
+                <div className='ContainerBody'>
+                    <IoMdClose className='IconClosePopUp' onClick={() => {
+                        handleClose();
+                        clearFields();
+                    }} />
+                    <h2>Funcionário: {userData.name}</h2>
+                    {type === 'employee' ? (
+                        <div className="ContainerFormEditerEmployee">
+                            <h3>Código:{userData.employeeCode}</h3>
+                            <div className='label'>
+                                <label htmlFor="password">Nova senha:</label>
+                                <Input
+                                    id='password'
+                                    placeholder={'Digite uma nova senha'}
+                                    type={'text'}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                            </div>
+                            <Button
+                              onClick={() => {
+                                onClick(password);
+                            }}
+                                TextButton={'Atualizar'}
+                            />
+                        </div>
+                    ) : (
+                        // código para edição dos doadores
+                        <div className='ContainerFormEditerDonation'>
+
+                        </div>
+                    )}
 
 
-        </div>
+                </div>
+            </Modal.Body>
+        </Modal>
     );
 }
 
-Popup.propTypes = {
+PopUp.propTypes = {
     show: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
-    employee: PropTypes.object
+    handleClose: PropTypes.func.isRequired,
+    userData: PropTypes.string.isRequired,// Supondo que userData seja um objeto
+    type: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired, // Se onClick é usado para atualizar a senha
 };
 
-export default Popup;
+
+export default PopUp;

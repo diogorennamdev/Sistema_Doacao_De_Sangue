@@ -2,16 +2,30 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../Contexts/useAuth';
 import Popup from '../../components/PopUp';
+import Card from '../../components/Card';
+import Input from '../../components/Input';
+import BoxDialog from '../../components/BoxDialog';
+import Loading from '../../components/Loading';
+import { FaSearch } from "react-icons/fa";
+import './styles.css'
+
 function EmployeeList() {
-
   const { userData } = useAuth();
-  const token = userData.token
+  const token = userData.token;
   const [employees, setEmployees] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [show, setShow] = useState(false);
+  const [showBoxDialog, setShowBoxDialog] = useState(false)
+  const [userSelected, setUserSelected] = useState('');
   const employee = import.meta.env.VITE_EMPLOYEES;
-  const [showPopup, setShowPopup] = useState(false);
-  const [editingEmployee, setEditingEmployee] = useState(null);
-
+  const [type, setType] = useState('')
+  const [message, setMessage] = useState('');
+  const [title, setTitle] = useState('');
+  const [personCode, setPersonCode] = useState('');
+  const [password, setPassword] = useState('');
   useEffect(() => {
+    setLoading(true); // Ativar o estado de carregamento antes da requisição
+
     axios.get(`${employee}`, {
       headers: {
         'Authorization': `Bearer ${token}`
@@ -19,35 +33,121 @@ function EmployeeList() {
     })
       .then(response => {
         setEmployees(response.data);
+        setLoading(false); // Desativar o estado de carregamento após a requisição ser completada
       })
       .catch(error => {
         console.error('Algo deu errado!', error);
+        setLoading(false); // Certifique-se de desativar o estado de carregamento em caso de erro também
       });
 
   }, [employee, token]);
 
+  const handleCloseModal = () => {
+    setShow(false);
+    setUserSelected('')
+  };
 
-  //console.log(editingEmployee.employeeCode)
+  const onClickModal = (user) => {
+    setUserSelected(user); // Atualizar o estado com o usuário clicado
+    setShow(true);
+  };
+
+  const handleCloseBoxDialog = () => {
+    setShowBoxDialog(false);
+    setMessage('');
+    setTitle('');
+    setPassword('')
+    setPersonCode('')
+    setType('')
+
+  };
+
+  //verfico se existe o dado atualizado quando clico em atualizar se sim passo as novas informações e atualizo a o funcionario
+  const onClickUpdate = (password) => {
+    if (!password) {
+      setShowBoxDialog(true);
+      setMessage('É necessário inserir uma nova senha para atualizar!');
+      setTitle('Atenção');
+      return;
+    }
+
+    if (password.length < 8) {
+      setShowBoxDialog(true);
+      setMessage('Sua senha precisa ter no mínimo 8 caracteres!');
+      setTitle('Atenção');
+      return;
+    }
+
+    try {
+      // Aqui, você pode chamar a função employeeUpdate para atualizar a senha
+      employeeUpdate(password);
+    } catch (error) {
+      // Lide com o erro, se necessário
+      console.error(error);
+    }
+  };
+
+  const employeeUpdate = async (password) => {
+    const updatedEmployee = {
+      password: password
+    };
+    try {
+      const response = await axios.patch(`${employee}${userSelected.employeeCode}`, updatedEmployee, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      if (response.status === 200) {
+        setShow(false);
+        setType('success');
+        setShowBoxDialog(true);
+        setMessage('Senha atualizada com sucesso!')
+        setTitle('Sucesso!')
+        setPersonCode(userSelected.employeeCode)
+        setPassword(password);
+       
+      }
+      console.log(response.data); // Se desejar, faça algo com a resposta da requisição
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <div>
+    <div className='ContainerEmployee'>
       <h1>Todos Funcionários</h1>
-      {employees.map((employee) => (
-        <div key={employee.employeeCode}>
-          <p>{employee.name}</p>
-          <div key={employee.employeeCode}>
-            <button onClick={() => {
-              setShowPopup(true);
-              setEditingEmployee(employee);
-            }}>Editar</button>
-          </div>
-        </div>
-      ))}
+      <div className='ContainerSearchEmployee'>
+        <FaSearch />
+        <Input
+          placeholder={'Pesquise pelo nome do funcionário'}
+        />
+      </div>
+
+      {loading ? ( // Mostrar componente de Loading enquanto estiver carregando
+        <Loading />
+      ) : (
+        <Card
+          users={employees}
+          onClick={(user) => onClickModal(user)}
+        />
+      )}
 
       <Popup
-        show={showPopup}
-        employee={editingEmployee}
-        onClose={() => setShowPopup(false)}
+        type={'employee'}
+        show={show}
+        handleClose={handleCloseModal}
+        userData={userSelected}
+        onClick={onClickUpdate}
+      />
+
+      <BoxDialog
+        handleClose={handleCloseBoxDialog}
+        show={showBoxDialog}
+        message={message}
+        title={title}
+        type={type}
+        password={password}
+        personCode={personCode}
       />
     </div>
   );
