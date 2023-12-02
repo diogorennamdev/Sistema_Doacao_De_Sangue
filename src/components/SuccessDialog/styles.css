@@ -1,0 +1,53 @@
+.icon-success {
+    font-size: 2rem;
+    margin-right: 0.3rem;
+    margin-bottom: 0.1rem;
+    color: var(--green-color);
+}
+
+.my-modal.success button {
+    background-color: var(--green-color);
+}
+
+.my-modal.success button:hover {
+    outline: 1px solid var(--green-color);
+    color: var(--white-color);
+}
+
+.copy-success-message {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--green-color);
+    color: var(--white-color);
+    padding: 8px 16px;
+    border-radius: 4px;
+    z-index: 999;
+    animation: fadeOut 2s ease-in-out forwards;
+}
+
+.informationEmployee p {
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+.informationEmployee span {
+    color: var(--text-color);
+    margin-right: 0.3rem;
+}
+
+.informationEmployee p svg {
+    cursor: pointer;
+    margin-left: 0.5rem;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
