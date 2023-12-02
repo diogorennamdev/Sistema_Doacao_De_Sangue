@@ -8,7 +8,7 @@ import Home from './pages/Home';
 import Admin from './pages/Admin';
 import EmployeeList from './pages/Employee';
 import Stock from './pages/Stock';
-import Cadastro from './pages/Cadastro';
+import Register from './pages/Register';
 import Donation from './pages/Donation';
 
 const RoutesConfig = () => {
@@ -25,7 +25,7 @@ const RoutesConfig = () => {
           <Route path="/admin" element={<PrivateRoute element={Admin} />} />
           <Route path="/funcionario/listar" element={<PrivateRoute element={EmployeeList} />} />
           <Route path='/estoque' element={<PrivateRoute element={Stock} />} />
-          <Route path='/cadastro' element={<PrivateRoute element={Cadastro} />} />
+          <Route path='/cadastro' element={<PrivateRoute element={Register} />} />
           <Route path='/doador' element={<PrivateRoute element={Donation} />} />
         </Route>
       );
