@@ -59,7 +59,7 @@ main.ContainerLogin {
 .CardDot hr {
     width: 100%;
     border: 1.2px solid var(--text-color-dimmed);
-    margin: 0 2rem;
+    margin: 0 3rem;
 }
 
 .CardForm span {
@@ -76,7 +76,7 @@ main.ContainerLogin {
     flex-direction: column;
     align-items: baseline;
     justify-content: center;
-    width: 90%;
+    width: 75%;
     margin: 0 auto 1rem;
 }
 
@@ -126,8 +126,7 @@ main.ContainerLogin {
 }
 
 .password-toggle-icon svg {
-    width: 1.6rem;
-    height: 1.6rem;
+    font-size: 1.4rem;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -183,6 +182,10 @@ input[type="password"]::-webkit-reveal {
 
     .CardDot hr {
         margin: 0 1rem;
+    }
+
+    .CardData {
+        width: 90%;
     }
 
     .ContainerButton button {
