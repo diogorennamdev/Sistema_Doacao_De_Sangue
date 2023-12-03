@@ -22,6 +22,7 @@ function Register() {
     const [type, setType] = useState('')
     const [messageBoxTitle, setMessageBoxTitle] = useState('');
     const [personCode, setPersonCode] = useState('');
+    const [showSuccessDialog, setShowSuccessDialog] = useState(false);
 
     const handleAdminPermissionChange = (event) => {
         setIsAdmin(event.target.value === 'true');
@@ -52,38 +53,46 @@ function Register() {
     }
 
     const handleSubmit = async () => {
+        console.log('handleSubmit chamado');
+
         if (name === '' || password === '') {
-            setMessage('Preencha todos os campos!');
             setShow(true);
             setMessageBoxTitle('Atenção')
+            setMessage('Preencha todos os campos!');
+            setType('alert');
+            return;
+        }
+
+        if (name.length < 3) {
+            setShow(true);
+            setMessageBoxTitle('Atenção')
+            setMessage('O nome precisa ter no mínimo 3 caracteres!');
             setType('alert');
             return;
         }
 
         if (password.length < 8) {
-            setMessage('A senha deve ter no mínimo 8 caracteres!');
             setShow(true);
             setMessageBoxTitle('Atenção')
+            setMessage('A senha deve ter no mínimo 8 caracteres!');
             setType('alert');
             return;
         }
 
-        const user = {
-            name: name,
-            password: password,
-            isAdmin: isAdmin
-        };
-
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        };
-
         try {
             setLoading(true);
-            const response = await axios.post(ApiUrl, user, config);
+            const response = await axios.post(ApiUrl, {
+                name: name,
+                password: password,
+                isAdmin: isAdmin
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            console.log('Resposta da API:', response);
 
             if (response.status === 201) {
                 setMessage('Funcionário cadastrado com sucesso!');
@@ -91,14 +100,17 @@ function Register() {
                 setLoading(false);
                 setType('success');
                 setMessageBoxTitle('Sucesso!')
+                setMessage('Funcionário cadastrado com sucesso!');
                 setPassword(response.data.Funcionário.Senha);
                 setPersonCode(response.data.Funcionário.Código)
-            }
+                setShowSuccessDialog(true);
+            }            
+
         } catch (error) {
+            console.error('Erro ao fazer a requisição:', error);
             if (error.response && error.response.status === 401) {
                 setLoading(false);
                 console.log('Usuário não autorizado!');
-                // TODO: redirecionar para a página de login
                 return
             }
             setMessage(error.response.data.error);
@@ -110,6 +122,7 @@ function Register() {
     };
 
     const handleCloseBox = async () => {
+        setShowSuccessDialog(false);
         setShow(false);
         clearFields();
     };
@@ -171,13 +184,14 @@ function Register() {
             </div>
             {show && type === 'success' && (
                 <SuccessDialog
-                    show={show}
-                    handleClose={handleCloseBox}
-                    title={messageBoxTitle}
-                    message={message}
-                    password={password}
-                    personCode={personCode}
-                />
+                show={showSuccessDialog}
+                handleClose={handleCloseBox}
+                title={messageBoxTitle}
+                message={message}
+                password={password}
+                personCode={personCode}
+                createType={true}
+            />
             )}
             {show && type !== 'success' && (
                 <AlertDialog
