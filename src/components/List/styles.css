@@ -1,20 +1,10 @@
-.LisContainer {
+.ListContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
   width: 60%;
-  min-height: 50vh; 
-  margin: 0 auto;
-}
 
-.pagination {
-  width: 100%;
-  margin: 1rem 0;
-  position: fixed;
-  bottom: 1rem;
 }
-
 
 .CardListUser {
   display: flex;
@@ -33,7 +23,7 @@
 
 
 .CardListUser:hover {
-  transform: scale(1.06);
+  transform: scale(1.02);
 }
 
 .CardListName {
@@ -85,7 +75,6 @@
   }
 
   .CardListUser h3 {
-    text-transform: uppercase;
     font-size: 0.8rem;
   }
 }

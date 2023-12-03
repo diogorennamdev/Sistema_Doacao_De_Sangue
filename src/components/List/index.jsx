@@ -18,7 +18,7 @@ function List({ users, onClick }) {
 
   return (
     <>
-      <div className='LisContainer'>
+      <div className='ListContainer'>
         {visibleUsers.map((user, index) => (
           <div className='CardListUser' key={index}>
             <div className='CardListName'>
