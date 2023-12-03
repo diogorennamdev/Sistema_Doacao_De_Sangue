@@ -51,7 +51,7 @@
   font-weight: 500;
 }
 
-.ContainerFormEditerEmployee input {
+.ContainerFormEditeEmployee input {
   font-size: 0.875rem;
   background-color: var(--background1-color);
   height: 3rem;
@@ -62,17 +62,17 @@
   margin-bottom: 1rem;
 }
 
-.ContainerFormEditerEmployee input:focus {
+.ContainerFormEditeEmployee input:focus {
   outline: 2px solid var(--primary-color-dimmed);
 }
 
-.ContainerFormEditerEmployee button {
+.ContainerFormEditeEmployee button {
   margin-bottom: 3rem;
   background-color: #0F9D58;
 }
 
-.ContainerFormEditerEmployee button:hover,
-.ContainerFormEditerEmployee button:focus {
+.ContainerFormEditeEmployee button:hover,
+.ContainerFormEditeEmployee button:focus {
   background-color: transparent;
   color: #0F9D58;
   outline: 1px solid #0F9D58;
