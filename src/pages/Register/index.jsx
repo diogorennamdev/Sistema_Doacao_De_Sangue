@@ -37,23 +37,23 @@ function Register({ onClose, updateEmployeeList }) {
 
     // Name validation with a minimum of 3 characters
     if (newName.length >= 3) {
-        setNameError('');
+      setNameError('');
     } else {
-        setNameError('O nome precisa ter no mínimo 3 caracteres.');
+      setNameError('O nome precisa ter no mínimo 3 caracteres.');
     }
-};
+  };
 
-const handlePassword = (e) => {
+  const handlePassword = (e) => {
     const newPassword = e.target.value;
     setPassword(newPassword);
 
     // Password validation with a minimum of 8 characters
     if (newPassword.length >= 8) {
-        setPasswordError('');
+      setPasswordError('');
     } else {
-        setPasswordError('A senha precisa ter no mínimo 8 caracteres.');
+      setPasswordError('A senha precisa ter no mínimo 8 caracteres.');
     }
-};
+  };
 
   function clearFields() {
     setIsAdmin(false);
@@ -109,8 +109,6 @@ const handlePassword = (e) => {
         }
       );
 
-      console.log('Resposta da API:', response);
-
       if (response.status === 201) {
         setMessage('Funcionário cadastrado com sucesso!');
         setShow(true);
@@ -145,6 +143,7 @@ const handlePassword = (e) => {
     setShow(false);
     clearFields();
   };
+
   return (
     <div className='sectionRegister'>
       <div className="containerForm">
@@ -162,7 +161,7 @@ const handlePassword = (e) => {
             />
           </div>
           {nameError && <p className="textError">{nameError}</p>}
-          
+
           <div className='label'>
             <label htmlFor="password" className='labelStyle'>Senha:</label>
             <Input

@@ -14,8 +14,8 @@
 
 .containerForm {
     position: relative;
-    width: 60%;
-    height: 70vh;
+    width: 50%;
+    height: 65%;
     background-color: var(--white-color);
     padding: 1.5rem;
     border-radius: 20px;
