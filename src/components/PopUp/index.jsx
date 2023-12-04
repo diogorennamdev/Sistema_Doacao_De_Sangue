@@ -1,99 +1,127 @@
-import { Modal } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import Button from '../Button';
-import Input from '../Input';
 import PropTypes from 'prop-types';
-import { IoMdClose } from "react-icons/io";
+import Input from '../Input';
+import Button from '../Button';
+import { IoCloseCircleSharp } from 'react-icons/io5';
 import './styles.css';
 
 function PopUp({ show, handleClose, userData, type, onClick }) {
-    const [password, setPassword] = useState('')
+    const [password, setPassword] = useState('');
     const [newName, setNewName] = useState(userData.name || '');
-    
+    const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+    const [nameError, setNameError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
 
-    function clearFields() {
-        setPassword('')
-    }
+
+    const handleName = (e) => {
+        const newName = e.target.value;
+        setNewName(newName);
+
+        // Name validation with a minimum of 3 characters
+        if (newName.length >= 3) {
+            setNameError('');
+        } else {
+            setNameError('O nome precisa ter no mínimo 3 caracteres.');
+        }
+    };
+
+    const handlePassword = (e) => {
+        const newPassword = e.target.value;
+        setPassword(newPassword);
+
+        // Password validation with a minimum of 8 characters
+        if (newPassword.length >= 8) {
+            setPasswordError('');
+        } else {
+            setPasswordError('A senha precisa ter no mínimo 8 caracteres.');
+        }
+    };
+
+
+    const clearFields = () => {
+        setPassword('');
+        setNewName('');
+    };
 
     useEffect(() => {
         if (userData.name) {
             setNewName(userData.name);
         }
-      }, [userData]);
-      
+    }, [userData]);
 
     useEffect(() => {
         if (!show) {
-            clearFields();// Define onSuccess como false quando o modal é fechado
+            clearFields();
         }
     }, [show]);
 
-    return (
-        <Modal className='ModalEditUser' show={show} onHide={() => {
-            handleClose();
-            clearFields();
-        }} backdrop="static">
+    const handleCloseBox = () => {
+        setShowSuccessDialog(false);
+        handleClose();
+        clearFields();
+    };
 
-            <Modal.Body className='BodyPopUp'>
-                <div className='ContainerBody'>
-                    <IoMdClose className='IconClosePopUp' onClick={() => {
-                        handleClose();
-                        clearFields();
-                    }} />
-                    <h2>Funcionário: {userData.name}</h2>
-                    {type === 'employee' ? (
-                        <div className="ContainerFormEditeEmployee">
-                            <h3>Código:{userData.employeeCode}</h3>
-                            <div className='label'>
-                                <label htmlFor="name">Nome:</label>
-                                <Input
-                                    id='name'
-                                    placeholder={'Digite um novo nome'}
-                                    type={'text'}
-                                    value={newName}
-                                    onChange={(e) => setNewName(e.target.value)}
-                                />
-                            </div>
-                            <div className='label'>
-                                <label htmlFor="password">Nova senha:</label>
-                                <Input
-                                    id='password'
-                                    placeholder={'Digite uma nova senha'}
-                                    type={'text'}
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                            </div>
-                            <Button
-                                onClick={() => {
-                                    onClick(newName, password);
-                                }}
-                                TextButton={'Atualizar'}
+    return (
+        <div className="popUp">
+            <div className="ContainerBody">
+                <h1>Editar Dados do funcionário</h1>
+                <IoCloseCircleSharp className="IconClosePopUp" onClick={handleCloseBox} />
+                {type === 'employee' ? (
+                    <div className="ContainerFormEditeEmployee">
+                        <h3>Código do Funcionário: {userData.employeeCode}</h3>
+                        <div className="labelEditeEmployee">
+                            <label htmlFor="name">Nome:</label>
+                            <Input
+                                id="name"
+                                placeholder={'Digite um novo nome'}
+                                type={'text'}
+                                value={newName}
+                                onChange={(e) => handleName(e)}
                             />
                         </div>
-                    ) : (
-                        // código para edição dos doadores
-                        <div className='ContainerFormEditeDonation'>
-
+                            {nameError && <p className="textError">{nameError}</p>}
+                        <div className="labelEditeEmployee">
+                            <label htmlFor="password">Senha:</label>
+                            <Input
+                                id="password"
+                                placeholder={'Digite uma nova senha'}
+                                type={'text'}
+                                value={password}
+                                onChange={(e) => handlePassword(e)}
+                            />
                         </div>
-                    )}
-
-
+                        {passwordError && <p className="textError">{passwordError}</p>}
+                        <Button
+                            onClick={() => {
+                                onClick(newName, password);
+                                setShowSuccessDialog(true);
+                            }}
+                            TextButton={'Atualizar'}
+                        />
+                    </div>
+                ) : (
+                    <div className="ContainerFormEditeDonation">{/* Add content for donation editing */}</div>
+                )}
+            </div>
+            {showSuccessDialog && (
+                <div>
+                    {/* Render SuccessDialog component here */}
                 </div>
-            </Modal.Body>
-        </Modal>
+            )}
+        </div>
     );
 }
 
 PopUp.propTypes = {
     show: PropTypes.bool.isRequired,
     handleClose: PropTypes.func.isRequired,
-    userData: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object
-    ]).isRequired,
+    userData: PropTypes.shape({
+        name: PropTypes.string,
+        employeeCode: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    }).isRequired,
     type: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
 };
+
 
 export default PopUp;
