@@ -90,6 +90,7 @@ function EmployeeList() {
     setUserSelected(user);
     setIsEditing(true);
     setShowPopup(true);
+    
   };
 
   const handleOpenDelete = (user) => {
@@ -104,7 +105,8 @@ function EmployeeList() {
     setPassword('');
     setPersonCode('');
     setAlertType('');
-  };
+    setIsEditing(false);
+    };
 
   const onClickUpdate = (newName, password) => {
     if (newName === userSelected.name && (password === userSelected.password || password === '')) {
@@ -128,11 +130,9 @@ function EmployeeList() {
       return;
     }
 
-    try  {
-      employeeUpdate(newName, password);
-    } catch (error) {
+    employeeUpdate(newName, password).catch(error => {
       console.error(error);
-    }
+    });
   };
 
   const employeeUpdate = async (newName, password) => {
@@ -189,7 +189,16 @@ function EmployeeList() {
 
       updateEmployeeList();
     } catch (error) {
-      console.error(error);
+      setLoading(false);
+      if (error.response && error.response.status === 403) {
+        setAlertType('error');
+        setAlertMessage('Não é possível excluir um funcionário administrador!');
+        setAlertTitle('Atenção!');
+        setShowAlertDialog(true);
+        return;
+      } else {
+        console.error(error);
+      }
     }
   };
 
@@ -225,7 +234,7 @@ function EmployeeList() {
             <List
               users={employees}
               onClick={(user) => handleOpenEdit(user)}
-              onDelete={(user) => handleOpenDelete(user)}
+              onDelete={(user) => handleOpenDelete(user)} // pass the correct parameters
             />
           )}
         </>
@@ -236,6 +245,7 @@ function EmployeeList() {
           show={showPopup}
           handleClose={handleClosePopup}
           userData={userSelected}
+          setPassword={setPassword}
           onClick={(newName, password) => {
             onClickUpdate(newName, password);
           }}
