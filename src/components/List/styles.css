@@ -1,8 +1,10 @@
 .ListContainer {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  width: 60%;
+  flex-direction: column;
+  align-items: center;
+  width: 68%;
+  min-height: 68vh;
 
 }
 
