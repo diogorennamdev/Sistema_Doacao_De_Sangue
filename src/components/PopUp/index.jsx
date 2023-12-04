@@ -117,10 +117,11 @@ PopUp.propTypes = {
     handleClose: PropTypes.func.isRequired,
     userData: PropTypes.shape({
         name: PropTypes.string,
-        employeeCode: PropTypes.string,
+        employeeCode: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     }).isRequired,
     type: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
 };
+
 
 export default PopUp;
