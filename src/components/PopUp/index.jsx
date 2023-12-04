@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Button from '../Button';
 import Input from '../Input';
 import PropTypes from 'prop-types';
-import { IoMdClose } from "react-icons/io";
+import { IoCloseCircleSharp } from "react-icons/io5";
 import './styles.css';
 
 function PopUp({ show, handleClose, userData, type, onClick }) {
@@ -36,7 +36,7 @@ function PopUp({ show, handleClose, userData, type, onClick }) {
 
             <Modal.Body className='BodyPopUp'>
                 <div className='ContainerBody'>
-                    <IoMdClose className='IconClosePopUp' onClick={() => {
+                    <IoCloseCircleSharp className='IconClosePopUp' onClick={() => {
                         handleClose();
                         clearFields();
                     }} />
