@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../Contexts/useAuth';
+import PropTypes from 'prop-types';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import SuccessDialog from '../../components/SuccessDialog';
 import AlertDialog from '../../components/AlertDialog';
+import { IoCloseCircleSharp } from "react-icons/io5";
+
 import './styles.css';
 
-function Register() {
+function Register({ onClose }) {
     const { userData } = useAuth();
     const token = userData.token;
     const ApiUrl = import.meta.env.VITE_EMPLOYEES;
-
     const [isAdmin, setIsAdmin] = useState(false);
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -104,7 +106,7 @@ function Register() {
                 setPassword(response.data.Funcionário.Senha);
                 setPersonCode(response.data.Funcionário.Código)
                 setShowSuccessDialog(true);
-            }            
+            }
 
         } catch (error) {
             console.error('Erro ao fazer a requisição:', error);
@@ -113,10 +115,10 @@ function Register() {
                 console.log('Usuário não autorizado!');
                 return
             }
-            setMessage(error.response.data.error);
             setShow(true);
             setLoading(false);
             setMessageBoxTitle('Atenção')
+            setMessage(error.response.data.error);
             setType('alert');
         }
     };
@@ -130,6 +132,7 @@ function Register() {
     return (
         <div className='sectionRegister'>
             <div className="containerForm">
+            <IoCloseCircleSharp onClick={onClose}/>
                 <h1>Cadastrar Funcionário</h1>
                 <div className="containerInput">
                     <label htmlFor="name" className='labelStyle'>Nome:</label>
@@ -184,14 +187,14 @@ function Register() {
             </div>
             {show && type === 'success' && (
                 <SuccessDialog
-                show={showSuccessDialog}
-                handleClose={handleCloseBox}
-                title={messageBoxTitle}
-                message={message}
-                password={password}
-                personCode={personCode}
-                createType={true}
-            />
+                    show={showSuccessDialog}
+                    handleClose={handleCloseBox}
+                    title={messageBoxTitle}
+                    message={message}
+                    password={password}
+                    personCode={personCode}
+                    createType={true}
+                />
             )}
             {show && type !== 'success' && (
                 <AlertDialog
@@ -204,5 +207,9 @@ function Register() {
         </div>
     );
 }
+
+Register.propTypes = {
+    onClose: PropTypes.func.isRequired,
+};
 
 export default Register;
