@@ -30,7 +30,7 @@ AlertDialog.propTypes = {
     show: PropTypes.bool.isRequired,
     handleClose: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired,
+    message: PropTypes.string,
     onConfirm: PropTypes.func,
     showConfirmButtons: PropTypes.bool,
 };

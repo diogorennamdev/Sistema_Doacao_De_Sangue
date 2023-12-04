@@ -69,7 +69,7 @@ SuccessDialog.propTypes = {
     show: PropTypes.bool.isRequired,
     handleClose: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired,
+    message: PropTypes.string,
     personCode: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
