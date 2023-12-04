@@ -6,15 +6,15 @@
 }
 
 :root{
-  --primary-color : #E50914;
-  --primary-color-dimmed : #E5091450;
+  --primary-color : #d20d1a;
+  --primary-color-dimmed : #d20d1a50;
   --text-color: #5e5b5b;
   --text-color-dimmed: #5e5b5b50;
   --border-color: #dddddd;
   --background1-color: #d9d9d94a;
   --white-color: #fefefe;
-  --black-color-dimmed: #00000095;  
-  --green-color: #0F9D58;
+  --black-color-dimmed: #00000050;  
+  --green-color: #0e834b;
 }
 
 a {
