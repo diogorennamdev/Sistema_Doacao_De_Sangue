@@ -5,10 +5,9 @@ import Button from '../Button';
 import { IoCloseCircleSharp } from 'react-icons/io5';
 import './styles.css';
 
-function PopUp({ show, handleClose, userData, type, onClick }) {
+function PopUp({ show, handleClose, userData, onClick }) {
     const [password, setPassword] = useState('');
     const [newName, setNewName] = useState(userData.name || '');
-    const [showSuccessDialog, setShowSuccessDialog] = useState(false);
     const [nameError, setNameError] = useState('');
     const [passwordError, setPasswordError] = useState('');
 
@@ -56,7 +55,6 @@ function PopUp({ show, handleClose, userData, type, onClick }) {
     }, [show]);
 
     const handleCloseBox = async () => {
-        setShowSuccessDialog(false);
         handleClose();
         clearFields();
     };
@@ -66,7 +64,6 @@ function PopUp({ show, handleClose, userData, type, onClick }) {
             <div className="ContainerBody">
                 <h1>Editar Dados do funcionário</h1>
                 <IoCloseCircleSharp className="IconClosePopUp" onClick={handleCloseBox} />
-                {type === 'employee' ? (
                     <div className="ContainerFormEditeEmployee">
                         <h3>Código do Funcionário: <span>{userData.employeeCode}</span></h3>
                         <div className="labelEditeEmployee">
@@ -94,21 +91,12 @@ function PopUp({ show, handleClose, userData, type, onClick }) {
                         <Button
                             onClick={() => {
                                 onClick(newName, password);
-                                setShowSuccessDialog(true);
                             }}
                             TextButton={'Atualizar'}
                         />
 
                     </div>
-                ) : (
-                    <div className="ContainerFormEditeDonation">{/* Add content for donation editing */}</div>
-                )}
             </div>
-            {showSuccessDialog && (
-                <div>
-                    {/* Render SuccessDialog component here */}
-                </div>
-            )}
         </div>
     );
 }
@@ -120,7 +108,6 @@ PopUp.propTypes = {
         name: PropTypes.string,
         employeeCode: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     }).isRequired,
-    type: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
 };
 
