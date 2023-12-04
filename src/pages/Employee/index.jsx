@@ -7,8 +7,11 @@ import Input from '../../components/Input';
 import AlertDialog from '../../components/AlertDialog';
 import SuccessDialog from '../../components/SuccessDialog';
 import Loading from '../../components/Loading';
-import { FaSearch } from "react-icons/fa";
-import './styles.css'
+import { IoSearch } from "react-icons/io5";
+import { BsPersonFillAdd } from "react-icons/bs";
+import Register from '../Register';
+
+import './styles.css';
 
 function EmployeeList() {
   const { userData } = useAuth();
@@ -17,54 +20,71 @@ function EmployeeList() {
   const [loading, setLoading] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
   const [showAlertDialog, setShowAlertDialog] = useState(false);
-  const [showSuccessDialog, setShowSuccessDialog] = useState(false)
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const [userSelected, setUserSelected] = useState('');
   const employee = import.meta.env.VITE_EMPLOYEES;
-  const [alertType, setAlertType] = useState('')
+  const [alertType, setAlertType] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
   const [alertTitle, setAlertTitle] = useState('');
   const [personCode, setPersonCode] = useState('');
   const [password, setPassword] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [passwordType, setPasswordType] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null);
+  const [showRegister, setShowRegister] = useState(false);
+  const [errorSearchTerm, setErrorSearchTerm] = useState('');
 
   useEffect(() => {
     setLoading(true);
-
+  
     axios.get(`${employee}?name=${searchTerm}`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
     })
       .then(response => {
-        setEmployees(response.data);
+        const responseData = Array.isArray(response.data) ? response.data : [response.data];
+  
+        // Ordena os funcionários pelo nome em ordem alfabética
+        const sortedEmployees = responseData.sort((a, b) => a.name.localeCompare(b.name));
+  
+        setEmployees(sortedEmployees);
         setLoading(false);
+        setErrorSearchTerm(''); // Reset errorSearchTerm when dados válidos são recebidos
       })
       .catch(error => {
-        console.error('Algo deu errado!', error);
+        if (error.response && error.response.status === 404) {
+          setErrorSearchTerm(searchTerm);
+        } else {
+          console.error('Algo deu errado!', error);
+        }
         setLoading(false);
       });
-
+  
   }, [employee, token, searchTerm]);
-
   const handleClosePopup = () => {
     setShowPopup(false);
-    setUserSelected('')
+    setUserSelected('');
   };
 
   const onClickModal = (user) => {
-    setUserSelected(user); // Atualizar o estado com o usuário clicado
+    setUserSelected(user);
     setShowPopup(true);
+  };
+
+  const onClickDelete = (user) => {
+    setUserToDelete(user);
+    setShowDeleteDialog(true);
   };
 
   const handleCloseSuccessDialog = () => {
     setShowSuccessDialog(false);
     setAlertMessage('');
     setAlertTitle('');
-    setPassword('')
-    setPersonCode('')
-    setAlertType('')
-
+    setPassword('');
+    setPersonCode('');
+    setAlertType('');
   };
 
   const onClickUpdate = (newName, password) => {
@@ -100,12 +120,12 @@ function EmployeeList() {
     const updatedEmployee = {};
     if (newName) {
       updatedEmployee.name = newName;
-      setPasswordType(false); // Adicione esta linha
+      setPasswordType(false);
     }
     if (password) {
       updatedEmployee.password = password;
       setPasswordType(true);
-      setPassword(password); // Definir a nova senha
+      setPassword(password);
     }
 
     try {
@@ -122,7 +142,7 @@ function EmployeeList() {
         if (newName) {
           setAlertMessage('Nome atualizado com sucesso!');
           setAlertTitle('Sucesso!');
-        } 
+        }
         if (password) {
           setAlertMessage('Senha atualizada com sucesso!');
           setAlertTitle('Sucesso!');
@@ -130,40 +150,80 @@ function EmployeeList() {
           setPassword(password);
         }
 
-        // Refaça a chamada à API para buscar os dados atualizados
         const updatedResponse = await axios.get(`${employee}?name=${searchTerm}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
         });
 
-        // Atualize o estado com os novos dados
         setEmployees(updatedResponse.data);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
+    }
+  };
+
+  const deleteUser = async () => {
+    try {
+      await axios.delete(`${employee}${userToDelete.employeeCode}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      setShowDeleteDialog(false);
+      setUserToDelete(null);
+
+      const updatedResponse = await axios.get(`${employee}?name=${searchTerm}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      setEmployees(updatedResponse.data);
+    } catch (error) {
+      console.error(error);
     }
   };
 
   return (
     <div className='ContainerEmployee'>
-      <h1>Todos Funcionários</h1>
-      <div className='ContainerSearchEmployee'>
-        <FaSearch />
-        <Input
-          placeholder={'Pesquise pelo nome do funcionário'}
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+      <h1>Funcionários</h1>
+      <div className='ContainerHeadSearch'>
+        <div className='SearchInput'>
+          <IoSearch className='SearchIcon' />
+          <Input
+            placeholder={'Pesquise pelo nome do funcionário'}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className='InputSearchEmployee'
+          />
+        </div>
+        <div>
+          <button onClick={() => setShowRegister(true)} className='AddButton'>
+            <BsPersonFillAdd className='AddIcon' /> Adicionar
+          </button>
+        </div>
       </div>
 
-      {loading ? (
-        <Loading />
+      {showRegister && (
+        <Register onClose={() => setShowRegister(false)} />
+      )}
+
+      {errorSearchTerm && searchTerm !== '' ? (
+        <p>O texto &quot;{searchTerm}&quot; não corresponde a nenhum funcionário!</p>
       ) : (
-        <List
-          users={employees}
-          onClick={(user) => onClickModal(user)}
-        />
+        <>
+          {loading ? (
+            <Loading />
+          ) : (
+            <List
+              users={employees}
+              onClick={(user) => onClickModal(user)}
+              onDelete={(user) => onClickDelete(user)}
+            />
+          )}
+        </>
       )}
 
       <Popup
@@ -181,6 +241,15 @@ function EmployeeList() {
         message={alertMessage}
       />
 
+      <AlertDialog
+        show={showDeleteDialog}
+        handleClose={() => setShowDeleteDialog(false)}
+        title="Atenção"
+        message={`Deseja excluir o usuário ${userToDelete?.name}?`}
+        onConfirm={deleteUser}
+        showConfirmButtons={true}
+      />
+
       <SuccessDialog
         handleClose={handleCloseSuccessDialog}
         show={showSuccessDialog}
@@ -191,7 +260,6 @@ function EmployeeList() {
         personCode={personCode.toString()}
         passwordType={passwordType}
       />
-
     </div>
   );
 }
