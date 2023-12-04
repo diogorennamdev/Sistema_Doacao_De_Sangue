@@ -5,8 +5,9 @@
 }
 
 .ContainerEmployee .ContainerEmployeeTitle {
-    margin: 2rem 0 1.5rem 0;
+    margin: 1.2rem 0 1rem 0;
     color: var(--primary-color);
+    text-transform: uppercase;
 }
 
 .ContainerHeadSearch {
@@ -18,13 +19,6 @@
     margin-bottom: 2rem;
 }
 
-.SearchInput {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
 svg.SearchIcon {
     font-size: 1.5rem;
     font-weight: 700;
@@ -32,6 +26,10 @@ svg.SearchIcon {
 }
 
 .SearchInput {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     width: 45%;
     height: 2.5rem;
     border-radius: 0.5rem;
