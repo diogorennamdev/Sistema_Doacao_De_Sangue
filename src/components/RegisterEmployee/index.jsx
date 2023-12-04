@@ -2,15 +2,15 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../Contexts/useAuth';
 import PropTypes from 'prop-types';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
-import SuccessDialog from '../../components/SuccessDialog';
-import AlertDialog from '../../components/AlertDialog';
+import Input from '../Input';
+import Button from '../Button';
+import SuccessDialog from '../SuccessDialog';
+import AlertDialog from '../AlertDialog';
 import { IoCloseCircleSharp } from 'react-icons/io5';
 
 import './styles.css';
 
-function Register({ onClose, updateEmployeeList }) {
+function RegisterEmployee({ onClose, updateEmployeeList }) {
   const { userData } = useAuth();
   const token = userData.token;
   const ApiUrl = import.meta.env.VITE_EMPLOYEES;
@@ -229,9 +229,9 @@ function Register({ onClose, updateEmployeeList }) {
   );
 }
 
-Register.propTypes = {
+RegisterEmployee.propTypes = {
   onClose: PropTypes.func.isRequired,
   updateEmployeeList: PropTypes.func.isRequired,
 };
 
-export default Register;
+export default RegisterEmployee;
