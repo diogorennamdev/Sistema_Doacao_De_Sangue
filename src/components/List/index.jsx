@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import "./styles.css";
-import { LuPencilLine } from "react-icons/lu";
+import { HiPencilAlt } from "react-icons/hi";
+import { HiMiniTrash } from "react-icons/hi2";
 import Pagination from '../Pagination';
 
-function List({ users, onClick }) {
+import "./styles.css";
+function List({ users, onClick, onDelete }) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const usersPerPage = 5;
   const totalPages = Math.ceil(users.length / usersPerPage);
 
-  const visibleUsers = users.slice((currentPage - 1) * usersPerPage, currentPage * usersPerPage);
+  const visibleUsers = Array.isArray(users) ? users.slice((currentPage - 1) * usersPerPage, currentPage * usersPerPage) : [];
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -25,14 +26,19 @@ function List({ users, onClick }) {
               <h2>{user.name.substring(0, 2)}</h2>
               <h3>{user.name}</h3>
             </div>
-            <span onClick={() => onClick(user)} className='icon'>
-              <LuPencilLine />
-            </span>
+            <div>
+              <span onClick={() => onClick(user)} className='icon'>
+                <HiPencilAlt />
+              </span>
+              <span onClick={() => onDelete(user)} className='icon'>
+                <HiMiniTrash />
+              </span>
+            </div>
           </div>
         ))}
-      </div>
       <div className="pagination">
         <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
+      </div>
       </div>
 
     </>
@@ -42,6 +48,7 @@ function List({ users, onClick }) {
 List.propTypes = {
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
   onClick: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default List;
