@@ -37,10 +37,10 @@ function PopUp({ show, handleClose, userData, type, onClick }) {
         }
     };
 
-
     const clearFields = () => {
         setPassword('');
-        setNewName('');
+        setNameError('');
+        setPasswordError('');
     };
 
     useEffect(() => {
@@ -55,7 +55,7 @@ function PopUp({ show, handleClose, userData, type, onClick }) {
         }
     }, [show]);
 
-    const handleCloseBox = () => {
+    const handleCloseBox = async () => {
         setShowSuccessDialog(false);
         handleClose();
         clearFields();
@@ -68,7 +68,7 @@ function PopUp({ show, handleClose, userData, type, onClick }) {
                 <IoCloseCircleSharp className="IconClosePopUp" onClick={handleCloseBox} />
                 {type === 'employee' ? (
                     <div className="ContainerFormEditeEmployee">
-                        <h3>Código do Funcionário: {userData.employeeCode}</h3>
+                        <h3>Código do Funcionário: <span>{userData.employeeCode}</span></h3>
                         <div className="labelEditeEmployee">
                             <label htmlFor="name">Nome:</label>
                             <Input
@@ -79,7 +79,7 @@ function PopUp({ show, handleClose, userData, type, onClick }) {
                                 onChange={(e) => handleName(e)}
                             />
                         </div>
-                            {nameError && <p className="textError">{nameError}</p>}
+                        {nameError && <p className="textError">{nameError}</p>}
                         <div className="labelEditeEmployee">
                             <label htmlFor="password">Senha:</label>
                             <Input
@@ -98,6 +98,7 @@ function PopUp({ show, handleClose, userData, type, onClick }) {
                             }}
                             TextButton={'Atualizar'}
                         />
+
                     </div>
                 ) : (
                     <div className="ContainerFormEditeDonation">{/* Add content for donation editing */}</div>
