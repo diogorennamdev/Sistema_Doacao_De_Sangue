@@ -34,7 +34,7 @@ function Home() {
       <div className='ContainerHome'>
         {renderWelcomeMessage()}
         <div className='CardsHome'>
-          {renderCard("/", "Gerenciar Doadores", "Visualize e gerencie todos os doadores")}
+          {renderCard("/doador", "Gerenciar Doadores", "Visualize e gerencie todos os doadores")}
           {renderCard("/", "Adicionar Exames", "Adicione resultados de exames para doadores")}
           {renderCard("/estoque", "Estoque", "Verifique o estoque atual de sangue")}
           {userData?.information?.isAdmin && renderCard("/funcionario", "Gerenciar funcionários", "Visualize e gerencie todos os funcionários")}

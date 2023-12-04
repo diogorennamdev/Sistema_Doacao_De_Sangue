@@ -5,10 +5,9 @@ import { useAuth } from './Contexts/useAuth';
 import App from './App';
 import Login from './pages/Login';
 import Home from './pages/Home';
-import Admin from './pages/Admin';
 import EmployeeList from './pages/Employee';
 import Stock from './pages/Stock';
-import Donation from './pages/Donation';
+import Donor from './pages/Donor';
 
 const RoutesConfig = () => {
   const { getUserData } = useAuth();
@@ -21,10 +20,9 @@ const RoutesConfig = () => {
         <Route element={<App />}>
           <Route path="/" element={<Login />} />
           <Route path="/inicio" element={<PrivateRoute element={Home} />} />
-          <Route path="/admin" element={<PrivateRoute element={Admin} />} />
           <Route path="/funcionario" element={<PrivateRoute element={EmployeeList} />} />
           <Route path='/estoque' element={<PrivateRoute element={Stock} />} />
-          <Route path='/doador' element={<PrivateRoute element={Donation} />} />
+          <Route path='/doador' element={<PrivateRoute element={Donor} />} />
         </Route>
       );
     } else {

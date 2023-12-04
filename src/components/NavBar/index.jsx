@@ -67,10 +67,9 @@ function Navbar() {
             <h4>Acesso rápido</h4>
             <div className="dropdown-links">
               <Link to="/inicio">Inicio</Link>
-              <Link to="/">Gerenciar Doadores</Link>
-              <Link to="/">Adicionar Exames</Link>
+              <Link to="/doador">Gerenciar Doadores</Link>
               <Link to="/estoque">Estoque</Link>
-              {userData?.information?.isAdmin && <Link to="/cadastro">Gerenciar funcionários</Link>}
+              {userData?.information?.isAdmin && <Link to="/funcionario">Gerenciar funcionários</Link>}
             </div>
             <Logout />
           </div>
