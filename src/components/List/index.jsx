@@ -18,30 +18,42 @@ function List({ users, onClick, onDelete }) {
   };
 
   return (
-    <>
-      <div className='ListContainer'>
-        {visibleUsers.map((user, index) => (
-          <div className='CardListUser' key={index}>
-            <div className='CardListName'>
-              <h2>{user.name.substring(0, 2)}</h2>
-              <h3>{user.name}</h3>
-            </div>
-            <div>
-              <span onClick={() => onClick(user)} className='icon'>
-                <HiPencilAlt />
-              </span>
-              <span onClick={() => onDelete(user)} className='icon'>
-                <HiMiniTrash />
-              </span>
-            </div>
+    <div className='ListContainer'>
+      {visibleUsers.map((user) => (
+        <div className='CardListUser' key={user._id}>
+          <div className='CardListName'>
+            <h2>{user.name.substring(0, 2)}</h2>
+            <h3>{user.name}</h3>
           </div>
-        ))}
+          <div>
+              <HiPencilAlt
+                onClick={() => onClick(user)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    onClick(user);
+                  }
+                }}
+                tabIndex={0}
+                className='EditIcon'
+              />
+              <HiMiniTrash
+                onClick={() => onDelete(user)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    onDelete(user);
+                  }
+                }}
+                tabIndex={0}
+                className='DeleteIcon'
+              />
+          </div>
+        </div>
+      ))
+      }
       <div className="pagination">
         <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
       </div>
-      </div>
-
-    </>
+    </div >
   );
 }
 
