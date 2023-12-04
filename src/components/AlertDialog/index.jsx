@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import './styles.css'; // Importando o arquivo CSS
 
-function AlertDialog({ show, handleClose, title, message }) {
+function AlertDialog({ show, handleClose, title, message, onConfirm, showConfirmButtons }) {
     return (
         <Modal show={show} onHide={handleClose} className="my-modal" backdrop="static">
             <Modal.Header closeButton>
@@ -13,7 +13,14 @@ function AlertDialog({ show, handleClose, title, message }) {
             </Modal.Header>
             <Modal.Body>{message}</Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={handleClose} TextButton={'Fechar'} />
+                {showConfirmButtons ? (
+                    <>
+                        <Button variant="secondary" onClick={handleClose} TextButton={'Não'} className="nao" />
+                        <Button variant="primary" onClick={onConfirm} TextButton={'Sim'}  className="sim"/>
+                    </>
+                ) : (
+                    <Button variant="primary" onClick={handleClose} TextButton={'Fechar'} />
+                )}
             </Modal.Footer>
         </Modal>
     );
@@ -24,6 +31,8 @@ AlertDialog.propTypes = {
     handleClose: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
+    onConfirm: PropTypes.func,
+    showConfirmButtons: PropTypes.bool,
 };
 
 export default AlertDialog;
