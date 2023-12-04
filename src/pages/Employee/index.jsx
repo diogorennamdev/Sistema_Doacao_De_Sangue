@@ -7,8 +7,8 @@ import Input from '../../components/Input';
 import AlertDialog from '../../components/AlertDialog';
 import SuccessDialog from '../../components/SuccessDialog';
 import Loading from '../../components/Loading';
-import { IoSearch } from "react-icons/io5";
-import { BsPersonFillAdd } from "react-icons/bs";
+import { IoSearch } from 'react-icons/io5';
+import { BsPersonFillAdd } from 'react-icons/bs';
 import Register from '../Register';
 
 import './styles.css';
@@ -34,26 +34,26 @@ function EmployeeList() {
   const [userToDelete, setUserToDelete] = useState(null);
   const [showRegister, setShowRegister] = useState(false);
   const [errorSearchTerm, setErrorSearchTerm] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-  
+
     axios.get(`${employee}?name=${searchTerm}`, {
       headers: {
-        'Authorization': `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     })
-      .then(response => {
+      .then((response) => {
         const responseData = Array.isArray(response.data) ? response.data : [response.data];
-  
-        // Ordena os funcionários pelo nome em ordem alfabética
-        const sortedEmployees = responseData.sort((a, b) => a.name.localeCompare(b.name));
-  
+
+        const sortedEmployees = responseData.toSorted((a, b) => a.name.localeCompare(b.name));
+
         setEmployees(sortedEmployees);
         setLoading(false);
-        setErrorSearchTerm(''); // Reset errorSearchTerm when dados válidos são recebidos
+        setErrorSearchTerm('');
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response && error.response.status === 404) {
           setErrorSearchTerm(searchTerm);
         } else {
@@ -61,19 +61,38 @@ function EmployeeList() {
         }
         setLoading(false);
       });
-  
   }, [employee, token, searchTerm]);
+
+  const updateEmployeeList = async () => {
+    try {
+      const response = await axios.get(`${employee}?name=${searchTerm}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const responseData = Array.isArray(response.data) ? response.data : [response.data];
+
+      const sortedEmployees = responseData.toSorted((a, b) => a.name.localeCompare(b.name));
+      setEmployees(sortedEmployees);
+    } catch (error) {
+      console.error('Error updating employee list:', error);
+    }
+  };
+
   const handleClosePopup = () => {
     setShowPopup(false);
     setUserSelected('');
+    setIsEditing(false); // Adicionado para fechar o Popup quando necessário
   };
 
-  const onClickModal = (user) => {
+  const handleOpenEdit = (user) => {
     setUserSelected(user);
+    setIsEditing(true);
     setShowPopup(true);
   };
 
-  const onClickDelete = (user) => {
+  const handleOpenDelete = (user) => {
     setUserToDelete(user);
     setShowDeleteDialog(true);
   };
@@ -109,7 +128,7 @@ function EmployeeList() {
       return;
     }
 
-    try {
+    try  {
       employeeUpdate(newName, password);
     } catch (error) {
       console.error(error);
@@ -131,8 +150,8 @@ function EmployeeList() {
     try {
       const response = await axios.patch(`${employee}${userSelected.employeeCode}`, updatedEmployee, {
         headers: {
-          'Authorization': `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       if (response.status === 200) {
@@ -150,13 +169,7 @@ function EmployeeList() {
           setPassword(password);
         }
 
-        const updatedResponse = await axios.get(`${employee}?name=${searchTerm}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-
-        setEmployees(updatedResponse.data);
+        updateEmployeeList();
       }
     } catch (error) {
       console.error(error);
@@ -167,20 +180,14 @@ function EmployeeList() {
     try {
       await axios.delete(`${employee}${userToDelete.employeeCode}`, {
         headers: {
-          'Authorization': `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       setShowDeleteDialog(false);
       setUserToDelete(null);
 
-      const updatedResponse = await axios.get(`${employee}?name=${searchTerm}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-
-      setEmployees(updatedResponse.data);
+      updateEmployeeList();
     } catch (error) {
       console.error(error);
     }
@@ -188,7 +195,7 @@ function EmployeeList() {
 
   return (
     <div className='ContainerEmployee'>
-      <h1>Funcionários</h1>
+      <h1 className='ContainerEmployeeTitle'>Funcionários</h1>
       <div className='ContainerHeadSearch'>
         <div className='SearchInput'>
           <IoSearch className='SearchIcon' />
@@ -206,9 +213,7 @@ function EmployeeList() {
         </div>
       </div>
 
-      {showRegister && (
-        <Register onClose={() => setShowRegister(false)} />
-      )}
+      {showRegister && <Register onClose={() => setShowRegister(false)} updateEmployeeList={updateEmployeeList} />}
 
       {errorSearchTerm && searchTerm !== '' ? (
         <p>O texto &quot;{searchTerm}&quot; não corresponde a nenhum funcionário!</p>
@@ -219,20 +224,23 @@ function EmployeeList() {
           ) : (
             <List
               users={employees}
-              onClick={(user) => onClickModal(user)}
-              onDelete={(user) => onClickDelete(user)}
+              onClick={(user) => handleOpenEdit(user)}
+              onDelete={(user) => handleOpenDelete(user)}
             />
           )}
         </>
       )}
-
-      <Popup
-        type={'employee'}
-        show={showPopup}
-        handleClose={handleClosePopup}
-        userData={userSelected}
-        onClick={onClickUpdate}
-      />
+      {isEditing && (
+        <Popup
+          type={'employee'}
+          show={showPopup}
+          handleClose={handleClosePopup}
+          userData={userSelected}
+          onClick={(newName, password) => {
+            onClickUpdate(newName, password);
+          }}
+        />
+      )}
 
       <AlertDialog
         show={showAlertDialog}
@@ -244,7 +252,7 @@ function EmployeeList() {
       <AlertDialog
         show={showDeleteDialog}
         handleClose={() => setShowDeleteDialog(false)}
-        title="Atenção"
+        title='Atenção'
         message={`Deseja excluir o usuário ${userToDelete?.name}?`}
         onConfirm={deleteUser}
         showConfirmButtons={true}
