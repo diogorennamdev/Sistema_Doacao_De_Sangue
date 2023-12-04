@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../Contexts/useAuth';
-import Popup from '../../components/PopUp';
 import List from '../../components/List';
 import Input from '../../components/Input';
 import AlertDialog from '../../components/AlertDialog';
@@ -9,7 +8,8 @@ import SuccessDialog from '../../components/SuccessDialog';
 import Loading from '../../components/Loading';
 import { IoSearch } from 'react-icons/io5';
 import { BsPersonFillAdd } from 'react-icons/bs';
-import Register from '../Register';
+import RegisterEmployee from '../../components/RegisterEmployee';
+import FormEmployee from '../../components/FormEmployee';
 
 import './styles.css';
 
@@ -90,7 +90,7 @@ function EmployeeList() {
     setUserSelected(user);
     setIsEditing(true);
     setShowPopup(true);
-    
+
   };
 
   const handleOpenDelete = (user) => {
@@ -106,7 +106,7 @@ function EmployeeList() {
     setPersonCode('');
     setAlertType('');
     setIsEditing(false);
-    };
+  };
 
   const onClickUpdate = (newName, password) => {
     if (newName === userSelected.name && (password === userSelected.password || password === '')) {
@@ -222,7 +222,7 @@ function EmployeeList() {
         </div>
       </div>
 
-      {showRegister && <Register onClose={() => setShowRegister(false)} updateEmployeeList={updateEmployeeList} />}
+      {showRegister && <RegisterEmployee onClose={() => setShowRegister(false)} updateEmployeeList={updateEmployeeList} />}
 
       {errorSearchTerm && searchTerm !== '' ? (
         <p>O texto &quot;{searchTerm}&quot; não corresponde a nenhum funcionário!</p>
@@ -234,13 +234,13 @@ function EmployeeList() {
             <List
               users={employees}
               onClick={(user) => handleOpenEdit(user)}
-              onDelete={(user) => handleOpenDelete(user)} // pass the correct parameters
+              onDelete={(user) => handleOpenDelete(user)}
             />
           )}
         </>
       )}
       {isEditing && (
-        <Popup
+        <FormEmployee
           type={'employee'}
           show={showPopup}
           handleClose={handleClosePopup}
