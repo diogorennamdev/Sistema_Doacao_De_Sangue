@@ -1,3 +1,15 @@
+.ListContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 65vh;
+}
+
+.pagination {
+    margin-top: auto;
+    /* Push the pagination to the bottom */
+    width: 100%;
+}
+
 .pagination-container button {
     border: none;
     border-radius: 100%;
@@ -12,14 +24,13 @@
     position: fixed;
     bottom: 0;
     width: 100%;
-  }
-  
+}
 
 .pagination-number {
     background-color: var(--border-color);
     color: var(--white-color);
     font-size: 1rem;
-   width: 2rem;
+    width: 2rem;
     height: 2rem;
     display: flex;
     justify-content: center;
@@ -51,7 +62,7 @@
     align-items: center;
 }
 
-.pagination-container svg{
+.pagination-container svg {
     font-size: 1.5rem;
 }
 
@@ -61,7 +72,6 @@
     color: var(--primary-color);
 }
 
-/* Estilo para o primeiro e último botões numéricos */
 .pagination-number:first-child,
 .pagination-number:last-child {
     background: none;
