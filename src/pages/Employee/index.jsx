@@ -18,7 +18,7 @@ function EmployeeList() {
   const token = userData.token;
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showPopup, setShowPopup] = useState(false);
+  const [showEditEmployee, setShowEditEmployee] = useState(false);
   const [showAlertDialog, setShowAlertDialog] = useState(false);
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const [userSelected, setUserSelected] = useState('');
@@ -63,33 +63,16 @@ function EmployeeList() {
       });
   }, [employee, token, searchTerm]);
 
-  const updateEmployeeList = async () => {
-    try {
-      const response = await axios.get(`${employee}?name=${searchTerm}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const responseData = Array.isArray(response.data) ? response.data : [response.data];
-
-      const sortedEmployees = responseData.toSorted((a, b) => a.name.localeCompare(b.name));
-      setEmployees(sortedEmployees);
-    } catch (error) {
-      console.error('Error updating employee list:', error);
-    }
-  };
-
-  const handleClosePopup = () => {
-    setShowPopup(false);
+  const handleCloseEditEmployee = () => {
+    setShowEditEmployee(false);
     setUserSelected('');
-    setIsEditing(false); // Adicionado para fechar o Popup quando necessário
+    setIsEditing(false); // Adicionado para fechar o EditEmployee quando necessário
   };
 
   const handleOpenEdit = (user) => {
     setUserSelected(user);
     setIsEditing(true);
-    setShowPopup(true);
+    setShowEditEmployee(true);
 
   };
 
@@ -106,6 +89,25 @@ function EmployeeList() {
     setPersonCode('');
     setAlertType('');
     setIsEditing(false);
+  };
+
+  const updateEmployeeList = async () => {
+    try {
+      const response = await axios.get(`${employee}?name=${searchTerm}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const responseData = Array.isArray(response.data) ? response.data : [response.data];
+
+      const sortedEmployees = responseData.toSorted((a, b) => a.name.localeCompare(b.name));
+      
+      setEmployees(sortedEmployees);
+
+    } catch (error) {
+      console.error('Error updating employee list:', error);
+    }
   };
 
   const onClickUpdate = (newName, password) => {
@@ -155,7 +157,7 @@ function EmployeeList() {
       });
 
       if (response.status === 200) {
-        setShowPopup(false);
+        setShowEditEmployee(false);
         setAlertType('success');
         setShowSuccessDialog(true);
         if (newName) {
@@ -242,8 +244,8 @@ function EmployeeList() {
       {isEditing && (
         <FormEmployee
           type={'employee'}
-          show={showPopup}
-          handleClose={handleClosePopup}
+          show={showEditEmployee}
+          handleClose={handleCloseEditEmployee}
           userData={userSelected}
           setPassword={setPassword}
           onClick={(newName, password) => {
