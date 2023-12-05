@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../Contexts/useAuth';
+import moment from 'moment';
 import List from '../../components/List';
 import Input from '../../components/Input';
 import AlertDialog from '../../components/AlertDialog';
@@ -26,12 +27,6 @@ function DonorList() {
   const [alertType, setAlertType] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
   const [alertTitle, setAlertTitle] = useState('');
-  const [CPF, setCPF] = useState('');
-  const [name, setName] = useState('');
-  const [birthDate, setBirthDate] = useState('');
-  const [sex, setSex] = useState('');
-  const [address, setAddress] = useState('');
-  const [telephone, setTelephone] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [donorToDelete, setDonorToDelete] = useState(null);
@@ -87,12 +82,6 @@ function DonorList() {
     setShowSuccessDialog(false);
     setAlertMessage('');
     setAlertTitle('');
-    setCPF('');
-    setName('');
-    setBirthDate('');
-    setSex('');
-    setAddress('');
-    setTelephone('');
     setAlertType('');
     setIsEditing(false);
   };
@@ -107,7 +96,7 @@ function DonorList() {
 
       const responseData = Array.isArray(response.data) ? response.data : [response.data];
 
-      const sortedDonors = responseData.sort((a, b) => a.name.localeCompare(b.name));
+      const sortedDonors = responseData.toSorted((a, b) => a.name.localeCompare(b.name));
 
       setDonors(sortedDonors);
 
@@ -116,13 +105,8 @@ function DonorList() {
     }
   };
 
-  const onClickUpdate = (newName) => {
-    if (newName === donorSelected.name) {
-      setShowAlertDialog(true);
-      setAlertTitle('Atenção');
-      setAlertMessage('É necessário alterar o nome para atualizar!');
-      return;
-    }
+
+  const onClickUpdate = async (newName, CPF, birthDate, sex, address, telephone) => {
 
     if (newName && newName.length < 3) {
       setShowAlertDialog(true);
@@ -131,19 +115,51 @@ function DonorList() {
       return;
     }
 
-    donorUpdate(newName).catch(error => {
+    if (CPF && CPF.length !== 14) {
+      setShowAlertDialog(true);
+      setAlertTitle('Atenção');
+      setAlertMessage('O CPF precisa ter 11 caracteres!');
+      return;
+    }
+
+    donorUpdate(newName, CPF, birthDate, sex, address, telephone).catch(error => {
       console.error(error);
     });
   };
 
-  const donorUpdate = async (newName) => {
+  const donorUpdate = async (newName, CPF, birthDate, sex, address, telephone) => {
     const updatedDonor = {};
-    if (newName) {
+
+    if (newName && newName !== donorSelected.name) {
       updatedDonor.name = newName;
+    }
+    if (CPF && CPF !== donorSelected.CPF) {
+      updatedDonor.CPF = CPF;
+    }
+    if (birthDate && moment(birthDate, 'DD/MM/YYYY').toISOString().split('T')[0] !== moment(donorSelected.birthDate).toISOString().split('T')[0]) {
+      const birthDateUS = moment(birthDate, 'DD/MM/YYYY').format('YYYY-MM-DD');
+      updatedDonor.birthDate = birthDateUS;
+    }      
+    if (sex && sex !== donorSelected.sex) {
+      updatedDonor.sex = sex;
+    }
+    if (address && address !== donorSelected.address) {
+      updatedDonor.address = address;
+    }
+    if (telephone && telephone !== donorSelected.telephone) {
+      updatedDonor.telephone = telephone;
+    }
+
+    // Se nenhum campo foi alterado, exiba uma mensagem de erro
+    if (Object.keys(updatedDonor).length === 0) {
+      setShowAlertDialog(true);
+      setAlertTitle('Atenção');
+      setAlertMessage('É necessário alterar algum campo para atualizar!');
+      return;
     }
 
     try {
-      const response = await axios.patch(`${donorUrl}${donorSelected.donorCode}`, updatedDonor, {
+      const response = await axios.patch(`${donorUrl}${donorSelected._id}`, updatedDonor, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -153,7 +169,7 @@ function DonorList() {
         setShowEditDonor(false);
         setAlertType('success');
         setShowSuccessDialog(true);
-        setAlertMessage('Nome atualizado com sucesso!');
+        setAlertMessage('Doador atualizado com sucesso!');
         setAlertTitle('Sucesso!');
 
         updateDonorList();
@@ -161,11 +177,13 @@ function DonorList() {
     } catch (error) {
       console.error(error);
     }
+    console.log(updatedDonor);
   };
+
 
   const deleteDonor = async () => {
     try {
-      await axios.delete(`${donorUrl}${donorToDelete.donorCode}`, {
+      await axios.delete(`${donorUrl}${donorToDelete._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -189,6 +207,7 @@ function DonorList() {
     }
   };
 
+
   return (
     <div className='ContainerDonor'>
       <h1 className='ContainerDonorTitle'>Doadores</h1>
@@ -209,7 +228,7 @@ function DonorList() {
         </div>
       </div>
 
-      {showRegister && <RegisterDonor onClose={() => setShowRegister(false)} updateDonorList={updateDonorList} />}
+      {showRegister && <RegisterDonor onClose={() => setShowRegister(false)} updateDonorList={donorUpdate} />}
 
       {errorSearchTerm && searchTerm !== '' ? (
         <p>O texto &quot;{searchTerm}&quot; não corresponde a nenhum doador!</p>
@@ -231,8 +250,8 @@ function DonorList() {
           show={showEditDonor}
           handleClose={handleCloseEditDonor}
           donorData={donorSelected}
-          onClick={(newName) => {
-            onClickUpdate(newName);
+          onClick={(newName, CPF, birthDate, sex, address, telephone) => {
+            onClickUpdate(newName, CPF, birthDate, sex, address, telephone);
           }}
         />
       )}
