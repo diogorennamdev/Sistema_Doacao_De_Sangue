@@ -1,23 +1,27 @@
 import PropTypes from 'prop-types';
 import './styles.css';
 
-function Input({ type, placeholder, onChange,value }) {
-    return <>
+function Input({ type, placeholder, onChange, value, maxLength, className }) {
+    return (
         <input
-            className='Input'
+            className={`Input ${className}`} // Add the 'Input' class and the provided class
             type={type}
             placeholder={placeholder}
             onChange={onChange}
             value={value}
-            autoComplete='on' />
-    </>
+            maxLength={maxLength} // Add maxLength attribute
+            autoComplete='on'
+        />
+    );
 }
 
 Input.propTypes = {
-    type: PropTypes.string, // Se uma prop não for marcada como isRequired, ela é considerada opcional. Se uma prop opcional não for fornecida, ela será undefined
+    type: PropTypes.string,
     placeholder: PropTypes.string,
     value: PropTypes.string,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    maxLength: PropTypes.number,
+    className: PropTypes.string,
 };
 
 export default Input;
