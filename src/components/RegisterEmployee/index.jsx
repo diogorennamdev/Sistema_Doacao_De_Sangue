@@ -145,13 +145,13 @@ function RegisterEmployee({ onClose, updateEmployeeList }) {
   };
 
   return (
-    <div className='sectionRegister'>
-      <div className="containerForm">
+    <div className='SectionRegisterEmployee'>
+      <div className="ContainerFormEmployee">
         <IoCloseCircleSharp onClick={onClose} className='closeIcon' />
         <h1>Cadastrar Funcionário</h1>
-        <div className="containerInput">
-          <div className='label'>
-            <label htmlFor="name" className='labelStyle'>Nome:</label>
+        <div className="ContainerInputEmployee">
+          <div className='LabelEmployee'>
+            <label htmlFor="name" className='labelStyleEmployee'>Nome:</label>
             <Input
               id="name"
               type={'text'}
@@ -161,9 +161,8 @@ function RegisterEmployee({ onClose, updateEmployeeList }) {
             />
           </div>
           {nameError && <p className="textError">{nameError}</p>}
-
-          <div className='label'>
-            <label htmlFor="password" className='labelStyle'>Senha:</label>
+          <div className='LabelEmployee'>
+            <label htmlFor="password" className='labelStyleEmployee'>Senha:</label>
             <Input
               id='password'
               value={password}
@@ -216,7 +215,7 @@ function RegisterEmployee({ onClose, updateEmployeeList }) {
         )
       }
       {
-        show && type !== 'success' && (
+        show && type === 'alert' && (
           <AlertDialog
             show={show}
             handleClose={handleCloseBox}
