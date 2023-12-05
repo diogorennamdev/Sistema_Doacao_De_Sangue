@@ -1,0 +1,72 @@
+.ContainerEditDonor {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ContainerFormEditDonor {
+    position: relative;
+    width: 70%;
+    height: 75%;
+    background-color: var(--white-color);
+    padding: 1.5rem;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.IconCloseEditDonor {
+    font-size: 2rem;
+    position: absolute;
+    top: 1rem;
+    right: 1.3rem;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+.ContainerFormEditDonor h1 {
+    margin: 2rem 0 0.5rem 0;
+    color: var(--primary-color);
+    text-align: center;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.ContainerFormEditDonor h3 {
+    font-size: 1.05rem;
+    text-align: center;
+    font-weight: 400;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+}
+
+.ContainerFormEditDonor span {
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.ContainerInputEditDonor {
+    width: 70%;
+}
+
+.ButtonEditDonor {
+    margin-top: 1rem;
+    background-color: var(--green-color);
+}
+
+.ButtonEditDonor:hover,
+.ButtonEditDonor:focus {
+    background-color: transparent;
+    color: var(--green-color);
+    outline: 1px solid var(--green-color);
+}

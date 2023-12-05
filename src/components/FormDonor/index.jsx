@@ -1,19 +1,22 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import Input from '../Input';
 import Button from '../Button';
 import { IoCloseCircleSharp } from 'react-icons/io5';
 import './styles.css';
 
 function FormDonor({ show, handleClose, donorData, onClick }) {
-    const [CPF, setCPF] = useState(donorData.CPF || '');
     const [name, setName] = useState(donorData.name || '');
+    const [CPF, setCPF] = useState(donorData.CPF || '');
     const [birthDate, setBirthDate] = useState(donorData.birthDate || '');
     const [sex, setSex] = useState(donorData.sex || '');
     const [address, setAddress] = useState(donorData.address || '');
     const [telephone, setTelephone] = useState(donorData.telephone || '');
     const [nameError, setNameError] = useState('');
     const [CPFError, setCPFError] = useState('');
+
+
 
     const handleName = (e) => {
         const newName = e.target.value;
@@ -84,7 +87,10 @@ function FormDonor({ show, handleClose, donorData, onClick }) {
         if (donorData.name) {
             setName(donorData.name);
         }
-        // Add similar blocks for other fields if needed
+        if (donorData.birthDate) {
+            const birthDateBR = moment(donorData.birthDate, 'YYYY-MM-DD').format('DD/MM/YYYY');
+            setBirthDate(birthDateBR);
+        }
     }, [donorData]);
 
     useEffect(() => {
@@ -100,82 +106,96 @@ function FormDonor({ show, handleClose, donorData, onClick }) {
 
     return (
         <div className="ContainerEditDonor">
-            <div className="ContainerEditDonorBody">
+            <div className="ContainerFormEditDonor">
                 <h1>Editar Dados do Doador</h1>
                 <IoCloseCircleSharp className="IconCloseEditDonor" onClick={handleCloseBox} />
-                <div className="ContainerFormDonor">
-                    <h3>Código do Doador: <span>{donorData.donorCode}</span></h3>
-                    <div className="labelEditDonor">
-                        <label htmlFor="name">Nome:</label>
+                <div className="ContainerInputDonor">
+                <h3>Id do Doador: <span>{donorData._id}</span></h3>
+                    <div className="LabelDonor">
+                        <label htmlFor="name" className='labelStyleDonor'>Nome:</label>
                         <Input
                             id="name"
-                            placeholder={'Digite um novo nome'}
                             type={'text'}
+                            placeholder={'Digite o nome do doador'}
                             value={name}
-                            onChange={(e) => handleName(e)}
+                            onChange={handleName}
+                            className="customInput"
+                            maxLength={255}
                         />
                     </div>
                     {nameError && <p className="textError">{nameError}</p>}
-                    <div className="labelEditDonor">
-                        <label htmlFor="CPF">CPF:</label>
+                    <div className="LabelDonor">
+                        <label htmlFor="CPF" className='labelStyleDonor'>CPF:</label>
                         <Input
                             id="CPF"
-                            placeholder={'999.999.999-99'}
                             type={'text'}
+                            placeholder={'999.999.999-99'}
+                            maxLength={14}
                             value={CPF}
-                            onChange={(e) => handleCPF(e)}
+                            onChange={handleCPF}
+                            className="customInput"
                         />
                     </div>
                     {CPFError && <p className="textError">{CPFError}</p>}
-                    <div className="labelEditDonor">
-                        <label htmlFor="birthDate">Data de Nascimento:</label>
-                        <Input
-                            id="birthDate"
-                            placeholder={'DD/MM/AAAA'}
-                            type={'text'}
-                            value={birthDate}
-                            onChange={(e) => handleBirthDate(e)}
-                        />
+                    <div className="LabelDonor">
+                        <div className="FlexContainer">
+                            <label htmlFor="birthDate" className='labelStyleDonorFlex'>Data de Nascimento:</label>
+                            <Input
+                                id="birthDate"
+                                type={'text'}
+                                placeholder={'DD/MM/AAAA'}
+                                maxLength={10}
+                                value={birthDate}
+                                onChange={handleBirthDate}
+                                className="customInputBD"
+                            />
+                            <div className="LabelDonor">
+                                <label htmlFor="sex" className='labelStyleDonorFlex'>Sexo:</label>
+                                <Input
+                                    id="sex"
+                                    type={'string'}
+                                    placeholder={'M ou F'}
+                                    value={sex}
+                                    onChange={handleSex}
+                                    className="customInputSX"
+                                    maxLength={1} // Limitar o comprimento para 1 caractere
+                                />
+                            </div>
+                        </div>
                     </div>
-                    <div className="labelEditDonor">
-                        <label htmlFor="sex">Sexo:</label>
-                        <Input
-                            id="sex"
-                            placeholder={'M ou F'}
-                            type={'text'}
-                            value={sex}
-                            onChange={(e) => handleSex(e)}
-                        />
-                    </div>
-                    <div className="labelEditDonor">
-                        <label htmlFor="address">Endereço:</label>
+                    <div className="LabelDonor">
+                        <label htmlFor="address" className='labelStyleDonor'>Endereço:</label>
                         <Input
                             id="address"
-                            placeholder={'Digite o endereço do doador'}
                             type={'text'}
+                            placeholder={'Digite o endereço do doador'}
                             value={address}
-                            onChange={(e) => handleAddress(e)}
+                            onChange={handleAddress}
+                            className="customInput"
                         />
                     </div>
-                    <div className="labelEditDonor">
-                        <label htmlFor="telephone">Telefone:</label>
+                    <div className="LabelDonor">
+                        <label htmlFor="telephone" className='labelStyleDonor'>Telefone:</label>
                         <Input
                             id="telephone"
-                            placeholder={'(99)99999-9999'}
                             type={'text'}
+                            placeholder={'(99)99999-9999'}
+                            maxLength={15}
                             value={telephone}
-                            onChange={(e) => handlePhone(e)}
+                            onChange={handlePhone}
+                            className="customInput"
                         />
                     </div>
+                </div>
                     <Button
                         onClick={() => {
                             onClick(name, CPF, birthDate, sex, address, telephone);
                         }}
                         TextButton={'Atualizar'}
+                        className="ButtonEditDonor"
                     />
-                </div>
             </div>
-        </div>
+        </div >
     );
 }
 
@@ -184,6 +204,7 @@ FormDonor.propTypes = {
     show: PropTypes.bool.isRequired,
     handleClose: PropTypes.func.isRequired,
     donorData: PropTypes.shape({
+        _id: PropTypes.string,
         name: PropTypes.string,
         donorCode: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         CPF: PropTypes.string,
