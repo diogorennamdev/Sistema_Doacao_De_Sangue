@@ -37,6 +37,20 @@
     width: 70%;
 }
 
+.LabelDonor {
+    display: flex;
+    align-items: center;
+}
+
+.labelStyleDonor {
+    font-weight: 500;
+    color: var(--text-color);
+    font-size: 1.125rem;
+    margin-right: 0.8rem;
+    width: 5rem;
+    text-align: left;
+}
+
 .FlexContainer {
     display: flex;
     align-items: center;
@@ -44,6 +58,14 @@
     width: 100%;
     margin-top: 0.5rem;
     margin-bottom: 0.6rem;
+}
+
+.labelStyleDonorFlex {
+    font-weight: 500;
+    color: var(--text-color);
+    font-size: 1.125rem;
+    margin-right: 0.8rem;
+    text-align: left;
 }
 
 .customInputBD {
@@ -61,28 +83,6 @@
     font-size: 1.05rem;
     width: 6rem;
     text-align: center;
-}
-
-.LabelDonor {
-    display: flex;
-    align-items: center;
-}
-
-.labelStyleDonor {
-    font-weight: 500;
-    color: var(--text-color);
-    font-size: 1.125rem;
-    margin-right: 0.8rem;
-    width: 5rem;
-    text-align: left;
-}
-
-.labelStyleDonorFlex{
-    font-weight: 500;
-    color: var(--text-color);
-    font-size: 1.125rem;
-    margin-right: 0.8rem;
-    text-align: left;
 }
 
 .customInput {
