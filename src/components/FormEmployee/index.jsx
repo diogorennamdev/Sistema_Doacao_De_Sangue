@@ -5,7 +5,7 @@ import Button from '../Button';
 import { IoCloseCircleSharp } from 'react-icons/io5';
 import './styles.css';
 
-function PopUp({ show, handleClose, userData, onClick }) {
+function EditEmployee({ show, handleClose, userData, onClick }) {
     const [password, setPassword] = useState('');
     const [newName, setNewName] = useState(userData.name || '');
     const [nameError, setNameError] = useState('');
@@ -60,11 +60,11 @@ function PopUp({ show, handleClose, userData, onClick }) {
     };
 
     return (
-        <div className="popUp">
-            <div className="ContainerBody">
+        <div className="ContainerEditEmployee">
+            <div className="ContainerEditEmployeeBody">
                 <h1>Editar Dados do funcionário</h1>
-                <IoCloseCircleSharp className="IconClosePopUp" onClick={handleCloseBox} />
-                    <div className="ContainerFormEditeEmployee">
+                <IoCloseCircleSharp className="IconCloseEditEmployee" onClick={handleCloseBox} />
+                    <div className="ContainerFormEmployee">
                         <h3>Código do Funcionário: <span>{userData.employeeCode}</span></h3>
                         <div className="labelEditeEmployee">
                             <label htmlFor="name">Nome:</label>
@@ -101,7 +101,7 @@ function PopUp({ show, handleClose, userData, onClick }) {
     );
 }
 
-PopUp.propTypes = {
+EditEmployee.propTypes = {
     show: PropTypes.bool.isRequired,
     handleClose: PropTypes.func.isRequired,
     userData: PropTypes.shape({
@@ -112,4 +112,4 @@ PopUp.propTypes = {
 };
 
 
-export default PopUp;
+export default EditEmployee;
