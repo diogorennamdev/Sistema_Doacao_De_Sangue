@@ -1,4 +1,4 @@
-.popUp {
+.ContainerEditEmployee {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -12,7 +12,7 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.ContainerBody {
+.ContainerEditEmployeeBody {
   position: relative;
   width: 50%;
   height: 65%;
@@ -25,7 +25,7 @@
   justify-content: center;
 }
 
-.ContainerBody h1 {
+.ContainerEditEmployeeBody h1 {
   margin: 2rem 0 0.5rem 0;
   color: var(--primary-color);
   text-align: center;
@@ -33,14 +33,14 @@
   text-transform: uppercase;
 }
 
-.ContainerFormEditeEmployee {
+.ContainerFormEmployee {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.ContainerFormEditeEmployee h3 {
+.ContainerFormEmployee h3 {
   margin-bottom: 1.5rem;
   text-align: center;
   color: var(--text-color);
@@ -48,7 +48,7 @@
   font-weight: 400;
 }
 
-.ContainerFormEditeEmployee span{
+.ContainerFormEmployee span{
   color: var(--primary-color);
   font-weight: 600;
   font-size: 1.125rem;
@@ -60,7 +60,7 @@
   width: 65%;
 }
 
-.containerFormInput {
+.ContainerFormEmployeeInput {
   margin-bottom: 2rem;
 }
 
@@ -72,7 +72,7 @@
   margin-right: 0.8rem;
 }
 
-.IconClosePopUp {
+.IconCloseEditEmployee {
   font-size: 2rem;
   position: absolute;
   top: 1rem;
@@ -81,7 +81,7 @@
   color: var(--primary-color);
 }
 
-.ContainerBody h2 {
+.ContainerEditEmployeeBody h2 {
   margin: 2rem 0;
   color: var(--primary-color);
   text-align: center;
@@ -89,7 +89,7 @@
   text-transform: uppercase;
 }
 
-.ContainerBody input {
+.ContainerEditEmployeeBody input {
   border-radius: 10px;
   background: var(--background1-color);
   margin-top: 0.5rem;
@@ -98,7 +98,7 @@
   font-size: 1.125em;
 }
 
-.ContainerBody input:focus {
+.ContainerEditEmployeeBody input:focus {
   outline: 2px solid var(--green-color);
 }
 
@@ -112,7 +112,7 @@
   display: flex;
 }
 
-.containerBody input[type="radio"] {
+.ContainerEditEmployeeBody input[type="radio"] {
   width: 1.3rem;
   height: 1.3rem;
   border-radius: 50%;
@@ -137,24 +137,24 @@
   margin-left: 0.3rem;
 }
 
-.ContainerBody button {
+.ContainerEditEmployeeBody button {
   margin-top: 2rem;
   background-color: var(--green-color);
 }
 
-.ContainerBody button:hover,
-.ContainerBody button:focus {
+.ContainerEditEmployeeBody button:hover,
+.ContainerEditEmployeeBody button:focus {
   background-color: transparent;
   color: var(--green-color);
   outline: 1px solid var(--green-color);
 }
 
 @media screen and (max-width: 768px) {
-  .ContainerBody {
+  .ContainerEditEmployeeBody {
     width: 90%;
   }
 
-  .ContainerBody h2 {
+  .ContainerEditEmployeeBody h2 {
     margin-top: 3rem;
     margin-bottom: 2rem;
     font-size: 1.4rem;
