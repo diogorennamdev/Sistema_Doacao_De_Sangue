@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { FaTimes } from 'react-icons/fa';
 import './styles.css';
 import Button from '../Button';
-function FormExams({ isOpen, onClose, donor, onConfirmAddDonation,loading }) {
+
+function FormExams({ isOpen, onClose, donor, onConfirmAddDonation, loading }) {
     const [formData, setFormData] = useState({
         bloodType: '',
         exams: [
@@ -14,7 +16,7 @@ function FormExams({ isOpen, onClose, donor, onConfirmAddDonation,loading }) {
         ],
         examsResult: 'negativo',
     });
-    //console.log(donor)
+
     const [showBloodTypeError, setShowBloodTypeError] = useState(false);
 
     const examsList = [
@@ -67,7 +69,7 @@ function FormExams({ isOpen, onClose, donor, onConfirmAddDonation,loading }) {
             const day = date.getDate();
             const month = date.getMonth() + 1; // Os meses começam do zero, então somamos 1
             const year = date.getFullYear();
-        
+
             return `${day < 10 ? '0' + day : day}/${month < 10 ? '0' + month : month}/${year}`;
         }
         return 'Data não disponível';
@@ -83,7 +85,7 @@ function FormExams({ isOpen, onClose, donor, onConfirmAddDonation,loading }) {
                 </div>
                 <div className='modal-header-title'>
                     <h4>Doador: {donor.name}</h4>
-                   <h4>Data da doação: {formatDate(donor?.donations?.[0]?.donationDate)}</h4>
+                    <h4>Data da doação: {formatDate(donor?.donations?.[0]?.donationDate)}</h4>
                 </div>
                 <div className="modal-body">
                     <label htmlFor="bloodType">Tipo Sanguíneo:</label>
@@ -97,7 +99,7 @@ function FormExams({ isOpen, onClose, donor, onConfirmAddDonation,loading }) {
                     </select>
 
                     {showBloodTypeError && (
-                        <p style={{ color: 'red', fontWeight:600, marginTop:0.3 }}>Por favor, selecione um tipo sanguíneo!</p>
+                        <p style={{ color: 'red', fontWeight: 600, marginTop: 0.3 }}>Por favor, selecione um tipo sanguíneo!</p>
                     )}
 
                     <div className='ListExams'>
@@ -117,10 +119,8 @@ function FormExams({ isOpen, onClose, donor, onConfirmAddDonation,loading }) {
                                     value="positivo"
                                     checked={formData.examsResult === 'positivo'}
                                     onChange={() => handleExamResultChange('positivo')}
-                                />
-                                Positivo
+                                />Positivo
                             </label>
-
                             <label>
                                 <input
                                     type="radio"
@@ -128,8 +128,7 @@ function FormExams({ isOpen, onClose, donor, onConfirmAddDonation,loading }) {
                                     value="negativo"
                                     checked={formData.examsResult === 'negativo'}
                                     onChange={() => handleExamResultChange('negativo')}
-                                />
-                                Negativo
+                                />Negativo
                             </label>
                         </div>
                     </div>
@@ -140,5 +139,13 @@ function FormExams({ isOpen, onClose, donor, onConfirmAddDonation,loading }) {
         </div>
     );
 }
+
+FormExams.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    donor: PropTypes.object.isRequired,
+    onConfirmAddDonation: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
+};
 
 export default FormExams;
