@@ -41,7 +41,7 @@ function SuccessDialog({ show, handleClose, title, message, password, personCode
                             <IoCopyOutline onClick={() => copyToClipboard(password)} className="copy-icon" />
                         </p>
                         {isCopied && (
-                            <div className="copy-success-message">Texto copiado com Sucesso!!</div>
+                            <div className="copy-success-message">Texto copiado com Sucesso!</div>
                         )}
                     </div>
                 )}
@@ -53,7 +53,7 @@ function SuccessDialog({ show, handleClose, title, message, password, personCode
                             <IoCopyOutline onClick={() => copyToClipboard(password)} className="copy-icon" />
                         </p>
                         {isCopied && (
-                            <div className="copy-success-message">Texto copiado com Sucesso!!</div>
+                            <div className="copy-success-message">Texto copiado com Sucesso!</div>
                         )}
                     </div>
                 )}

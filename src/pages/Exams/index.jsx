@@ -66,7 +66,7 @@ function Exams() {
             if (response.status === 200) {
                 setShow(false);
                 setShowSucessDialog(true);
-                setMessage('Doação Removida com sucesso!');
+                setMessage('Doação Removida com Sucesso!');
                 setTittle('Sucesso!');
                 setLoadingButton(false);
 
@@ -98,9 +98,9 @@ function Exams() {
             );
 
             if (response.status === 200) {
-                console.log('exame adicionado com sucesso');
+                console.log('exame adicionado com Sucesso!');
                 setShowSucessDialog(true);
-                setMessage('Resultado de exame adicionado com sucesso!');
+                setMessage('Resultado de exame adicionado com Sucesso!');
                 setTittle('Sucesso!');
                 const updatedExams = exams.filter((exam) => exam._id !== donorSelected._id); // Remove o exame específico da lista
                 setExams(updatedExams);

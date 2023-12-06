@@ -157,7 +157,7 @@ function RegisterDonor({ onClose, updateDonorList }) {
 
             if (response.status === 201) {
                 setMessageBoxTitle('Sucesso!');
-                setMessage('Doador cadastrado com Sucesso!!');
+                setMessage('Doador cadastrado com Sucesso!');
                 setShow(true);
                 setShowSuccessDialog(true);
                 setType('success');

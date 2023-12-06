@@ -110,12 +110,12 @@ function RegisterEmployee({ onClose, updateEmployeeList }) {
       );
 
       if (response.status === 201) {
-        setMessage('Funcionário cadastrado com Sucesso!!');
+        setMessage('Funcionário cadastrado com Sucesso!');
         setShow(true);
         setLoading(false);
         setType('success');
-        setMessageBoxTitle('Sucesso!!');
-        setMessage('Funcionário cadastrado com Sucesso!!');
+        setMessageBoxTitle('Sucesso!');
+        setMessage('Funcionário cadastrado com Sucesso!');
         setPassword(response.data.Funcionário.Senha);
         setPersonCode(response.data.Funcionário.Código);
         setShowSuccessDialog(true);
