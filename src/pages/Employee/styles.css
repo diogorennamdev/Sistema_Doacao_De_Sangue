@@ -10,7 +10,7 @@
     text-transform: uppercase;
 }
 
-.ContainerHeadSearch {
+.ContainerHeadSearchEmployee {
     display: flex;
     flex-direction: row;
     width: 100%;

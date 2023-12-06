@@ -207,7 +207,7 @@ function EmployeeList() {
   return (
     <div className='ContainerEmployee'>
       <h1 className='ContainerEmployeeTitle'>Funcionários</h1>
-      <div className='ContainerHeadSearch'>
+      <div className='ContainerHeadSearchEmployee'>
         <div className='SearchInput'>
           <IoSearch className='SearchIcon' />
           <Input

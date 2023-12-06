@@ -235,7 +235,7 @@ function DonorList() {
   return (
     <div className='ContainerDonor'>
       <h1 className='ContainerDonorTitle'>Doadores</h1>
-      <div className='ContainerHeadSearch'>
+      <div className='ContainerHeadSearchDonor'>
         <div className='SearchInput'>
           <IoSearch className='SearchIcon' />
           <Input
