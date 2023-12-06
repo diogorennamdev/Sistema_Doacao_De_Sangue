@@ -23,7 +23,6 @@
   transition: all 0.3s ease;
 }
 
-
 .CardListUser:hover {
   transform: scale(1.02);
 }
@@ -32,9 +31,7 @@
   display: flex;
   align-items: center;
 }
-.CardListName p{
-  margin-left: 1rem;
-}
+
 .CardListUser h2 {
   text-transform: uppercase;
   font-size: 1rem;
@@ -53,6 +50,22 @@
   font-size: 1rem;
   color: var(--text-color);
   font-weight: 400;
+  margin-right: 2rem;
+}
+
+.Data-Icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 2rem;
+}
+
+.Data-Icon p {
+  margin-right: 5rem;
+}
+
+.Data-Icon span {
+  color: var(--primary-color);
 }
 
 .EditIcon,
@@ -62,6 +75,14 @@
   cursor: pointer;
   font-size: 1.5rem;
   color: var(--primary-color);
+  outline: none;
+}
+
+.ExamIcon {
+  margin-right: 1.2rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--green-color);
   outline: none;
 }
 
