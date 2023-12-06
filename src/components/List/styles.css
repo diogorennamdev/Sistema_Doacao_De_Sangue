@@ -54,10 +54,11 @@
 }
 
 .EditIcon,
-.DeleteIcon {
-  margin-right: 1.5rem;
+.DeleteIcon,
+.DonorIcon {
+  margin-right: 1.2rem;
   cursor: pointer;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   color: var(--primary-color);
   outline: none;
 }

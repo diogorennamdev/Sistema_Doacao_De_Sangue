@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { HiPencilAlt } from "react-icons/hi";
-import { HiMiniTrash } from "react-icons/hi2";
+import { TbDropletPlus, TbEdit, TbTrash } from "react-icons/tb";
 import Pagination from '../Pagination';
 
 import "./styles.css";
-function List({ users, onClick, onDelete }) {
+function List({ users, onClick, onDelete, onAddDonation }) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const usersPerPage = 5;
@@ -26,30 +25,44 @@ function List({ users, onClick, onDelete }) {
             <h3>{user.name}</h3>
           </div>
           <div>
-              <HiPencilAlt
-                onClick={() => onClick(user)}
+            {user.isDonor &&
+              <TbDropletPlus
+                onClick={() => onAddDonation(user)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
-                    onClick(user);
+                    onAddDonation(user);
                   }
                 }}
                 tabIndex={0}
-                className='EditIcon'
-              />
-              <HiMiniTrash
-                onClick={() => onDelete(user)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    onDelete(user);
-                  }
-                }}
-                tabIndex={0}
-                className='DeleteIcon'
-              />
+                className='DonorIcon'
+                title='Adicionar Doação'
+              />}
+            <TbEdit
+              onClick={() => onClick(user)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  onClick(user);
+                }
+              }}
+              tabIndex={0}
+              className='EditIcon'
+              title='Editar'
+            />
+            <TbTrash
+              onClick={() => onDelete(user)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  onDelete(user);
+                }
+              }}
+              tabIndex={0}
+              className='DeleteIcon'
+              title='Excluir'
+            />
           </div>
         </div>
-      ))
-      }
+      ))}
+
       <div className="pagination">
         <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
       </div>
@@ -61,6 +74,7 @@ List.propTypes = {
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
   onClick: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
+  onAddDonation: PropTypes.func.isRequired,
 };
 
 export default List;
