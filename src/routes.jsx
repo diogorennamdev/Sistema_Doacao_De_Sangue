@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import EmployeeList from './pages/Employee';
 import Stock from './pages/Stock';
 import Donor from './pages/Donor';
+import Exams from './pages/Exams';
 
 const RoutesConfig = () => {
   const { getUserData } = useAuth();
@@ -23,6 +24,8 @@ const RoutesConfig = () => {
           <Route path="/funcionario" element={<PrivateRoute element={EmployeeList} />} />
           <Route path='/estoque' element={<PrivateRoute element={Stock} />} />
           <Route path='/doador' element={<PrivateRoute element={Donor} />} />
+          <Route path='/exame' element={<PrivateRoute element={Exams} />} />
+
         </Route>
       );
     } else {
