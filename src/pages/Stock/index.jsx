@@ -43,12 +43,11 @@ const Stock = () => {
     const totalBags = countsArray.reduce((total, [, count]) => total + count, 0);
 
     const countsWithPercentage = countsArray.map(([bloodType, count]) => {
-        const cleanedBloodType = bloodType.replace(' (Pos)', '').replace(' (Neg)', '');
         let percentage = 0;
         if (totalBags !== 0) {
-            percentage = Math.floor((count / totalBags) * 100); // Alterado aqui
+            percentage = Math.floor((count / totalBags) * 100);
         }
-        return [bloodType, count, cleanedBloodType, percentage];
+        return [bloodType, count, percentage];
     });
 
     return (
@@ -57,7 +56,7 @@ const Stock = () => {
             <span className='Subtitle'>Visualize o estoque disponível!</span>
             <div className='ContainerBloodBag'>
                 <div className="BloodBagIcon">
-                    {countsWithPercentage.map(([, , cleanedBloodType, percentage]) => {
+                    {countsWithPercentage.map(([bloodType, , percentage]) => {
                         let iconSrc, altText;
                         if (percentage < 10) {
                             iconSrc = critico;
@@ -73,10 +72,10 @@ const Stock = () => {
                             altText = "Estavel";
                         }
                         return (
-                            <div key={cleanedBloodType} className="ContainerIcon no-events">
+                            <div key={bloodType} className="ContainerIcon no-events">
                                 <img src={iconSrc} alt={altText} draggable="false" />
                                 <span>{altText}</span>
-                                <p className="IconText">{cleanedBloodType}</p>
+                                <p className="IconText">{bloodType}</p>
                             </div>
                         );
                     })}
@@ -91,9 +90,9 @@ const Stock = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {countsWithPercentage.map(([, count, cleanedBloodType, percentage]) => (
-                            <tr key={cleanedBloodType}>
-                                <td>{cleanedBloodType}</td>
+                        {countsWithPercentage.map(([bloodType, count, percentage]) => (
+                            <tr key={bloodType}>
+                                <td>{bloodType}</td>
                                 <td>{count}</td>
                                 <td>{Number.isNaN(percentage) ? 'NaN' : percentage}%</td>
                             </tr>
