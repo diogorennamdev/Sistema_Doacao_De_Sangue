@@ -1,0 +1,93 @@
+/* Estilos CSS para o modal do formulário de exames */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fundo escurecido */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.open {
+    display: flex;
+    /* Mostra o modal quando a classe open é adicionada */
+}
+
+.modal-content-Exams {
+    background-color: #fff;
+    /* Fundo branco */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    /* Sombra */
+    padding: 20px;
+    border-radius: 8px;
+    width: 60%;
+    /* Largura do conteúdo do modal */
+}
+
+.modal-FormExams-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-FormExams-header h2 {
+    margin: 0;
+}
+
+.modal-header-title {
+    margin-top: 0.2rem;
+}
+
+.modal-header-title h4 {
+    margin-top: 0rem;
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 1.2rem;
+}
+
+.modal-content-Exams .close-btn {
+    background-color: var(--primary-color);
+    border: none;
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.3rem;
+    margin-top: -1rem;
+
+}
+
+.modal-content-Exams button {
+    background-color: var(--green-color);
+    margin-top: 2rem;
+}
+
+.modal-content-Exams button input:focus,
+.modal-content-Exams button input:hover {
+    background-color: transparent;
+    color: var(--green-color);
+    outline: 1px solid var(--green-color);
+}
+#bloodType{
+    border-radius: 1rem;
+    padding: 0.2rem;
+    outline: none;
+}
+.ListExams{
+    margin-top: 0.2rem;
+}
+.ResultExams{
+    margin-top: 0.3rem;
+}
+.ResultExams label{
+    margin-top: 0.4rem;
+}
