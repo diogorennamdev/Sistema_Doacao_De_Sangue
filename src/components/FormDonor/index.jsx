@@ -16,8 +16,6 @@ function FormDonor({ show, handleClose, donorData, onClick }) {
     const [nameError, setNameError] = useState('');
     const [CPFError, setCPFError] = useState('');
 
-
-
     const handleName = (e) => {
         const newName = e.target.value;
         setName(newName);
