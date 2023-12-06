@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { TbDropletPlus, TbEdit, TbTrash } from "react-icons/tb";
+import { TbDropletPlus, TbEdit, TbTrash, TbPlus } from "react-icons/tb";
 import Pagination from '../Pagination';
 
 import "./styles.css";
-function List({ users, onClick, onDelete, onAddDonation }) {
+function List({ users, onClick, onDelete, onAddDonation, onAddExames }) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const usersPerPage = 5;
@@ -31,11 +31,13 @@ function List({ users, onClick, onDelete, onAddDonation }) {
           <div className='CardListName'>
             <h2>{user.name.substring(0, 2)}</h2>
             <h3>{user.name}</h3>
-            {user.donations && user.donations.length > 0 && (
-              <p>Data da doação: {formatDate(user.donations[0].donationDate)}</p>
-            )}
           </div>
-          <div>
+          <div className='Data-Icon'>
+            <div>
+              {user.donations && user.donations.length > 0 && (
+                <p>Data da doação: <span>{formatDate(user.donations[0].donationDate)}</span></p>
+              )}
+            </div>
             {user.isDonor &&
               <TbDropletPlus
                 onClick={() => onAddDonation(user)}
@@ -48,21 +50,18 @@ function List({ users, onClick, onDelete, onAddDonation }) {
                 className='DonorIcon'
                 title='Adicionar Doação'
               />}
-
-            {/* icone que para adicionar exame */}
             {user.donations &&
-              <TbDropletPlus
-                onClick={() => onAddDonation(user)}
+              <TbPlus
+                onClick={() => onAddExames(user)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
-                    onAddDonation(user);
+                    onAddExames(user);
                   }
                 }}
                 tabIndex={0}
-                className='DonorIcon'
+                className='ExamIcon'
                 title='Adicionar Doação'
               />}
-
             {user.donations ? (null) : (
               <TbEdit
                 onClick={() => onClick(user)}
@@ -76,7 +75,6 @@ function List({ users, onClick, onDelete, onAddDonation }) {
                 title='Editar'
               />
             )}
-
             <TbTrash
               onClick={() => onDelete(user)}
               onKeyDown={(e) => {
@@ -106,6 +104,7 @@ List.propTypes = {
   onClick: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
   onAddDonation: PropTypes.func.isRequired,
+  onAddExames: PropTypes.func.isRequired,
 };
 
 export default List;
