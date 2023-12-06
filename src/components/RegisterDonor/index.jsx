@@ -98,43 +98,43 @@ function RegisterDonor({ onClose, updateDonorList }) {
         if (!name || !CPF || !birthDate || !sex || !address || !telephone) {
             setShow(true);
             setLoading(false);
-            setMessageBoxTitle('Atenção');
+            setMessageBoxTitle('Atenção!');
             setMessage('Preencha todos os campos!');
             setType('alert');
             return false;
         }
-    
+
         if (name.length < 3) {
             setShow(true);
             setLoading(false);
-            setMessageBoxTitle('Atenção');
+            setMessageBoxTitle('Atenção!');
             setMessage('O nome precisa ter no mínimo 3 caracteres!');
             setType('alert');
             return false;
         }
-    
+
         if (CPF.length < 14) {
             setShow(true);
             setLoading(false);
-            setMessageBoxTitle('Atenção');
+            setMessageBoxTitle('Atenção!');
             setMessage('O CPF precisa ter 11 caracteres!');
             setType('alert');
             return false;
         }
-    
+
         return true;
     };
-    
+
     const handleSubmit = async () => {
         try {
             setLoading(true);
-    
+
             if (!validateFields()) {
                 return;
             }
-    
+
             const birthDateUS = moment(birthDate, 'DD/MM/YYYY').format('YYYY-MM-DD');
-    
+
             const newDonor = {
                 name,
                 CPF,
@@ -143,7 +143,7 @@ function RegisterDonor({ onClose, updateDonorList }) {
                 address,
                 telephone,
             };
-    
+
             const response = await axios.post(
                 `${donorUrl}`,
                 newDonor, // Envia os dados do novo doador
@@ -156,8 +156,8 @@ function RegisterDonor({ onClose, updateDonorList }) {
             );
 
             if (response.status === 201) {
-                setMessageBoxTitle('Sucesso');
-                setMessage('Doador cadastrado com sucesso!');
+                setMessageBoxTitle('Sucesso!');
+                setMessage('Doador cadastrado com Sucesso!!');
                 setShow(true);
                 setShowSuccessDialog(true);
                 setType('success');
@@ -173,12 +173,12 @@ function RegisterDonor({ onClose, updateDonorList }) {
                 console.log('Usuário não autorizado!');
                 return;
             }
-    
+
             setShow(true);
             setLoading(false);
             setType('alert');
             if (error.response) {
-                setMessageBoxTitle('Erro');
+                setMessageBoxTitle('Atenção!');
                 if (error.response.status === 400 || error.response.status === 500) {
                     const errorMessage = error.response.data.error || 'Ocorreu um erro desconhecido.'; // Extrai a mensagem de erro ou fornece uma mensagem padrão
                     setMessage(errorMessage); // Define a mensagem para a mensagem de erro extraída
@@ -188,10 +188,10 @@ function RegisterDonor({ onClose, updateDonorList }) {
             } else {
                 setMessageBoxTitle('Erro de conexão');
                 setMessage('Houve um problema de conexão. Por favor, verifique sua conexão com a internet.');
-            }            
+            }
         }
     };
-    
+
 
     const handleCloseBox = async () => {
         setShowSuccessDialog(false);
@@ -235,8 +235,8 @@ function RegisterDonor({ onClose, updateDonorList }) {
                         />
                     </div>
                     {CPFError && <p className="textError">{CPFError}</p>}
-                    <div className="LabelDonor">
-                        <div className="FlexContainer">
+                    <div className="FlexContainer">
+                        <div className="LabelDonor">
                             <label htmlFor="birthDate" className='labelStyleDonorFlex'>Data de Nascimento:</label>
                             <Input
                                 id="birthDate"

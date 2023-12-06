@@ -18,8 +18,4 @@
     outline: 1px solid var(--primary-color);
 }
 
-@media screen and (max-width: 768px) {
-    .button {
-        width: 45%;
-    }
-}
+

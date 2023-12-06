@@ -113,21 +113,21 @@ function EmployeeList() {
   const onClickUpdate = (newName, password) => {
     if (newName === userSelected.name && (password === userSelected.password || password === '')) {
       setShowAlertDialog(true);
-      setAlertTitle('Atenção');
+      setAlertTitle('Atenção!');
       setAlertMessage('É necessário alterar o nome ou adicionar uma nova senha para atualizar!');
       return;
     }
 
     if (newName && newName.length < 3) {
       setShowAlertDialog(true);
-      setAlertTitle('Atenção');
+      setAlertTitle('Atenção!');
       setAlertMessage('O nome precisa ter no mínimo 3 caracteres!');
       return;
     }
 
     if (password && password.length < 8) {
       setShowAlertDialog(true);
-      setAlertTitle('Atenção');
+      setAlertTitle('Atenção!');
       setAlertMessage('Sua senha precisa ter no mínimo 8 caracteres!');
       return;
     }
@@ -161,12 +161,12 @@ function EmployeeList() {
         setAlertType('success');
         setShowSuccessDialog(true);
         if (newName) {
-          setAlertMessage('Nome atualizado com sucesso!');
-          setAlertTitle('Sucesso!');
+          setAlertMessage('Nome atualizado com Sucesso!!');
+          setAlertTitle('Sucesso!!');
         }
         if (password) {
-          setAlertMessage('Senha atualizada com sucesso!');
-          setAlertTitle('Sucesso!');
+          setAlertMessage('Senha atualizada com Sucesso!!');
+          setAlertTitle('Sucesso!!');
           setPasswordType(true);
           setPassword(password);
         }
@@ -195,7 +195,7 @@ function EmployeeList() {
       if (error.response && error.response.status === 403) {
         setAlertType('error');
         setAlertMessage('Não é possível excluir um funcionário administrador!');
-        setAlertTitle('Atenção!');
+        setAlertTitle('Atenção!!');
         setShowAlertDialog(true);
         return;
       } else {
@@ -264,7 +264,7 @@ function EmployeeList() {
       <AlertDialog
         show={showDeleteDialog}
         handleClose={() => setShowDeleteDialog(false)}
-        title='Atenção'
+        title='Atenção!'
         message={`Deseja excluir o funcionário ${userToDelete?.name}?`}
         onConfirm={deleteUser}
         showConfirmButtons={true}

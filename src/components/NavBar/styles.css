@@ -91,20 +91,3 @@
     padding: 0.5rem;
 }
 
-@media (max-width: 765px) {
-    .ContainerNavBar {
-        flex-direction: column;
-        padding: 1rem;
-    }
-
-    .ContainerUser {
-        margin: 1rem 0;
-    }
-
-    .dropdown-menu {
-        position: fixed;
-        top: 15%;
-        left: 0;
-        width: 100%;
-    }
-}

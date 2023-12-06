@@ -117,14 +117,14 @@ function DonorList() {
 
     if (newName && newName.length < 3) {
       setShowAlertDialog(true);
-      setAlertTitle('Atenção');
+      setAlertTitle('Atenção!');
       setAlertMessage('O nome precisa ter no mínimo 3 caracteres!');
       return;
     }
 
     if (CPF && CPF.length !== 14) {
       setShowAlertDialog(true);
-      setAlertTitle('Atenção');
+      setAlertTitle('Atenção!');
       setAlertMessage('O CPF precisa ter 11 caracteres!');
       return;
     }
@@ -160,7 +160,7 @@ function DonorList() {
     // Se nenhum campo foi alterado, exiba uma mensagem de erro
     if (Object.keys(updatedDonor).length === 0) {
       setShowAlertDialog(true);
-      setAlertTitle('Atenção');
+      setAlertTitle('Atenção!');
       setAlertMessage('É necessário alterar algum campo para atualizar!');
       return;
     }
@@ -176,8 +176,8 @@ function DonorList() {
         setShowEditDonor(false);
         setAlertType('success');
         setShowSuccessDialog(true);
-        setAlertMessage('Doador atualizado com sucesso!');
-        setAlertTitle('Sucesso!');
+        setAlertMessage('Doador atualizado com Sucesso!!');
+        setAlertTitle('Sucesso!!');
 
         updateDonorList();
       }
@@ -204,7 +204,7 @@ function DonorList() {
       if (error.response && error.response.status === 403) {
         setAlertType('error');
         setAlertMessage('Não é possível excluir um doador administrador!');
-        setAlertTitle('Atenção!');
+        setAlertTitle('Atenção!!');
         setShowAlertDialog(true);
         return;
       } else {
@@ -292,7 +292,7 @@ function DonorList() {
       <AlertDialog
         show={showDeleteDialog}
         handleClose={() => setShowDeleteDialog(false)}
-        title='Atenção'
+        title='Atenção!'
         message={`Deseja excluir o doador ${donorToDelete?.name}?`}
         onConfirm={deleteDonor}
         showConfirmButtons={true}
@@ -301,7 +301,7 @@ function DonorList() {
       <AlertDialog
         show={showAddDonationDialog}
         handleClose={() => setShowAddDonationDialog(false)}
-        title='Atenção'
+        title='Atenção!'
         message={`Deseja adicionar uma doação para ${donorToDonate?.name}?`}
         onConfirm={addDonation}
         showConfirmButtons={true}

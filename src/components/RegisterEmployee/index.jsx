@@ -70,7 +70,7 @@ function RegisterEmployee({ onClose, updateEmployeeList }) {
   const handleSubmit = async () => {
     if (!name || !password) {
       setShow(true);
-      setMessageBoxTitle('Atenção');
+      setMessageBoxTitle('Atenção!');
       setMessage('Preencha todos os campos!');
       setType('alert');
       return;
@@ -78,7 +78,7 @@ function RegisterEmployee({ onClose, updateEmployeeList }) {
 
     if (name.length < 3) {
       setShow(true);
-      setMessageBoxTitle('Atenção');
+      setMessageBoxTitle('Atenção!');
       setMessage('O nome precisa ter no mínimo 3 caracteres!');
       setType('alert');
       return;
@@ -86,7 +86,7 @@ function RegisterEmployee({ onClose, updateEmployeeList }) {
 
     if (password.length < 8) {
       setShow(true);
-      setMessageBoxTitle('Atenção');
+      setMessageBoxTitle('Atenção!');
       setMessage('A senha precisa ter no mínimo 8 caracteres!');
       setType('alert');
       return;
@@ -110,12 +110,12 @@ function RegisterEmployee({ onClose, updateEmployeeList }) {
       );
 
       if (response.status === 201) {
-        setMessage('Funcionário cadastrado com sucesso!');
+        setMessage('Funcionário cadastrado com Sucesso!!');
         setShow(true);
         setLoading(false);
         setType('success');
-        setMessageBoxTitle('Sucesso!');
-        setMessage('Funcionário cadastrado com sucesso!');
+        setMessageBoxTitle('Sucesso!!');
+        setMessage('Funcionário cadastrado com Sucesso!!');
         setPassword(response.data.Funcionário.Senha);
         setPersonCode(response.data.Funcionário.Código);
         setShowSuccessDialog(true);
@@ -132,7 +132,7 @@ function RegisterEmployee({ onClose, updateEmployeeList }) {
       }
       setShow(true);
       setLoading(false);
-      setMessageBoxTitle('Atenção');
+      setMessageBoxTitle('Atenção!');
       setMessage(error.response.data.error);
       setType('alert');
     }

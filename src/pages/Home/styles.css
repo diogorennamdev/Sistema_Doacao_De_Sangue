@@ -1,24 +1,30 @@
 .ContainerHome {
   width: 100%;
-  max-width: 75rem;
   margin: 0 auto;
   padding: 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+ 
 }
 
 .WelcomeMessage {
   text-align: center;
   color: var(--text-color);
-  margin: 5rem 0 2.5rem;
+  margin: 2rem 0 2.5rem;
 }
 
-.welcome h2 {
-  font-size: 1.7rem;
+.WelcomeMessage p {
+  font-size: 1rem;
+  color: var(--text-color);
+  font-weight: 400;
 }
 
 .CardsHome {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  width: 100%;
 }
 
 .Card {
@@ -28,7 +34,7 @@
   margin-bottom: 1.25rem;
   border: 1px solid var(--border-color);
   border-radius: 10px;
-  padding: 1.25rem;
+  padding: 1.25rem 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
@@ -44,16 +50,4 @@
 
 .Card p {
   color: var(--text-color);
-}
-
-@media (max-width: 1200px) {
-  .Card {
-    width: calc(50% - 0.625rem);
-  }
-}
-
-@media (max-width: 30rem) {
-  .Card {
-    width: 100%;
-  }
 }
