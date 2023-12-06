@@ -71,8 +71,8 @@
     margin-top: 2rem;
 }
 
-.modal-content-Exams button input:focus,
-.modal-content-Exams button input:hover {
+.modal-content-Exams button:focus,
+.modal-content-Exams button:hover {
     background-color: transparent;
     color: var(--green-color);
     outline: 1px solid var(--green-color);
