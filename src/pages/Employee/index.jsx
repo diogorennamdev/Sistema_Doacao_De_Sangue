@@ -265,7 +265,7 @@ function EmployeeList() {
         show={showDeleteDialog}
         handleClose={() => setShowDeleteDialog(false)}
         title='Atenção'
-        message={`Deseja excluir o usuário ${userToDelete?.name}?`}
+        message={`Deseja excluir o funcionário ${userToDelete?.name}?`}
         onConfirm={deleteUser}
         showConfirmButtons={true}
       />
