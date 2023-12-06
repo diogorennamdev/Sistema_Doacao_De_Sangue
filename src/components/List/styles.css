@@ -3,7 +3,7 @@
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
-  width: 68%;
+  width: 55%;
   min-height: 68vh;
 
 }
@@ -86,23 +86,3 @@
   outline: none;
 }
 
-@media (max-width: 768px) {
-  .CardListUser {
-    width: 95%;
-  }
-
-  .CardListUser h2 {
-    width: 2rem;
-    height: 2rem;
-    font-size: 1rem;
-  }
-
-  .icon {
-    padding-right: 1rem;
-    font-size: 1.3rem;
-  }
-
-  .CardListUser h3 {
-    font-size: 0.8rem;
-  }
-}

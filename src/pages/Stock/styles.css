@@ -52,11 +52,13 @@
 
 .ContainerIcon span {
     font-size: 1.2rem;
+    font-weight: 600;
     color: var(--primary-color);
 }
 
 .ContainerIcon p {
-    font-size: 1.2rem;
+    font-size: 1rem;
+    font-weight: 500;
     color: var(--text-color);
     margin-bottom: 0.8rem;
 }
@@ -109,26 +111,3 @@ td {
     border-right: 1px solid var(--border-color);
 }
 
-@media (max-width: 600px) {
-    .ContainerStock {
-        margin: 1rem;
-    }
-
-    .ContainerBloodBag {
-        flex-direction: column;
-    }
-
-    .BloodBagIcon {
-        grid-template-columns: repeat(2, 1fr);
-        margin-right: 0;
-    }
-
-    table {
-        width: 100%;
-        font-size: 0.8rem;
-    }
-
-    th {
-        padding: 5px 0;
-    }
-}

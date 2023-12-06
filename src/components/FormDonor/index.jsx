@@ -108,7 +108,7 @@ function FormDonor({ show, handleClose, donorData, onClick }) {
                 <h1>Editar Dados do Doador</h1>
                 <IoCloseCircleSharp className="IconCloseEditDonor" onClick={handleCloseBox} />
                 <div className="ContainerInputDonor">
-                <h3>Id do Doador: <span>{donorData._id}</span></h3>
+                    <h3>Id do Doador: <span>{donorData._id}</span></h3>
                     <div className="LabelDonor">
                         <label htmlFor="name" className='labelStyleDonor'>Nome:</label>
                         <Input
@@ -135,8 +135,8 @@ function FormDonor({ show, handleClose, donorData, onClick }) {
                         />
                     </div>
                     {CPFError && <p className="textError">{CPFError}</p>}
-                    <div className="LabelDonor">
-                        <div className="FlexContainer">
+                    <div className="FlexContainer">
+                        <div className="LabelDonor">
                             <label htmlFor="birthDate" className='labelStyleDonorFlex'>Data de Nascimento:</label>
                             <Input
                                 id="birthDate"
@@ -185,13 +185,13 @@ function FormDonor({ show, handleClose, donorData, onClick }) {
                         />
                     </div>
                 </div>
-                    <Button
-                        onClick={() => {
-                            onClick(name, CPF, birthDate, sex, address, telephone);
-                        }}
-                        TextButton={'Atualizar'}
-                        className="ButtonEditDonor"
-                    />
+                <Button
+                    onClick={() => {
+                        onClick(name, CPF, birthDate, sex, address, telephone);
+                    }}
+                    TextButton={'Atualizar'}
+                    className="ButtonEditDonor"
+                />
             </div>
         </div >
     );

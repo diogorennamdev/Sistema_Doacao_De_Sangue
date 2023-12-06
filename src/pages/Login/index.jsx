@@ -39,7 +39,7 @@ function Login() {
   const loginUser = async (event) => {
     event.preventDefault();
     if (employeeCode.trim() === '' || password.trim() === '') {
-      setTitle('Atenção');
+      setTitle('Atenção!');
       setMessage('Preencha todos os campos para continuar.');
       handleShow();
       return;

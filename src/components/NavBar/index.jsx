@@ -35,6 +35,10 @@ function Navbar() {
     setIsOpen(!isOpen);
   };
 
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className="ContainerNavBar">
       <LogoReverse />
@@ -66,9 +70,10 @@ function Navbar() {
           >
             <h4>Acesso rápido</h4>
             <div className="dropdown-links">
-              <Link to="/inicio">Inicio</Link>
-              <Link to="/doador">Gerenciar Doadores</Link>
-              <Link to="/estoque">Estoque</Link>
+              <Link to="/inicio" onClick={closeMenu}>Inicio</Link>
+              <Link to="/doador" onClick={closeMenu}>Gerenciar Doadores</Link>
+              <Link to="/exame" onClick={closeMenu}>Adicionar Exames</Link>
+              <Link to="/estoque" onClick={closeMenu}>Estoque</Link>
               {userData?.information?.isAdmin && <Link to="/funcionario">Gerenciar funcionários</Link>}
             </div>
             <Logout />
