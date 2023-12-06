@@ -24,6 +24,7 @@ function DonorList() {
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const [donorSelected, setDonorSelected] = useState('');
   const donorUrl = import.meta.env.VITE_DONORS;
+  const donationUrl = import.meta.env.VITE_DONATIONS;
   const [alertType, setAlertType] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
   const [alertTitle, setAlertTitle] = useState('');
@@ -33,8 +34,11 @@ function DonorList() {
   const [showRegister, setShowRegister] = useState(false);
   const [errorSearchTerm, setErrorSearchTerm] = useState('');
   const [isEditing, setIsEditing] = useState(false);
+  const [showAddDonationDialog, setShowAddDonationDialog] = useState(false);
+  const [donorToDonate, setDonorToDonate] = useState(null);
 
   useEffect(() => {
+
     setLoading(true);
 
     axios.get(`${donorUrl}?name=${searchTerm}`, {
@@ -45,7 +49,7 @@ function DonorList() {
       .then((response) => {
         const responseData = Array.isArray(response.data) ? response.data : [response.data];
 
-        const sortedDonors = responseData.sort((a, b) => a.name.localeCompare(b.name));
+        const sortedDonors = responseData.toSorted((a, b) => a.name.localeCompare(b.name))
 
         setDonors(sortedDonors);
         setLoading(false);
@@ -65,6 +69,10 @@ function DonorList() {
     setShowEditDonor(false);
     setDonorSelected('');
     setIsEditing(false);
+  };
+  const handleOpenAddDonation = (donor) => {
+    setDonorToDonate(donor);
+    setShowAddDonationDialog(true);
   };
 
   const handleOpenEdit = (donor) => {
@@ -99,12 +107,12 @@ function DonorList() {
       const sortedDonors = responseData.toSorted((a, b) => a.name.localeCompare(b.name));
 
       setDonors(sortedDonors);
-
+      console.log(sortedDonors);
+      console.log(responseData);
     } catch (error) {
-      console.error('Error updating donor list:', error);
+      console.log('Error updating donor list:', error);
     }
   };
-
 
   const onClickUpdate = async (newName, CPF, birthDate, sex, address, telephone) => {
 
@@ -139,7 +147,7 @@ function DonorList() {
     if (birthDate && moment(birthDate, 'DD/MM/YYYY').toISOString().split('T')[0] !== moment(donorSelected.birthDate).toISOString().split('T')[0]) {
       const birthDateUS = moment(birthDate, 'DD/MM/YYYY').format('YYYY-MM-DD');
       updatedDonor.birthDate = birthDateUS;
-    }      
+    }
     if (sex && sex !== donorSelected.sex) {
       updatedDonor.sex = sex;
     }
@@ -180,7 +188,6 @@ function DonorList() {
     console.log(updatedDonor);
   };
 
-
   const deleteDonor = async () => {
     try {
       await axios.delete(`${donorUrl}${donorToDelete._id}`, {
@@ -207,6 +214,23 @@ function DonorList() {
     }
   };
 
+  const addDonation = async () => {
+
+    try {
+      await axios.post(`${donationUrl}${donorToDonate._id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      setShowAddDonationDialog(false);
+      setDonorToDonate(null);
+
+      updateDonorList();
+    } catch (error) {
+      console.error('Erro ao adicionar doação:', error);
+    }
+  };
 
   return (
     <div className='ContainerDonor'>
@@ -228,7 +252,7 @@ function DonorList() {
         </div>
       </div>
 
-      {showRegister && <RegisterDonor onClose={() => setShowRegister(false)} updateDonorList={donorUpdate} />}
+      {showRegister && <RegisterDonor onClose={() => setShowRegister(false)} updateDonorList={updateDonorList} />}
 
       {errorSearchTerm && searchTerm !== '' ? (
         <p>O texto &quot;{searchTerm}&quot; não corresponde a nenhum doador!</p>
@@ -241,12 +265,14 @@ function DonorList() {
               users={donors}
               onClick={(donor) => handleOpenEdit(donor)}
               onDelete={(donor) => handleOpenDelete(donor)}
+              onAddDonation={(donor) => handleOpenAddDonation(donor)}
             />
           )}
         </>
       )}
       {isEditing && (
         <FormDonor
+          type={'donor'}
           show={showEditDonor}
           handleClose={handleCloseEditDonor}
           donorData={donorSelected}
@@ -269,6 +295,15 @@ function DonorList() {
         title='Atenção'
         message={`Deseja excluir o doador ${donorToDelete?.name}?`}
         onConfirm={deleteDonor}
+        showConfirmButtons={true}
+      />
+
+      <AlertDialog
+        show={showAddDonationDialog}
+        handleClose={() => setShowAddDonationDialog(false)}
+        title='Atenção'
+        message={`Deseja adicionar uma doação para ${donorToDonate?.name}?`}
+        onConfirm={addDonation}
         showConfirmButtons={true}
       />
 
