@@ -235,52 +235,61 @@ function DonorList() {
   return (
     <div className='ContainerDonor'>
       <h1 className='ContainerDonorTitle'>Doadores</h1>
-      <div className='ContainerHeadSearchDonor'>
-        <div className='SearchInput'>
-          <IoSearch className='SearchIcon' />
-          <Input
-            placeholder={'Pesquise pelo nome do doador'}
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className='InputSearchDonor'
-          />
-        </div>
-        <div>
-          <button onClick={() => setShowRegister(true)} className='AddButton'>
-            <BsPersonFillAdd className='AddIcon' /> Adicionar
-          </button>
-        </div>
-      </div>
-
-      {showRegister && <RegisterDonor onClose={() => setShowRegister(false)} updateDonorList={updateDonorList} />}
-
-      {errorSearchTerm && searchTerm !== '' ? (
-        <p>O texto &quot;{searchTerm}&quot; não corresponde a nenhum doador!</p>
+      {donors && donors.length === 0 ? (
+        <p>nenhum doador encontrado</p>
       ) : (
         <>
-          {loading ? (
-            <Loading />
+
+          <div className='ContainerHeadSearchDonor'>
+            <div className='SearchInput'>
+              <IoSearch className='SearchIcon' />
+              <Input
+                placeholder={'Pesquise pelo nome do doador'}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className='InputSearchDonor'
+              />
+            </div>
+
+            <div>
+              <button onClick={() => setShowRegister(true)} className='AddButton'>
+                <BsPersonFillAdd className='AddIcon' /> Adicionar
+              </button>
+            </div>
+          </div>
+
+          {showRegister && <RegisterDonor onClose={() => setShowRegister(false)} updateDonorList={updateDonorList} />}
+
+          {errorSearchTerm && searchTerm !== '' ? (
+            <p>O texto &quot;{searchTerm}&quot; não corresponde a nenhum doador!</p>
           ) : (
-            <List
-              users={donors}
-              onClick={(donor) => handleOpenEdit(donor)}
-              onDelete={(donor) => handleOpenDelete(donor)}
-              onAddDonation={(donor) => handleOpenAddDonation(donor)}
+            <>
+              {loading ? (
+                <Loading />
+              ) : (
+                <List
+                  users={donors}
+                  onClick={(donor) => handleOpenEdit(donor)}
+                  onDelete={(donor) => handleOpenDelete(donor)}
+                  onAddDonation={(donor) => handleOpenAddDonation(donor)}
+                />
+              )}
+            </>
+          )}
+          {isEditing && (
+            <FormDonor
+              type={'donor'}
+              show={showEditDonor}
+              handleClose={handleCloseEditDonor}
+              donorData={donorSelected}
+              onClick={(newName, CPF, birthDate, sex, address, telephone) => {
+                onClickUpdate(newName, CPF, birthDate, sex, address, telephone);
+              }}
             />
           )}
         </>
       )}
-      {isEditing && (
-        <FormDonor
-          type={'donor'}
-          show={showEditDonor}
-          handleClose={handleCloseEditDonor}
-          donorData={donorSelected}
-          onClick={(newName, CPF, birthDate, sex, address, telephone) => {
-            onClickUpdate(newName, CPF, birthDate, sex, address, telephone);
-          }}
-        />
-      )}
+
 
       <AlertDialog
         show={showAlertDialog}
