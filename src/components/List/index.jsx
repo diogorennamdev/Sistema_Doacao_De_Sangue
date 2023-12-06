@@ -16,6 +16,14 @@ function List({ users, onClick, onDelete, onAddDonation }) {
     setCurrentPage(pageNumber);
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // Os meses começam do zero, então somamos 1
+    const year = date.getFullYear();
+
+    return `${day < 10 ? '0' + day : day}/${month < 10 ? '0' + month : month}/${year}`;
+  };
   return (
     <div className='ListContainer'>
       {visibleUsers.map((user) => (
@@ -23,6 +31,9 @@ function List({ users, onClick, onDelete, onAddDonation }) {
           <div className='CardListName'>
             <h2>{user.name.substring(0, 2)}</h2>
             <h3>{user.name}</h3>
+            {user.donations && user.donations.length > 0 && (
+              <p>Data da doação: {formatDate(user.donations[0].donationDate)}</p>
+            )}
           </div>
           <div>
             {user.isDonor &&
@@ -37,17 +48,35 @@ function List({ users, onClick, onDelete, onAddDonation }) {
                 className='DonorIcon'
                 title='Adicionar Doação'
               />}
-            <TbEdit
-              onClick={() => onClick(user)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  onClick(user);
-                }
-              }}
-              tabIndex={0}
-              className='EditIcon'
-              title='Editar'
-            />
+
+            {/* icone que para adicionar exame */}
+            {user.donations &&
+              <TbDropletPlus
+                onClick={() => onAddDonation(user)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    onAddDonation(user);
+                  }
+                }}
+                tabIndex={0}
+                className='DonorIcon'
+                title='Adicionar Doação'
+              />}
+
+            {user.donations ? (null) : (
+              <TbEdit
+                onClick={() => onClick(user)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    onClick(user);
+                  }
+                }}
+                tabIndex={0}
+                className='EditIcon'
+                title='Editar'
+              />
+            )}
+
             <TbTrash
               onClick={() => onDelete(user)}
               onKeyDown={(e) => {
@@ -59,6 +88,8 @@ function List({ users, onClick, onDelete, onAddDonation }) {
               className='DeleteIcon'
               title='Excluir'
             />
+
+
           </div>
         </div>
       ))}
