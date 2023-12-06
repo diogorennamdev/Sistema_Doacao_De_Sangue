@@ -18,7 +18,6 @@ function DonorList() {
   const { userData } = useAuth();
   const token = userData.token;
   const [donors, setDonors] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [showEditDonor, setShowEditDonor] = useState(false);
   const [showAlertDialog, setShowAlertDialog] = useState(false);
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
@@ -36,11 +35,12 @@ function DonorList() {
   const [isEditing, setIsEditing] = useState(false);
   const [showAddDonationDialog, setShowAddDonationDialog] = useState(false);
   const [donorToDonate, setDonorToDonate] = useState(null);
+  const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
 
     setLoading(true);
-
     axios.get(`${donorUrl}?name=${searchTerm}`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -135,6 +135,7 @@ function DonorList() {
   };
 
   const donorUpdate = async (newName, CPF, birthDate, sex, address, telephone) => {
+    setLoading(true);
     const updatedDonor = {};
 
     if (newName && newName !== donorSelected.name) {
@@ -176,18 +177,19 @@ function DonorList() {
         setShowEditDonor(false);
         setAlertType('success');
         setShowSuccessDialog(true);
-        setAlertMessage('Doador atualizado com Sucesso!!');
-        setAlertTitle('Sucesso!!');
+        setAlertMessage('Doador atualizado com Sucesso!');
+        setAlertTitle('Sucesso!');
 
         updateDonorList();
       }
     } catch (error) {
       console.error(error);
     }
-    console.log(updatedDonor);
+    setLoading(false);
   };
 
   const deleteDonor = async () => {
+    setLoading(true);
     try {
       await axios.delete(`${donorUrl}${donorToDelete._id}`, {
         headers: {
@@ -211,9 +213,11 @@ function DonorList() {
         console.error(error);
       }
     }
+    setLoading(false);
   };
 
   const addDonation = async () => {
+    setLoading(true);
     try {
 
       await axios.post(`${donationUrl}${donorToDonate._id}`, null, { // o null é o body da requisição
@@ -230,66 +234,58 @@ function DonorList() {
       console.error('Erro ao adicionar doação:', error);
       console.log(`${donationUrl}${donorToDonate._id}`);
     }
+    setLoading(false);
   };
 
   return (
     <div className='ContainerDonor'>
       <h1 className='ContainerDonorTitle'>Doadores</h1>
-      {donors && donors.length === 0 ? (
-        <p>nenhum doador encontrado</p>
+      <div className='ContainerHeadSearchDonor'>
+        <div className='SearchInput'>
+          <IoSearch className='SearchIcon' />
+          <Input
+            placeholder={'Pesquise pelo nome do doador'}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className='InputSearchDonor'
+          />
+        </div>
+        <div>
+          <button onClick={() => setShowRegister(true)} className='AddButton'>
+            <BsPersonFillAdd className='AddIcon' /> Adicionar
+          </button>
+        </div>
+      </div>
+
+      {showRegister && <RegisterDonor onClose={() => setShowRegister(false)} updateDonorList={updateDonorList} />}
+
+      {errorSearchTerm && searchTerm !== '' ? (
+        <p>O texto &quot;{searchTerm}&quot; não corresponde a nenhum doador!</p>
       ) : (
         <>
-
-          <div className='ContainerHeadSearchDonor'>
-            <div className='SearchInput'>
-              <IoSearch className='SearchIcon' />
-              <Input
-                placeholder={'Pesquise pelo nome do doador'}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className='InputSearchDonor'
-              />
-            </div>
-
-            <div>
-              <button onClick={() => setShowRegister(true)} className='AddButton'>
-                <BsPersonFillAdd className='AddIcon' /> Adicionar
-              </button>
-            </div>
-          </div>
-
-          {showRegister && <RegisterDonor onClose={() => setShowRegister(false)} updateDonorList={updateDonorList} />}
-
-          {errorSearchTerm && searchTerm !== '' ? (
-            <p>O texto &quot;{searchTerm}&quot; não corresponde a nenhum doador!</p>
+          {loading ? (
+            <Loading />
           ) : (
-            <>
-              {loading ? (
-                <Loading />
-              ) : (
-                <List
-                  users={donors}
-                  onClick={(donor) => handleOpenEdit(donor)}
-                  onDelete={(donor) => handleOpenDelete(donor)}
-                  onAddDonation={(donor) => handleOpenAddDonation(donor)}
-                />
-              )}
-            </>
-          )}
-          {isEditing && (
-            <FormDonor
-              type={'donor'}
-              show={showEditDonor}
-              handleClose={handleCloseEditDonor}
-              donorData={donorSelected}
-              onClick={(newName, CPF, birthDate, sex, address, telephone) => {
-                onClickUpdate(newName, CPF, birthDate, sex, address, telephone);
-              }}
+            <List
+              users={donors}
+              onClick={(donor) => handleOpenEdit(donor)}
+              onDelete={(donor) => handleOpenDelete(donor)}
+              onAddDonation={(donor) => handleOpenAddDonation(donor)}
             />
           )}
         </>
       )}
-
+      {isEditing && (
+        <FormDonor
+          type={'donor'}
+          show={showEditDonor}
+          handleClose={handleCloseEditDonor}
+          donorData={donorSelected}
+          onClick={(newName, CPF, birthDate, sex, address, telephone) => {
+            onClickUpdate(newName, CPF, birthDate, sex, address, telephone);
+          }}
+        />
+      )}
 
       <AlertDialog
         show={showAlertDialog}
