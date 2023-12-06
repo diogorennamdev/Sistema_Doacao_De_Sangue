@@ -161,12 +161,12 @@ function EmployeeList() {
         setAlertType('success');
         setShowSuccessDialog(true);
         if (newName) {
-          setAlertMessage('Nome atualizado com Sucesso!!');
-          setAlertTitle('Sucesso!!');
+          setAlertMessage('Nome atualizado com Sucesso!');
+          setAlertTitle('Sucesso!');
         }
         if (password) {
-          setAlertMessage('Senha atualizada com Sucesso!!');
-          setAlertTitle('Sucesso!!');
+          setAlertMessage('Senha atualizada com Sucesso!');
+          setAlertTitle('Sucesso!');
           setPasswordType(true);
           setPassword(password);
         }

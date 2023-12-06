@@ -7,10 +7,9 @@
 }
 
 .ContainerStock .Title {
-    text-align: center;
-    font-size: 2rem;
-    color: var(--text-color);
-    margin-top: 2rem;
+    margin: 1.2rem 0 0 0;
+    color: var(--primary-color);
+    text-transform: uppercase;
 }
 
 .ContainerStock .Subtitle {

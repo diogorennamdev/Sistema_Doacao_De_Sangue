@@ -74,7 +74,7 @@ function Navbar() {
               <Link to="/doador" onClick={closeMenu}>Gerenciar Doadores</Link>
               <Link to="/exame" onClick={closeMenu}>Adicionar Exames</Link>
               <Link to="/estoque" onClick={closeMenu}>Estoque</Link>
-              {userData?.information?.isAdmin && <Link to="/funcionario">Gerenciar funcionários</Link>}
+              {userData?.information?.isAdmin && <Link to="/funcionario" nClick={closeMenu}>Gerenciar funcionários</Link>}
             </div>
             <Logout />
           </div>

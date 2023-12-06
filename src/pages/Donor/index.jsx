@@ -206,7 +206,7 @@ function DonorList() {
       if (error.response && error.response.status === 403) {
         setAlertType('error');
         setAlertMessage('Não é possível excluir um doador administrador!');
-        setAlertTitle('Atenção!!');
+        setAlertTitle('Atenção!');
         setShowAlertDialog(true);
         return;
       } else {
