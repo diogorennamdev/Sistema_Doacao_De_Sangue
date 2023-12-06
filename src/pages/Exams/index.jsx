@@ -115,6 +115,23 @@ function Exams() {
 
         }
     };
+
+    const [filteredExams, setFilteredExams] = useState([]);
+
+    // Atualize o useEffect para filtrar os exames quando houver uma mudança no searchTerm
+    useEffect(() => {
+        if (searchTerm.trim() === '') {
+            // Se o campo de pesquisa estiver vazio, exibir todos os exames
+            setFilteredExams(exams);
+        } else {
+            // Filtrar os exames com base no nome do doador
+            const filtered = exams.filter(exam =>
+                exam.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            setFilteredExams(filtered);
+        }
+    }, [searchTerm, exams]);
+
     return (
         <div className='ContainerExams'>
             {loading ? (
@@ -138,28 +155,41 @@ function Exams() {
                                     />
                                 </div>
                             </div>
-                            <List
-                                onClick={() => { }}
-                                onAddDonation={() => { }}
-                                onDelete={(user) => {
-                                    setDonorSelected(user);
-                                    setShow(true);
-                                    setTittle('Atenção!');
-                                    setMessage('Deseja apagar essa doação?')
-                                }}
-                                onAddExames={(user) => {
-                                    setDonorSelected(user);
-                                    setFormFormExams(true);
-                                }}
-                                users={exams}
-                            />
+                            {filteredExams.length === 0 ? (
+                               <p>Nenhum resultado encontrado para &quot;{searchTerm}&quot;</p>
+                            ) : (
+                                <>
+                                    <List
+                                        onClick={() => { }}
+                                        onAddDonation={() => { }}
+                                        onDelete={
+                                            (user) => {
+                                                setDonorSelected(user);
+                                                setShow(true);
+                                                setTittle('Atenção!');
+                                                setMessage('Deseja apagar essa doação?')
+                                            }
+                                        }
+                                        onAddExames={
+                                            (user) => {
+                                                setDonorSelected(user);
+                                                setFormFormExams(true);
+                                            }
+                                        }
+                                        users={filteredExams}
+                                    />
+                                </>
+
+                            )}
+
                         </>
 
                     )
 
                     }
                 </>
-            )}
+            )
+            }
             <AlertDialog
                 show={show}
                 handleClose={handleClose}
@@ -188,7 +218,7 @@ function Exams() {
             />
 
 
-        </div>
+        </div >
     )
 }
 

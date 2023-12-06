@@ -24,7 +24,10 @@ svg.SearchIcon {
     font-weight: 700;
     color: var(--primary-color);
 }
-
+.InputSearchExame{
+    width: 100%;
+    text-align: center;
+}
 .SearchInputExames{
     display: flex;
     flex-direction: row;
