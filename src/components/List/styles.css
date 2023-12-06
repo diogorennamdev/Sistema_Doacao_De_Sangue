@@ -32,7 +32,9 @@
   display: flex;
   align-items: center;
 }
-
+.CardListName p{
+  margin-left: 1rem;
+}
 .CardListUser h2 {
   text-transform: uppercase;
   font-size: 1rem;
