@@ -146,7 +146,7 @@ function RegisterEmployee({ onClose, updateEmployeeList }) {
 
   return (
     <div className='SectionRegisterEmployee'>
-      <div className="ContainerFormEmployee">
+      <div className="ContainerRegisterEmployee">
         <IoCloseCircleSharp onClick={onClose} className='closeIcon' />
         <h1>Cadastrar Funcionário</h1>
         <div className="ContainerInputEmployee">

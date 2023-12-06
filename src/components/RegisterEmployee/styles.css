@@ -12,7 +12,7 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.ContainerFormEmployee {
+.ContainerRegisterEmployee {
     position: relative;
     width: 50%;
     height: 65%;
@@ -34,7 +34,7 @@
     color: var(--primary-color);
 }
 
-.ContainerFormEmployee h1 {
+.ContainerRegisterEmployee h1 {
     margin: 2rem 0;
     color: var(--primary-color);
     text-align: center;
@@ -58,7 +58,7 @@
     margin-right: 0.8rem;
 }
 
-.ContainerFormEmployee input {
+.ContainerRegisterEmployee input {
     border-radius: 10px;
     background: var(--background1-color);
     margin-top: 0.5rem;
@@ -67,7 +67,7 @@
     font-size: 1.05rem;
 }
 
-.ContainerFormEmployee input:focus {
+.ContainerRegisterEmployee input:focus {
     outline: 2px solid var(--green-color);
 }
 
@@ -89,7 +89,7 @@
     display: flex;
 }
 
-.ContainerFormEmployee input[type="radio"] {
+.ContainerRegisterEmployee input[type="radio"] {
     width: 1.3rem;
     height: 1.3rem;
     border-radius: 50%;
@@ -115,12 +115,12 @@
 }
 
 
-.ContainerFormEmployee button {
+.ContainerRegisterEmployee button {
     background-color: var(--green-color);
 }
 
-.ContainerFormEmployee button:hover,
-.ContainerFormEmployee button:focus {
+.ContainerRegisterEmployee button:hover,
+.ContainerRegisterEmployee button:focus {
     background-color: transparent;
     color: var(--green-color);
     outline: 1px solid var(--green-color);
