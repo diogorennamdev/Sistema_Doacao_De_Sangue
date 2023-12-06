@@ -11,7 +11,7 @@ import SuccessDialog from '../SuccessDialog';
 
 import './styles.css';
 
-function RegisterDonor({ onClose }) {
+function RegisterDonor({ onClose, updateDonorList }) {
     const donorUrl = import.meta.env.VITE_DONORS;
     const { userData } = useAuth();
     const token = userData.token;
@@ -161,6 +161,8 @@ function RegisterDonor({ onClose }) {
                 setShow(true);
                 setShowSuccessDialog(true);
                 setType('success');
+
+                updateDonorList();
             }
 
         } catch (error) {
@@ -311,6 +313,7 @@ function RegisterDonor({ onClose }) {
 
 RegisterDonor.propTypes = {
     onClose: PropTypes.func.isRequired,
+    updateDonorList: PropTypes.func.isRequired,
 };
 
 export default RegisterDonor;
