@@ -105,7 +105,7 @@ function DonorList() {
       const responseData = Array.isArray(response.data) ? response.data : [response.data];
 
       const sortedDonors = responseData.toSorted((a, b) => a.name.localeCompare(b.name));
-      
+
       setDonors(sortedDonors);
 
     } catch (error) {
@@ -213,25 +213,22 @@ function DonorList() {
     }
   };
 
-  const addDonation = async  () => { 
-
+  const addDonation = async () => {
     try {
 
-      await axios.post(`${donationUrl}${donorToDonate._id}`, {
+      await axios.post(`${donationUrl}${donorToDonate._id}`, null, { // o null é o body da requisição
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
-      
       setShowAddDonationDialog(false);
       setDonorToDonate(null);
-      
+
       updateDonorList();
     } catch (error) {
       console.error('Erro ao adicionar doação:', error);
       console.log(`${donationUrl}${donorToDonate._id}`);
-
     }
   };
 
