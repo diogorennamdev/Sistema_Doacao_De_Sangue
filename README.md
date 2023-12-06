@@ -35,3 +35,21 @@ npm run dev
 ```
 
 - Agora você pode acessar o sistema de doação de sangue no seu navegador através do endereço: `http://localhost:3000`
+
+## Acessando o projeto
+
+- Observação: Para conseguir logar no sistema é necessário utilizar os dados abaixo
+
+```bash
+Localhost: (http://localhost:3000) 
+
+Código do Funcionário: 438718
+Senha: 12345678
+```
+
+```bash
+HemovidUnifg (https://hemovidaunifg.vercel.app/)
+
+Código do Funcionário:: 788216
+Senha: 12345678
+```
