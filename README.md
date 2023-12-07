@@ -28,7 +28,19 @@ git clone https://github.com/diogorennamdev/Sistema_Doacao_De_Sangue
 npm install
 ```
 
-3. No terminal, digite o comando abaixo para iniciar o servidor local:
+3. Crie um arquivo `.env` e adicione as seguintes *Variáveis de Ambiente*
+
+```bash
+VITE_LOGIN=                                   
+VITE_LOGOUT=                                   
+VITE_EMPLOYEES=                    
+VITE_DONORS=
+VITE_DONATIONS=                    
+VITE_STOCK=                       
+```
+- Observação: para que o projeto rode na sua maquina, você precisará preencher as variáveis com as rotas da  [API de gerenciamento de doadores de sangue](https://github.com/alvesjaov/APIdoadoresSangue#documenta%C3%A7%C3%A3o-das-rotas-da-api).
+
+4. No terminal, digite o comando abaixo para iniciar o servidor local:
 
 ```bash
 npm run dev
