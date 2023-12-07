@@ -62,6 +62,6 @@ Senha: 12345678
 ```bash
 HemovidUnifg (https://hemovidaunifg.vercel.app/)
 
-Código do Funcionário:: 788216
+Código do Funcionário: 788216
 Senha: 12345678
 ```
